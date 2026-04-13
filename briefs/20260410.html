@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>수소·암모니아 브리핑 — 2026.04.10</title>
+<script src="../auth.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:#f4f6fa;color:#1a1a1a;font-size:14px;line-height:1.6}
+.wrap{max-width:720px;margin:24px auto;padding:0 16px 40px}
+.header{border-left:5px solid #D85A30;padding:12px 16px;margin-bottom:20px;background:#FFF4EF;border-radius:0 8px 8px 0}
+.header-badge{display:inline-block;font-size:10px;font-weight:700;background:#D85A30;color:#fff;padding:2px 8px;border-radius:20px;margin-bottom:6px;letter-spacing:.06em}
+.header-title{font-size:18px;font-weight:700;color:#712B13}
+.header-meta{font-size:12px;color:#D85A30;margin-top:4px;display:flex;gap:12px;flex-wrap:wrap}
+.header-meta span{display:flex;align-items:center;gap:4px}
+.header-sub{font-size:12px;color:#9E3A1A;margin-top:6px;font-weight:600}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#fff;border:1.5px solid #85B7EB;border-radius:7px;font-size:12px;font-weight:600;color:#0C447C;text-decoration:none;margin-bottom:16px;cursor:pointer}
+.back-btn:hover{background:#E6F1FB}
+.source-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.btn-src{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .15s}
+.btn-orig{background:#0C447C;color:#fff}
+.btn-orig:hover{background:#185FA5}
+.btn-trans{background:#fff;color:#0C447C;border:1.5px solid #85B7EB}
+.btn-trans:hover{background:#E6F1FB}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.08em;color:#888;text-transform:uppercase;margin:20px 0 10px}
+.price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px}
+.price-card{padding:10px 14px;border-radius:8px;border:0.5px solid #e0e0e0;background:#fff}
+.price-card.up-card{border-color:#F0997B;background:#FFF8F5}
+.price-label{font-size:11px;color:#666;margin-bottom:2px}
+.price-val{font-size:22px;font-weight:700;color:#0C447C}
+.price-unit{font-size:11px;color:#888;font-weight:400}
+.price-chg{font-size:12px;font-weight:600;margin-top:3px}
+.up{color:#D85A30}.nc{color:#639922}.dn{color:#378ADD}
+.jklab-row{background:#F0F7FF;border-radius:8px;padding:10px 16px;margin-bottom:4px;border:0.5px solid #85B7EB;display:flex;justify-content:space-between;align-items:center}
+.jklab-label{font-size:12px;color:#0C447C;font-weight:600}
+.jklab-sub{font-size:11px;color:#378ADD;margin-top:2px}
+.jklab-val{font-size:18px;font-weight:700;color:#0C447C;text-align:right}
+.forward-box{background:#fff;border-radius:8px;border:0.5px solid #e0e0e0;padding:12px 16px;margin-bottom:8px}
+.forward-title{font-size:11px;font-weight:700;color:#888;margin-bottom:8px}
+.forward-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.forward-item{text-align:center}
+.forward-month{font-size:10px;color:#888}
+.forward-price{font-size:14px;font-weight:700;color:#0C447C}
+.forward-region{font-size:10px;color:#378ADD;font-weight:600;margin-bottom:4px}
+.issue-card{border-radius:10px;padding:14px 16px;margin-bottom:10px;border:0.5px solid}
+.issue-hot{background:#FFF4EF;border-color:#F0997B}
+.issue-hot .issue-title{color:#712B13}
+.issue-mid{background:#F0F7FF;border-color:#85B7EB}
+.issue-mid .issue-title{color:#0C447C}
+.issue-pol{background:#F7F0FF;border-color:#B59BDB}
+.issue-pol .issue-title{color:#3B1C7A}
+.issue-green{background:#F0FFF4;border-color:#7BC47B}
+.issue-green .issue-title{color:#0A3A0A}
+.issue-header{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px}
+.issue-badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.badge-hot{background:#F0997B;color:#4A1B0C}
+.badge-watch{background:#85B7EB;color:#042C53}
+.badge-pol{background:#B59BDB;color:#1E0A4A}
+.badge-mkt{background:#7BC47B;color:#0A3A0A}
+.badge-signal{background:#854F0B;color:#fff}
+.issue-title{font-weight:700;font-size:14px;line-height:1.4}
+.issue-divider{height:0.5px;background:#e0e0e0;margin:10px 0}
+.trans-quote{background:rgba(255,255,255,0.7);border-radius:6px;padding:8px 12px;margin:8px 0;font-size:12px;color:#555;line-height:1.7;border-left:3px solid #d0d0d0;font-style:italic}
+.trans-label{font-size:10px;font-weight:700;color:#aaa;letter-spacing:.06em;margin-bottom:4px}
+.issue-bullets{margin:0;padding:0;list-style:none}
+.issue-bullets li{font-size:13px;color:#333;padding:3px 0 3px 16px;position:relative;line-height:1.6}
+.issue-bullets li::before{content:'·';position:absolute;left:4px;color:#888;font-weight:700}
+.issue-bullets li strong{color:#0C447C}
+.arrow-point{font-size:12px;color:#185FA5;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #185FA5}
+.arrow-point-red{font-size:12px;color:#D85A30;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #D85A30}
+.news-list{border-radius:8px;border:0.5px solid #e8e8e8;overflow:hidden;margin-bottom:4px;background:#fff}
+.news-row{padding:10px 14px;border-bottom:0.5px solid #f0f0f0}
+.news-row:last-child{border-bottom:none}
+.news-row-top{display:flex;align-items:baseline;gap:8px;margin-bottom:3px}
+.news-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dot-red{background:#D85A30}.dot-blue{background:#378ADD}.dot-green{background:#639922}.dot-gray{background:#aaa}
+.news-title{font-size:13px;font-weight:600;color:#222}
+.news-detail{font-size:12px;color:#666;line-height:1.6;padding-left:13px}
+.monitor-box{border-radius:8px;background:#FFFBEF;border:0.5px solid #FAC775;padding:14px 16px;margin-bottom:16px}
+.monitor-title{font-size:12px;font-weight:700;color:#854F0B;margin-bottom:10px;letter-spacing:.04em;display:flex;align-items:center;gap:6px}
+.monitor-row{font-size:13px;color:#412402;margin-bottom:8px;display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:baseline}
+.monitor-row:last-child{margin-bottom:0}
+.monitor-key{color:#854F0B;font-weight:700;font-size:12px}
+.monitor-val{line-height:1.6}
+.outlook-box{border-radius:8px;background:#FFF4EF;border:0.5px solid #F0997B;padding:14px 16px;margin-bottom:16px}
+.outlook-title{font-size:12px;font-weight:700;color:#712B13;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.outlook-text{font-size:13px;color:#412402;line-height:1.7}
+.footer{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:0.5px solid #e0e0e0;font-size:12px;color:#888;flex-wrap:wrap;gap:8px}
+.footer-src{display:flex;gap:16px}
+.footer-src a{color:#185FA5;text-decoration:none;font-weight:500}
+.footer-src a:hover{text-decoration:underline}
+.nav-btns{display:flex;gap:8px;margin-top:20px;justify-content:space-between}
+.nav-btn{padding:9px 16px;border-radius:7px;font-size:12px;font-weight:600;text-decoration:none;background:#fff;color:#0C447C;border:1.5px solid #85B7EB}
+.nav-btn:hover{background:#E6F1FB}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-btn" href="../dashboard.html">← 아카이브로 돌아가기</a>
+
+  <!-- 헤더 -->
+  <div class="header">
+    <div class="header-badge">🚨 ARGUS MEDIA · 긴급 브리핑</div>
+    <div class="header-title">불안정한 휴전 — 호르무즈 통행 오히려 감소, 추가 상승 여지 존재</div>
+    <div class="header-meta">
+      <span>📅 2026년 4월 10일 (금)</span>
+      <span>📄 Argus Ammonia Issue 26-69</span>
+      <span>🏢 서부발전 수소사업실</span>
+    </div>
+    <div class="header-sub">━ 전 지역 가격 보합 — 그러나 불안정한 휴전으로 상방 리스크 지속</div>
+  </div>
+
+  <!-- 원문 접근 -->
+  <div class="source-bar">
+    <a class="btn-src btn-orig" href="https://drive.google.com/drive/folders/1oMyl4hTVN8chOw5MPLQKYWdMonStRLxo" target="_blank">
+      <span>📂</span> 원문 PDF
+    </a>
+    <a class="btn-src btn-trans" href="https://docs.google.com/document/d/17PI2KQPORxw05rcfVuIWfPvYOsO4lCA1lyUNKELlXzo/edit" target="_blank">
+      <span>📄</span> 번역본
+    </a>
+  </div>
+
+  <!-- 가격 현황 -->
+  <div class="section-label">📊 암모니아 일일 가격 (4월 10일 vs 전일)</div>
+  <div class="price-grid">
+    <div class="price-card">
+      <div class="price-label">중동 fob</div>
+      <div class="price-val">700 <span class="price-unit">$/t</span></div>
+      <div class="price-chg nc">━ 보합 (전일 동일)</div>
+    </div>
+    <div class="price-card">
+      <div class="price-label">동아시아 cfr</div>
+      <div class="price-val">725 <span class="price-unit">$/t</span></div>
+      <div class="price-chg nc">━ 보합 (전일 동일)</div>
+    </div>
+    <div class="price-card">
+      <div class="price-label">NW유럽 cfr</div>
+      <div class="price-val">830 <span class="price-unit">$/t</span></div>
+      <div class="price-chg nc">━ 보합 (전일 동일)</div>
+    </div>
+    <div class="price-card">
+      <div class="price-label">미국 걸프 cfr</div>
+      <div class="price-val">775 <span class="price-unit">$/t</span></div>
+      <div class="price-chg nc">━ 보합 (전일 동일)</div>
+    </div>
+  </div>
+  <div class="jklab-row">
+    <div>
+      <div class="jklab-label">JKLAB (저탄소 cfr 울산, 45Q 포함)</div>
+      <div class="jklab-sub">주간 기준 | 전주 $681.40 대비 +$5.34</div>
+    </div>
+    <div class="jklab-val">686.74 <span style="font-size:12px;font-weight:400;color:#378ADD">$/t</span></div>
+  </div>
+
+  <!-- 선도 가격 -->
+  <div class="forward-box">
+    <div class="forward-title">📈 선도 가격 곡선 (Forward Curves) — 5-7월</div>
+    <div class="forward-region">중동 fob $/t</div>
+    <div class="forward-grid">
+      <div class="forward-item"><div class="forward-month">May 26</div><div class="forward-price">720.60</div></div>
+      <div class="forward-item"><div class="forward-month">Jun 26</div><div class="forward-price">736.38</div></div>
+      <div class="forward-item"><div class="forward-month">Jul 26</div><div class="forward-price">742.56</div></div>
+    </div>
+    <div style="height:8px"></div>
+    <div class="forward-region">동아시아 cfr $/t</div>
+    <div class="forward-grid">
+      <div class="forward-item"><div class="forward-month">May 26</div><div class="forward-price">739.02</div></div>
+      <div class="forward-item"><div class="forward-month">Jun 26</div><div class="forward-price">754.18</div></div>
+      <div class="forward-item"><div class="forward-month">Jul 26</div><div class="forward-price">758.39</div></div>
+    </div>
+    <div style="height:8px"></div>
+    <div class="forward-region">NW유럽 cfr $/t</div>
+    <div class="forward-grid">
+      <div class="forward-item"><div class="forward-month">May 26</div><div class="forward-price">842.37</div></div>
+      <div class="forward-item"><div class="forward-month">Jun 26</div><div class="forward-price">857.76</div></div>
+      <div class="forward-item"><div class="forward-month">Jul 26</div><div class="forward-price">861.45</div></div>
+    </div>
+  </div>
+
+  <!-- 핵심 이슈 -->
+  <div class="section-label">🔥 핵심 이슈 (5대 주요 사항)</div>
+
+  <!-- 이슈 1 -->
+  <div class="issue-card issue-hot">
+    <div class="issue-header">
+      <span class="issue-badge badge-hot">호르무즈 정체</span>
+      <div class="issue-title">휴전 3일째에도 호르무즈 통행 오히려 감소 — 트럼프, 진전 없음에 불만 표시</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "Kpler 데이터에 따르면 휴전 합의 이후 이틀 동안 해협을 통과한 선박은 하루 평균 8척 미만으로, 4월 첫째 주의 12척 이상에서 크게 줄었다. 이는 전쟁 발발 전 하루 100척 이상과 비교된다. 전쟁 발발 이후 호르무즈 해협을 통과한 암모니아 운반선은 이란 화물을 실은 단 한 척뿐이며, 휴전 발표 이후에는 암모니아 운반선이 전혀 통과하지 않았다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>휴전 발표 이후 통행량 <strong>하루 8척 미만</strong> → 4월 초 12척↑, 전쟁 전 100척↑ 대비 급감</li>
+      <li>암모니아 운반선 <strong>0척 통과</strong> (휴전 이후) — 공급 재개 신호 전혀 없음</li>
+      <li>Eco Oracle(26,870t), Green One(25,835t) 여전히 중동 걸프 내 묶여 있음</li>
+      <li>트럼프, 호르무즈 재개통 조건 이행 지연에 공개 불만 표시 — 외교 불확실성 확대</li>
+    </ul>
+    <div class="arrow-point-red">→ 휴전이 실질적 공급 재개로 이어지지 않음 — 추가 가격 상승 여지 여전히 유효</div>
+  </div>
+
+  <!-- 이슈 2 -->
+  <div class="issue-card issue-hot">
+    <div class="issue-header">
+      <span class="issue-badge badge-hot">보험·통항</span>
+      <div class="issue-title">전쟁 위험 보험료(AWRP) 소폭 하락 시작 — 그러나 통항 조건 여전히 매우 제한적</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "중동만, 호르무즈 해협, 홍해 지역의 추가 전쟁 위험 보험료(AWRP)는 4월 10일부터 완화되기 시작했다고 시장 참여자들이 밝혔다. 일부 보험사들이 보험료를 인하하기 시작했음에도 불구하고, 해당 지역의 전쟁 위험 보험은 여전히 매우 까다로운 상황이다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>4월 10일부터 <strong>일부 보험사 AWRP 인하 시작</strong> — 방향성은 긍정적이나 인하 폭 미미</li>
+      <li>선주들은 보험 커버·안전 보장 명확화 전까지 통항 대기 유지</li>
+      <li>미국·이란 성명 간 <strong>휴전 상태 해석 차이</strong> 존재 — 통항 재개 기준 불분명</li>
+      <li>실질적 통항 재개를 위해서는 보험사 전면 복귀·안전 보장 프로토콜 필요</li>
+    </ul>
+    <div class="arrow-point">→ 보험료 소폭 하락은 방향 전환 신호 — 실질 통항 재개까지는 추가 조건 충족 필요</div>
+  </div>
+
+  <!-- 이슈 3 -->
+  <div class="issue-card issue-mid">
+    <div class="issue-header">
+      <span class="issue-badge badge-watch">파나마</span>
+      <div class="issue-title">파나마 운하 경매가 Argus 사상 최고치 — 호르무즈 차단 후 태평양 수요 급증 반영</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "이란의 호르무즈 해협 봉쇄 이후 미국 걸프 코스트 적재 에너지 상품 및 석유화학 원료에 대한 태평양 유역 수요가 강해지면서 파나마 운하 경매 가격이 Argus 평가 시작 이래 최고 수준으로 치솟았다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>파나마 운하 예약(slot) 경매가 <strong>사상 최고치</strong> — 중동 공급 차단 직접 여파</li>
+      <li>미국 걸프→울산(파나마 경유) 운임: <strong>$165.24/t</strong> (전주 대비 -$3.02, 그러나 절대 수준 고공)</li>
+      <li>미국 걸프→니이하마(파나마 경유) 운임: <strong>$165.32/t</strong></li>
+      <li>케이프 경유 대안 운임: 걸프→울산 $208.23/t — 비용 부담 동아시아 구매자에 전가</li>
+    </ul>
+    <div class="arrow-point">→ 파나마 운하 비용 상승이 미국발 아시아향 암모니아 가격 경쟁력 약화 — 공급망 비용 압박 지속</div>
+  </div>
+
+  <!-- 이슈 4 -->
+  <div class="issue-card issue-mid">
+    <div class="issue-header">
+      <span class="issue-badge badge-watch">청정에너지</span>
+      <div class="issue-title">IHI·Gentari·Petronas Chemicals, 말레이시아 2MW 암모니아 전소 가스터빈 사업 추진</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "일본 엔지니어링 회사 IHI와 말레이시아 파트너사 Gentari Hydrogen, Petronas Chemicals는 Petronas Chemicals의 말레이시아 사업장 전력 공급을 위한 2MW 암모니아 전소 가스터빈을 실증 후 상업 운전할 계획이다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>IHI(일본) + Gentari Hydrogen + Petronas Chemicals <strong>3사 컨소시엄</strong></li>
+      <li>실증(demonstration) → 상업 운전(commercial operation) 단계적 추진</li>
+      <li>발전 규모 <strong>2MW</strong> — 소규모 산업용 전력 공급 목적</li>
+      <li>동남아시아 암모니아 연소 기술 상용화 사례 — 지역 내 암모니아 수요 창출 기반</li>
+    </ul>
+    <div class="arrow-point">→ 동남아 산업용 암모니아 전소 실증 본격화 — 중장기 암모니아 수요 다변화 신호</div>
+  </div>
+
+  <!-- 이슈 5 -->
+  <div class="issue-card issue-pol">
+    <div class="issue-header">
+      <span class="issue-badge badge-pol">Argus 방법론</span>
+      <div class="issue-title">Argus, 암모니아 생산비용 산식 4월 16일부로 CO2 포함 신규 방식으로 변경</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li><strong>4월 15일</strong>: TTF 기준 암모니아 생산비용 계산 마지막 발행</li>
+      <li><strong>4월 16일~</strong>: CO2 배출 비용 포함한 유럽·미국 암모니아 생산비 신규 산출 시작</li>
+      <li>현재 TTF 기준 생산비: <strong>$636.75/t</strong> (전주 $669.30 대비 -$32.55)</li>
+      <li>변경 후 CBAM 포함 NWE cfr 비용: duty unpaid <strong>$838.68/t</strong>, duty free/paid <strong>$887.49/t</strong></li>
+    </ul>
+    <div class="arrow-point">→ CO2 비용 내재화로 유럽 암모니아 생산비용 현실화 — CBAM 대응 지표로 활용 가능</div>
+  </div>
+
+  <!-- 주요 동향 -->
+  <div class="section-label">📋 주요 동향 요약</div>
+  <div class="news-list">
+    <div class="news-row">
+      <div class="news-row-top">
+        <div class="news-dot dot-red"></div>
+        <div class="news-title">인도 IPL, 250만t 요소 대규모 입찰 발행 (4월 15일 마감)</div>
+      </div>
+      <div class="news-detail">서해안 150만t + 동해안 100만t, 6월 14일까지 선적. 중동 걸프 체류 요소선박은 입찰 제외. 낙찰 가격이 이번 주 시장 피크 여부 가늠자로 주목</div>
+    </div>
+    <div class="news-row">
+      <div class="news-row-top">
+        <div class="news-dot dot-red"></div>
+        <div class="news-title">요소 가격 급등 — 이집트 $842/t fob, 중동 $800-830/t fob 신고가</div>
+      </div>
+      <div class="news-detail">인도 IPL 입찰 발표 후 시장 상승세 지속. 이집트 NCIC DAP·SSP 판매 입찰도 더 높은 가격에 낙찰. 알제리 $850s/t fob 오퍼 유통 중</div>
+    </div>
+    <div class="news-row">
+      <div class="news-row-top">
+        <div class="news-dot dot-blue"></div>
+        <div class="news-title">트리니다드 Sabic Seashine호, Jorf Lasfar 하역 후 Point Lisas 방향 이동</div>
+      </div>
+      <div class="news-detail">Sabic 수출 불가 기간 중 재임대(relet) 추정. 트리니다드 생산업체들 소량 현물 공식(formula) 기준 판매 진행 중이나 세부 정보 미공개</div>
+    </div>
+    <div class="news-row">
+      <div class="news-row-top">
+        <div class="news-dot dot-blue"></div>
+        <div class="news-title">베네수엘라 Eugenia Gas, 4월 10일 Jose 출항 — 콜롬비아 Barranquilla향</div>
+      </div>
+      <div class="news-detail">3월 이후 베네수엘라→콜롬비아 소규모 화물 3회 인도 지속. 남미 역내 소규모 거래 계속</div>
+    </div>
+    <div class="news-row">
+      <div class="news-row-top">
+        <div class="news-dot dot-blue"></div>
+        <div class="news-title">Antwerp 항 Deurganck 도크 기름 유출 발생 (4/9), 이후 해소</div>
+      </div>
+      <div class="news-detail">벙커링 작업 중 기름 유출로 선박 입항 일시 중단 → 이후 정상화. 유럽 수입 일정에 단기 영향 있었으나 해소됨</div>
+    </div>
+    <div class="news-row">
+      <div class="news-row-top">
+        <div class="news-dot dot-gray"></div>
+        <div class="news-title">인도 DAP: Coromandel, JPMC 2Q26 인산 $70/t 인상 합의 — 시장 예상 하회</div>
+      </div>
+      <div class="news-detail">2Q26 인산 cfr 인상폭 $70/t P2O5로 합의. DAP 생산원가 기준 손실 여전, 인도 정부 추가 NBS 보조금 결정 여부가 핵심 변수</div>
+    </div>
+  </div>
+
+  <!-- 30-60일 전망 -->
+  <div class="section-label">📆 30-60일 시장 전망</div>
+  <div class="outlook-box">
+    <div class="outlook-title">⬆→⬇ 피크 후 하락 — IPL 입찰 결과가 가격 방향 결정</div>
+    <div class="outlook-text">
+      요소 가격은 다음 주 인도 IPL 입찰에서 신고점을 기록할 것으로 예상되며, 공급자들에게 현 가격 환경을 극대화할 최적의 기회가 도래하고 있다. 암모니아는 전 지역 보합이나, 불안정한 휴전 속에서 추가 상승 여지가 여전히 존재한다.<br><br>
+      <strong>상방 압력:</strong> 호르무즈 실질 통항 부재, 트럼프 외교 불확실성, 4-5월 전 지역 수요 시즌<br>
+      <strong>하방 완화:</strong> 전쟁 위험 보험료 소폭 하락 시작, 미국 GCA·Woodside 수출 지속, 휴전 합의 자체는 유지 중
+    </div>
+  </div>
+
+  <!-- 모니터링 포인트 -->
+  <div class="section-label">👁 모니터링 포인트</div>
+  <div class="monitor-box">
+    <div class="monitor-title">⚠ 향후 30-60일 주요 체크포인트</div>
+    <div class="monitor-row">
+      <div class="monitor-key">호르무즈</div>
+      <div class="monitor-val">트럼프-이란 간 조건 이행 협의 진전 여부 — 보험사 복귀 시점이 실질적 1차 공급 재개 신호</div>
+    </div>
+    <div class="monitor-row">
+      <div class="monitor-key">AWRP 완화</div>
+      <div class="monitor-val">전쟁 위험 보험료 추가 인하 속도 — 전면 복귀 없이는 선주 통항 불가</div>
+    </div>
+    <div class="monitor-row">
+      <div class="monitor-key">인도 IPL</div>
+      <div class="monitor-val">4월 15일 입찰 마감·낙찰가 확인 → 글로벌 요소·암모니아 가격 피크 여부 판단 기준</div>
+    </div>
+    <div class="monitor-row">
+      <div class="monitor-key">한국 조달</div>
+      <div class="monitor-val">5-6월 선적 동아시아 spot 경쟁 심화 — 선도 5월 $739/t, 6월 $754/t (cfr) 반영</div>
+    </div>
+    <div class="monitor-row">
+      <div class="monitor-key">Luwuk</div>
+      <div class="monitor-val">5월 정기보수(1개월) 돌입 → 동아시아 spot 공급 추가 감소 확정적</div>
+    </div>
+    <div class="monitor-row">
+      <div class="monitor-key">Argus 산식</div>
+      <div class="monitor-val">4월 16일 CO2 포함 신규 생산비 지표 첫 발표 — 유럽 CBAM 대응 벤치마크 기준 변경 주목</div>
+    </div>
+  </div>
+
+  <!-- 하단 내비 -->
+  <div class="nav-btns">
+    <a class="nav-btn" href="20260409.html">← 이전 (4월 9일)</a>
+    <span style="font-size:12px;color:#aaa;align-self:center;">최신 브리핑</span>
+  </div>
+
+  <!-- 푸터 -->
+  <div class="footer">
+    <span>Argus Ammonia Issue 26-69 | 2026.04.10</span>
+    <div class="footer-src">
+      <a href="../dashboard.html">← 아카이브</a>
+      <a href="https://www.argusmedia.com" target="_blank">Argus Media</a>
+    </div>
+  </div>
+
+</div>
+<script>
+AUTH.requireAuth();
+</script>
+</body>
+</html>
