@@ -134,9 +134,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',san
 
   <div id="trend" class="panel">
     <div class="stat-grid">
-      <div class="stat-card"><div class="stat-label">중동 fob 최근 고점</div><div class="stat-val">$700</div><div class="stat-sub">2026. 4. 9.</div></div>
-      <div class="stat-card"><div class="stat-label">4월 NW유럽 최고치</div><div class="stat-val">$830</div><div class="stat-sub">4월 9일 cfr</div></div>
-      <div class="stat-card"><div class="stat-label">JKLAB cfr 울산</div><div class="stat-val">$687</div><div class="stat-sub">45Q 포함 · 4월 9일</div></div>
+      <div class="stat-card"><div class="stat-label">중동 fob 최근 고점</div><div class="stat-val">$765</div><div class="stat-sub">2026. 4. 16.</div></div>
+      <div class="stat-card"><div class="stat-label">4월 NW유럽 최고치</div><div class="stat-val">$850</div><div class="stat-sub">4월 16일 cfr</div></div>
+      <div class="stat-card"><div class="stat-label">JKLAB cfr 울산</div><div class="stat-val">$681</div><div class="stat-sub">45Q 포함 · 4월 16일</div></div>
     </div>
     <div class="chart-wrap">
       <div class="chart-title">암모니아 현물가 추이 ($/t)</div>
@@ -164,6 +164,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',san
 
 <script>
 const briefs = [
+  { date:'2026-04-16', label:'4월 16일', day:'목', hot:true, tags:'중동급등 · 동남아최고 · Tampa결제',
+    ocrUrl:'https://docs.google.com/document/d/16E6LRlHS13exVf8DfsKuRnGrRQZDwMjg7gQKE5pXPdY/edit',
+    prices:{me:765,ea:775,nwe:850,usg:780,jklab:681.47}, chg:{me:'+40',ea:'+50',nwe:'+20',usg:'+5'},
+    issues:[
+      {type:'hot', text:'중동 fob +$40 → $765/t — 오만 단독 공급 구조, 인도향 $870-880/t cfr 성사'},
+      {type:'hot', text:'동남아 fob +$100 → $725/t (2023.1 이후 최고) — 동아시아 cfr +$50 → $775/t'},
+      {type:'hot', text:'미군 이란 봉쇄 도전 선박 13척 차단 + NPC 수출 중단 — 봉쇄 이중 구조화'},
+      {type:'',    text:'알제리 Sorfert $800-810/t fob 판매 + 미국 4월 수출 170,000t+(YoY +22%)'},
+      {type:'pol', text:'Tampa 5월 결제 $820-840/t cfr 예상 + 신규 CO2 포함 생산비 지표 공개'}
+    ], monitor:'호르무즈 봉쇄 지속 · Tampa 5월 결제 확정 · 중국 수출 쿼터 결정 · Yara Pilbara 재가동' },
   { date:'2026-04-15', label:'4월 15일', day:'수', hot:true, tags:'이란NPC · 공급절박 · fob급등',
     ocrUrl:'https://docs.google.com/document/d/1rH4PoIeylufNOBDJnR9Jl8dNqJUsXHOdKwYJpzB3A9U/edit',
     prices:{me:725,ea:725,nwe:830,usg:775,jklab:681.47}, chg:{me:'+25',ea:'nc',nwe:'nc',usg:'nc'},
