@@ -125,7 +125,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',san
   <div id="archive" class="panel active">
     <div class="archive-grid">
       <div>
-        <div class="month-label">2026년 4월</div>
+        <div class="month-label">2026년 4-5월</div>
         <div class="date-list" id="dateList"></div>
       </div>
       <div id="previewCol"><div class="empty-msg">← 날짜를 선택하세요</div></div>
@@ -164,6 +164,76 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',san
 
 <script>
 const briefs = [
+  { date:'2026-05-08', label:'5월 8일', day:'금', hot:false, tags:'Nutrien트리니다드 · 동남아공급절박 · Gen2노르웨이',
+    ocrUrl:'https://docs.google.com/document/d/1EFPbaw1L40wy9qTTh0Zzu_Dytq_ZWrGe_5953lz-FmQ/edit',
+    prices:{me:800,ea:815,nwe:910,usg:825,jklab:677.12}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'Nutrien, 트리니다드 암모니아 4개 플랜트 매각 검토 — 2025년 10월부터 가동 중단, 항만비·가스 공급 분쟁'},
+      {type:'',    text:'동아시아 $815/t cfr 보합 — 동남아 현물 공급 극도 제한, 공급자 협상력 유지'},
+      {type:'',    text:'중국·동남아, $800/t fob 수출 오퍼 테스트 중 — 실거래 미확인'},
+      {type:'',    text:'Gen2 Energy(노르웨이) 150MW 전력망 접속 완료 — 수력 기반 그린 H2·암모니아 생산 개시'},
+      {type:'',    text:'IPL 입찰 521,000t 마감(5/18) 앞두고 시장 관망 지속'}
+    ], monitor:'IPL 5/18 낙찰가 · 호르무즈 협상 타결 여부 · Nutrien 매각 구매자 · 동남아 $800 fob 거래 성사 여부' },
+  { date:'2026-05-07', label:'5월 7일', day:'목', hot:false, tags:'IPL입찰521kt · 탬파825정착 · 서방공급개선',
+    ocrUrl:'https://docs.google.com/document/d/1XlPuZ4Aj7ET8EBtsAjVZcdYSZGmE_XuKrjHEnTYVAKM/edit',
+    prices:{me:800,ea:815,nwe:910,usg:825,jklab:677.12}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'인도 IPL 입찰 521,000t 공고 — 6~8월 분할 인도, 마감 5월 18일, 가격 상방 압력'},
+      {type:'hot', text:'Tampa 5월 $825/t 정착 (+$50), US Gulf FMB 주간 $827.5/t (+$15) — 대서양 가격 레벨업'},
+      {type:'',    text:'미국 걸프 고가동 + 존스법 유예 연장 — 서방 공급 개선, 바이어 저항으로 스폿 거래 제한적'},
+      {type:'',    text:'호르무즈 미개통 시 6월 이후 공급 부족 현실화 — 바이어 관망과 공급자 강세 교착 국면'},
+      {type:'',    text:'NWE 주간 인덱스 $910 (+$2), 북아프리카 $840 보합'}
+    ], monitor:'IPL 5/18 낙찰 결과 · 호르무즈 재개 공식 발표 · Tampa 6월 협상 개시 · Jones Act 유예 종료 여부' },
+  { date:'2026-05-06', label:'5월 6일', day:'수', hot:true, tags:'트럼프이란협상 · EU CBAM · NE아시아그린전환',
+    ocrUrl:'https://docs.google.com/document/d/1EiesbnEwtxTcjr36IXdfwKUV-2l52zvOAW-ebkTPq-U/edit',
+    prices:{me:800,ea:815,nwe:910,usg:825,jklab:677.12}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'트럼프, 이란 핵협상 타결 임박 시사 — 호르무즈 재개 기대 선반영, TFC 대만 $800/t cfr 스폿 -$50'},
+      {type:'',    text:'인도 PPL 중국산 31,000t 계약, 중국 $800 fob 오퍼 — 실거래 미성사'},
+      {type:'pol', text:'EU 의회 CBAM 27a 농업면제 삭제 지지 + PepsiCo 인증 저탄소 암모니아 계약 체결'},
+      {type:'',    text:'[수소] NE아시아 블루→그린 전환 가속 — 삼성물산-Reliance $30억, IHI-Acme 오디샤 400kt/yr'},
+      {type:'pol', text:'[수소] IMO MEPC 84 해운 GHG 부과금 최종 합의 불발 — 85차 재논의'}
+    ], monitor:'이란 협상 공식 타결 여부 · CBAM 27a 입법 진행 · MEPC 85차 GHG 합의 가능성 · 인도산 그린NH3 FID 일정' },
+  { date:'2026-05-05', label:'5월 5일', day:'화', hot:true, tags:'Tampa825+50 · 이집트질소관세 · 호르무즈충돌',
+    ocrUrl:'https://docs.google.com/document/d/1OO3Leru303WG-tTGnNaOQdbEwYOtRdv6wjriqZTfH1k/edit',
+    prices:{me:800,ea:815,nwe:910,usg:825,jklab:677.12}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'+5'},
+    issues:[
+      {type:'hot', text:'Tampa 5월 $825/t 정산 확정 (+$50) — 이란-미국 Hormuz 교전 직후 협상 타결, 연간 최고치'},
+      {type:'hot', text:'이란-미국 호르무즈 충돌 — 휴전 발표에도 실질 통항 차단 지속, 보험 불확실성'},
+      {type:'pol', text:'이집트, 질소비료 수출세 $90/t 도입 — 글로벌 유럽·아시아 공급 타이트 심화'},
+      {type:'',    text:'중동 fob $800 보합, 동아시아 $815 보합 — JKLAB $677.12 (-$2.49)'},
+      {type:'',    text:'미국 걸프 $825 (+$5) → 대서양 수급 개선이지만 중동 공급 재개까지 여전히 긴장'}
+    ], monitor:'이집트 수출세 실제 적용 여부 · Tampa 6월 협상 · 호르무즈 실질 재개 · 중동 fob 추가 상승 가능성' },
+  { date:'2026-05-01', label:'5월 1일', day:'금', hot:false, tags:'Tampa협상진행 · 중동전쟁2022수준 · 인도DAP',
+    ocrUrl:'https://docs.google.com/document/d/1WhPubRI2aSEl675DBObn5IZ7QV8YzL0p_n5Rf5dxz2Y/edit',
+    prices:{me:800,ea:815,nwe:910,usg:820,jklab:679.61}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'',    text:'Tampa 5월 협상 진행 중 — 바이어 $775, 공급자 $850+ 이견 지속, 최종 합의 지연'},
+      {type:'',    text:'중동 전쟁, 2022년 우크라이나 수준 가격 재현 가능성 낮다는 분석 — 아시아 수요 구조 다름'},
+      {type:'pol', text:'인도 컨소시엄, DAP·TSP 비료 합동 입찰 — 수입 물량 확보 경쟁 지속'},
+      {type:'',    text:'중동 fob $800, 동아시아 $815, NWE $910 모두 보합 — 공급 위기 속 가격 안정 구간'},
+      {type:'',    text:'JKLAB $679.61 전일 동일 — 저탄소 프리미엄 지속'}
+    ], monitor:'Tampa 5월 최종 정산가 · 인도 DAP/TSP 입찰 낙찰 · 중동 공급 재개 시나리오 시뮬레이션' },
+  { date:'2026-04-30', label:'4월 30일', day:'목', hot:false, tags:'IFFCO감산60% · 서방공급개선 · Tampa신중',
+    ocrUrl:'https://docs.google.com/document/d/1LwXLRU_m-ywxch1s3bsRoDLoN96AmiMA0-enJSIw0Zo/edit',
+    prices:{me:800,ea:815,nwe:910,usg:820,jklab:679.61}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'인도 IFFCO, 암모니아 생산량 60-65% 감산 — 중동 공급 차질로 원료 확보 실패'},
+      {type:'',    text:'수에즈 서쪽(NWE·미국) 공급 개선세 — 알제리·미국 대서양 공급 정상화 진행'},
+      {type:'',    text:'Tampa 5월 정산 예상치 신중 — 협상 진행 중, $800-825 범위 예상'},
+      {type:'',    text:'중동 fob $800, 동아시아 $815 — JKLAB $679.61 (+$4.76)'},
+      {type:'',    text:'호르무즈 봉쇄 지속 — 중동산 재고 극히 제한적, 바이어 대안 조달 지속'}
+    ], monitor:'IFFCO 생산 재개 여부 · Tampa 5월 정산 확정 · 호르무즈 통항 재개 · NWE 공급 정상화 속도' },
+  { date:'2026-04-28', label:'4월 28일', day:'월', hot:false, tags:'독일RFNBO확정 · 일본전력경매 · Atome파라과이',
+    ocrUrl:'https://docs.google.com/document/d/1_CU89abupBR1tsUbY1pSlokGJVaGYBn66OkfhC-Apso/edit',
+    prices:{me:800,ea:815,nwe:900,usg:810,jklab:674.85}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'pol', text:'독일, 2030년 RFNBO 쿼터 1.5%·2032년 3% 확정 입법 — 수소 파생물 수요 의무화 구체화'},
+      {type:'hot', text:'일본 전력 경매, 암모니아 혼소 사업 입찰 저조 — 비용 경쟁력 미흡, 그린 전환 압박'},
+      {type:'',    text:'Atome Energy, 파라과이 그린 암모니아 FID — 2028년 생산 목표, 유럽향 수출 계획'},
+      {type:'',    text:'이토추(Itochu)-L&T, 인도산 그린 암모니아 300kt/yr 공급 협약 체결'},
+      {type:'pol', text:'미국 45V 청정수소 세액공제 재설정 논의 — IRA 개정 속 수소 인센티브 유지 여부 불확실'}
+    ], monitor:'독일 RFNBO 입법 시행 일정 · 일본 혼소 경쟁력 재검토 · Atome FID 후속 자금 조달 · 45V 최종 결정' },
   { date:'2026-04-24', label:'4월 24일', day:'금', hot:true, tags:'필바라재가동 · 벨플레인정비 · 공급차질',
     ocrUrl:'https://docs.google.com/document/d/1hZWBdSMgaM2502ZvoTc7xrGnwQQY_Va4Pbhr98ALOHI/edit',
     prices:{me:800,ea:815,nwe:900,usg:810,jklab:674.85}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
