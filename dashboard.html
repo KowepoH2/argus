@@ -452,22 +452,24 @@ function renderPreview(b){
 
 function renderCharts(){
   const sorted = briefs.slice().reverse();
-  const labels = sorted.map(b=>b.label);
+  // 암모니아 가격이 있는 항목만 가격 차트에 사용 (수소 전용 브리핑 제외 → 선 끊김 방지)
+  const ammOnly  = sorted.filter(b => b.prices.me !== null);
+  const jklabOnly = sorted.filter(b => b.prices.jklab !== null);
   const opts = {
     responsive:true, maintainAspectRatio:false,
     interaction:{mode:'index',intersect:false},
     plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',borderColor:'#d8dde8',borderWidth:1,titleColor:'#0C447C',bodyColor:'#444',padding:10,callbacks:{label:c=>` ${c.dataset.label}: $${c.parsed.y}`}}},
     scales:{x:{grid:{color:'#f0f0f0'},ticks:{color:'#888',font:{size:11}}},y:{grid:{color:'#f0f0f0'},ticks:{color:'#888',font:{size:11},callback:v=>'$'+v}}}
   };
-  new Chart(document.getElementById('priceChart'),{type:'line',data:{labels,datasets:[
-    {label:'중동 fob',      data:sorted.map(b=>b.prices.me),  borderColor:'#D85A30',borderWidth:2,pointRadius:4,tension:.3,fill:false},
-    {label:'동아시아 cfr',  data:sorted.map(b=>b.prices.ea),  borderColor:'#185FA5',borderWidth:2,pointRadius:4,tension:.3,fill:false},
-    {label:'NW유럽 cfr',    data:sorted.map(b=>b.prices.nwe), borderColor:'#639922',borderWidth:2,pointRadius:4,tension:.3,fill:false},
-    {label:'미국걸프 cfr',  data:sorted.map(b=>b.prices.usg), borderColor:'#8B5CF6',borderWidth:2,pointRadius:4,tension:.3,fill:false,borderDash:[4,3]}
+  new Chart(document.getElementById('priceChart'),{type:'line',data:{labels:ammOnly.map(b=>b.label),datasets:[
+    {label:'중동 fob',      data:ammOnly.map(b=>b.prices.me),  borderColor:'#D85A30',borderWidth:2,pointRadius:4,tension:.3,fill:false},
+    {label:'동아시아 cfr',  data:ammOnly.map(b=>b.prices.ea),  borderColor:'#185FA5',borderWidth:2,pointRadius:4,tension:.3,fill:false},
+    {label:'NW유럽 cfr',    data:ammOnly.map(b=>b.prices.nwe), borderColor:'#639922',borderWidth:2,pointRadius:4,tension:.3,fill:false},
+    {label:'미국걸프 cfr',  data:ammOnly.map(b=>b.prices.usg), borderColor:'#8B5CF6',borderWidth:2,pointRadius:4,tension:.3,fill:false,borderDash:[4,3]}
   ]},options:opts});
-  new Chart(document.getElementById('jklabChart'),{type:'line',data:{labels,datasets:[
-    {label:'JKLAB cfr 울산', data:sorted.map(b=>b.prices.jklab), borderColor:'#0C447C',backgroundColor:'rgba(12,68,124,.1)',borderWidth:2.5,pointRadius:5,tension:.3,fill:true},
-    {label:'중동 fob (참조)', data:sorted.map(b=>b.prices.me),   borderColor:'#FAC775',borderWidth:2,pointRadius:4,tension:.3,fill:false,borderDash:[5,4]}
+  new Chart(document.getElementById('jklabChart'),{type:'line',data:{labels:jklabOnly.map(b=>b.label),datasets:[
+    {label:'JKLAB cfr 울산', data:jklabOnly.map(b=>b.prices.jklab), borderColor:'#0C447C',backgroundColor:'rgba(12,68,124,.1)',borderWidth:2.5,pointRadius:5,tension:.3,fill:true},
+    {label:'중동 fob (참조)', data:jklabOnly.map(b=>b.prices.me),   borderColor:'#FAC775',borderWidth:2,pointRadius:4,tension:.3,fill:false,borderDash:[5,4]}
   ]},options:opts});
 }
 
