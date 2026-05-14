@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>암모니아 브리핑 — 2026.05.13</title>
+<script src="../auth.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:#f4f6fa;color:#1a1a1a;font-size:14px;line-height:1.6}
+.wrap{max-width:720px;margin:24px auto;padding:0 16px 40px}
+.header{border-left:5px solid #185FA5;padding:12px 16px;margin-bottom:20px;background:#E6F1FB;border-radius:0 8px 8px 0}
+.header-badge{display:inline-block;font-size:10px;font-weight:700;background:#185FA5;color:#fff;padding:2px 8px;border-radius:20px;margin-bottom:6px;letter-spacing:.06em}
+.header-title{font-size:18px;font-weight:700;color:#0C447C}
+.header-meta{font-size:12px;color:#378ADD;margin-top:4px;display:flex;gap:12px;flex-wrap:wrap}
+.header-meta span{display:flex;align-items:center;gap:4px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#fff;border:1.5px solid #85B7EB;border-radius:7px;font-size:12px;font-weight:600;color:#0C447C;text-decoration:none;margin-bottom:16px;cursor:pointer}
+.back-btn:hover{background:#E6F1FB}
+.source-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.btn-src{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .15s}
+.btn-orig{background:#0C447C;color:#fff}
+.btn-orig:hover{background:#185FA5}
+.btn-trans{background:#fff;color:#0C447C;border:1.5px solid #85B7EB}
+.btn-trans:hover{background:#E6F1FB}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.08em;color:#888;text-transform:uppercase;margin:20px 0 10px}
+.price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px}
+.price-card{padding:10px 14px;border-radius:8px;border:0.5px solid #e0e0e0;background:#fff}
+.price-label{font-size:11px;color:#666;margin-bottom:2px}
+.price-val{font-size:22px;font-weight:700;color:#0C447C}
+.price-unit{font-size:11px;color:#888;font-weight:400}
+.price-chg{font-size:12px;font-weight:600;margin-top:3px}
+.up{color:#D85A30}.nc{color:#639922}.dn{color:#378ADD}
+.jklab-row{background:#F0F7FF;border-radius:8px;padding:10px 16px;margin-bottom:4px;border:0.5px solid #85B7EB;display:flex;justify-content:space-between;align-items:center}
+.jklab-label{font-size:12px;color:#0C447C;font-weight:600}
+.jklab-sub{font-size:11px;color:#378ADD;margin-top:2px}
+.jklab-val{font-size:18px;font-weight:700;color:#0C447C;text-align:right}
+.weekly-table{background:#fff;border-radius:8px;border:0.5px solid #85B7EB;overflow:hidden;margin-bottom:16px}
+.weekly-header{background:#0C447C;color:#fff;padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:.04em}
+.weekly-row{display:grid;grid-template-columns:1fr 120px 80px;padding:9px 16px;border-bottom:0.5px solid #f0f0f0;align-items:center}
+.weekly-row:last-child{border-bottom:none}
+.weekly-row:nth-child(even){background:#F8FBFF}
+.weekly-name{font-size:13px;color:#1a1a1a;font-weight:500}
+.weekly-price{font-size:14px;font-weight:700;color:#0C447C;text-align:right}
+.weekly-chg{font-size:12px;font-weight:600;text-align:right}
+.issue-card{border-radius:10px;padding:14px 16px;margin-bottom:10px;border:0.5px solid}
+.issue-hot{background:#FFF4EF;border-color:#F0997B}
+.issue-hot .issue-title{color:#712B13}
+.issue-mid{background:#F0F7FF;border-color:#85B7EB}
+.issue-mid .issue-title{color:#0C447C}
+.issue-pol{background:#F7F0FF;border-color:#B59BDB}
+.issue-pol .issue-title{color:#3B1C7A}
+.issue-header{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px}
+.issue-badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.badge-hot{background:#F0997B;color:#4A1B0C}
+.badge-watch{background:#85B7EB;color:#042C53}
+.badge-pol{background:#B59BDB;color:#1E0A4A}
+.issue-title{font-weight:700;font-size:14px;line-height:1.4}
+.issue-divider{height:0.5px;background:#e0e0e0;margin:10px 0}
+.trans-quote{background:rgba(255,255,255,0.7);border-radius:6px;padding:8px 12px;margin:8px 0;font-size:12px;color:#555;line-height:1.7;border-left:3px solid #d0d0d0;font-style:italic}
+.trans-label{font-size:10px;font-weight:700;color:#aaa;letter-spacing:.06em;margin-bottom:4px}
+.issue-bullets{margin:0;padding:0;list-style:none}
+.issue-bullets li{font-size:13px;color:#333;padding:3px 0 3px 16px;position:relative;line-height:1.6}
+.issue-bullets li::before{content:'·';position:absolute;left:4px;color:#888;font-weight:700}
+.issue-bullets li strong{color:#0C447C}
+.arrow-point{font-size:12px;color:#185FA5;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #185FA5}
+.arrow-point-pol{font-size:12px;color:#3B1C7A;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #B59BDB}
+.trend-list{background:#fff;border-radius:8px;border:0.5px solid #e0e0e0;overflow:hidden;margin-bottom:16px}
+.trend-item{padding:10px 16px;border-bottom:0.5px solid #f0f0f0;font-size:13px;color:#333;display:flex;gap:10px;align-items:flex-start;line-height:1.6}
+.trend-item:last-child{border-bottom:none}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.dot-red{background:#D85A30}.dot-blue{background:#378ADD}.dot-gray{background:#aaa}
+.monitor-box{border-radius:8px;background:#FFFBEF;border:0.5px solid #FAC775;padding:14px 16px;margin-bottom:16px}
+.monitor-title{font-size:12px;font-weight:700;color:#854F0B;margin-bottom:10px;letter-spacing:.04em;display:flex;align-items:center;gap:6px}
+.monitor-row{font-size:13px;color:#412402;margin-bottom:8px;display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:baseline}
+.monitor-row:last-child{margin-bottom:0}
+.monitor-key{color:#854F0B;font-weight:700;font-size:12px}
+.monitor-val{line-height:1.6}
+.footer{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:0.5px solid #e0e0e0;font-size:12px;color:#888;flex-wrap:wrap;gap:8px}
+.footer-src{display:flex;gap:16px}
+.footer-src a{color:#185FA5;text-decoration:none;font-weight:500}
+.footer-src a:hover{text-decoration:underline}
+.nav-btns{display:flex;gap:8px;margin-top:20px;justify-content:space-between}
+.nav-btn{padding:9px 16px;border-radius:7px;font-size:12px;font-weight:600;text-decoration:none;background:#fff;color:#0C447C;border:1.5px solid #85B7EB}
+.nav-btn:hover{background:#E6F1FB}
+.nav-btn.next{background:#0C447C;color:#fff;border-color:#0C447C}
+.nav-btn.next:hover{background:#185FA5}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-btn" href="../dashboard.html">← 아카이브로 돌아가기</a>
+
+  <!-- 헤더 -->
+  <div class="header">
+    <div class="header-badge">ARGUS MEDIA · 번역 정리본</div>
+    <div class="header-title">암모니아 일간 브리핑</div>
+    <div class="header-meta">
+      <span>📅 2026년 5월 13일 (수)</span>
+      <span>📄 Argus FMB Ammonia 26-91</span>
+      <span>🏢 서부발전 수소사업실</span>
+    </div>
+  </div>
+
+  <!-- 원문 접근 -->
+  <div class="source-bar">
+    <a class="btn-src btn-orig" href="https://drive.google.com/drive/folders/1oMyl4hTVN8chOw5MPLQKYWdMonStRLxo" target="_blank">
+      <span>📂</span> 원문 PDF
+    </a>
+    <a class="btn-src btn-trans" href="https://docs.google.com/document/d/1kpHIfJKtZStg8BlPASi9n7Z47waZkSRHdK9oyj_r6-8/edit" target="_blank">
+      <span>📄</span> 번역본
+    </a>
+  </div>
+
+  <!-- 가격 현황 -->
+  <div class="section-label">📊 암모니아 일일 가격 (5월 13일)</div>
+  <div class="price-grid">
+    <div class="price-card">
+      <div class="price-label">중동 fob</div>
+      <div class="price-val">800 <span class="price-unit">$/t</span></div>
+      <div class="price-chg nc">━ 전일 동일 (보합)</div>
+    </div>
+    <div class="price-card">
+      <div class="price-label">동아시아 cfr</div>
+      <div class="price-val">815 <span class="price-unit">$/t</span></div>
+      <div class="price-chg nc">━ 전일 동일 (보합)</div>
+    </div>
+    <div class="price-card">
+      <div class="price-label">NW유럽 cfr</div>
+      <div class="price-val">910 <span class="price-unit">$/t</span></div>
+      <div class="price-chg nc">━ 전일 동일 (보합)</div>
+    </div>
+    <div class="price-card">
+      <div class="price-label">미국 걸프 cfr</div>
+      <div class="price-val">825 <span class="price-unit">$/t</span></div>
+      <div class="price-chg nc">━ 전일 동일 (보합)</div>
+    </div>
+  </div>
+  <div class="jklab-row">
+    <div>
+      <div class="jklab-label">JKLAB (저탄소 cfr 울산, 45Q 포함)</div>
+      <div class="jklab-sub">Argus Japan-Korea-Australia Low-carbon Benchmark</div>
+    </div>
+    <div class="jklab-val">679.23 <span style="font-size:12px;font-weight:400;color:#D85A30">▲ +2.11 $/t (전주比)</span></div>
+  </div>
+
+  <!-- 주간 가격 요약 -->
+  <div class="section-label">📈 주간 기준 가격 요약 (Argus FMB, 5월 7일 기준)</div>
+  <div class="weekly-table">
+    <div class="weekly-header">⚓ FMB 주간 암모니아 가격 인덱스</div>
+    <div class="weekly-row">
+      <div class="weekly-name">Tampa (미국 걸프, cfr)</div>
+      <div class="weekly-price">825 $/t</div>
+      <div class="weekly-chg up">▲ +50</div>
+    </div>
+    <div class="weekly-row">
+      <div class="weekly-name">US Gulf (미국 걸프, fob)</div>
+      <div class="weekly-price">827.5 $/t</div>
+      <div class="weekly-chg up">▲ +15</div>
+    </div>
+    <div class="weekly-row">
+      <div class="weekly-name">북아프리카 (fob)</div>
+      <div class="weekly-price">840 $/t</div>
+      <div class="weekly-chg nc">━ 보합</div>
+    </div>
+    <div class="weekly-row">
+      <div class="weekly-name">NW유럽 주간 인덱스 (cfr)</div>
+      <div class="weekly-price">910 $/t</div>
+      <div class="weekly-chg up">▲ +2</div>
+    </div>
+  </div>
+
+  <!-- 핵심 이슈 -->
+  <div class="section-label">🔥 핵심 이슈</div>
+
+  <div class="issue-card issue-mid">
+    <div class="issue-header">
+      <span class="issue-badge badge-watch">공급 동향</span>
+      <div class="issue-title">중국 수출 급증 — 2026년 누적 465,000t+, 4월 130,000t으로 전년比 4배 폭증</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "중국 암모니아 수출이 2026년 들어 급증세를 이어가고 있다. 4월 수출은 130,000t으로 지난해 동월 30,000t의 4배 이상에 달했으며, 5월에는 162,000t이 수출될 것으로 추정된다. 2026년 누적 수출량은 이미 465,000t을 넘어섰다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>중국 2026년 월별 수출: 4월 <strong>130,000t</strong>(전년 30,000t, 약 4.3배 증가)</li>
+      <li>5월 추정 수출: <strong>162,000t</strong>(가득 선적 기준), 2026년 누계 <strong>465,000t+</strong></li>
+      <li>6-7월 선적 오퍼 <strong>$750-830/t fob</strong> 유통 중 — 그러나 $800/t fob 이상 실거래 미성사</li>
+      <li>Argus 중국 수출 라인업 신규 공개 — 수출 추세 데이터 추적 강화</li>
+    </ul>
+    <div class="arrow-point">→ 중국 공급 급증은 동아시아 현물 상방 압력 제한 요인 — $800/t fob 중국 오퍼 실거래 성사 여부가 시장 가격 상한 결정의 테스트 케이스</div>
+  </div>
+
+  <div class="issue-card issue-mid">
+    <div class="issue-header">
+      <span class="issue-badge badge-watch">시장 동향</span>
+      <div class="issue-title">동아시아 $815/t cfr 보합 — 대만 화학 60-70% 가동, 한국 비료 6월까지 고가동</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>동아시아 현물 스폿 <strong>$800-830/t cfr</strong> 범위, 일일 기준가 $815/t cfr 보합</li>
+      <li>대만: 아크릴로니트릴·카프로락탐 화학플랜트 가동률 <strong>60-70%</strong> 유지 중</li>
+      <li>한국 비료 생산업체: 6월까지 <strong>고가동률 유지</strong> 계획 — 일부 동남아·중국 소규모 공급 확보</li>
+      <li>트레이더들, 5월말~6월 선적 물량에 대한 수요 관심 확인 중</li>
+    </ul>
+    <div class="arrow-point">→ 한국·대만 다운스트림 가동률 수준이 암모니아 재고 소진 속도를 결정 — 6월 IPL 인도 전후 현물 수급 변화 집중 모니터링 필요</div>
+  </div>
+
+  <div class="issue-card issue-mid">
+    <div class="issue-header">
+      <span class="issue-badge badge-watch">수급 동향</span>
+      <div class="issue-title">Fact(인도) 6월 코치 입찰 재공고 — 이전 입찰 오퍼 전무, 인도 현물 공급 극도 타이트</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>Fact, 6월 15일 코치 인도 <strong>8,000t</strong> 입찰 재공고 — 마감 5월 19일</li>
+      <li>4월 28일 이전 입찰 동일 조건 → <strong>오퍼 전무</strong>로 유찰. 현물 공급 가용성 극히 제한</li>
+      <li>5월 인도 물량 50,000t 미만 추정 (Argus) — 계절적 수요 대비 현저히 부족</li>
+      <li>Fact는 IPL 521,000t 입찰(5/18 마감) 포함 구매자 중 하나로도 등록</li>
+    </ul>
+    <div class="arrow-point">→ 인도 현물 공급 공백 = 입찰 재공고 반복 → 5월 18일 IPL 입찰 오퍼 가격이 인도 수급 긴장의 실질 온도계</div>
+  </div>
+
+  <div class="issue-card issue-pol">
+    <div class="issue-header">
+      <span class="issue-badge badge-pol">정책</span>
+      <div class="issue-title">미국 상원, 비료 시장 투명성 청문회 — 가격 급등·독점 우려 대응 입법 논의</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>미 상원 위원회, 비료 가격 급등·공급 집중 문제 관련 청문회 개최</li>
+      <li>패널 증언: 투명성·시장 경쟁 강화·국내 생산 확대로 비료 가격 부담 완화 가능</li>
+      <li>중동 갈등 장기화 시 미국산 암모니아·질소비료의 정책 지원 논의 가속 예상</li>
+    </ul>
+    <div class="arrow-point-pol">→ 미국 비료 시장 개입 가능성 — CF Industries·Mosaic 등 대형 생산업체 정책 리스크 모니터링. 반독점 규제 강화 시 미국 수출 물량 변동성 확대 가능</div>
+  </div>
+
+  <!-- 주요 동향 -->
+  <div class="section-label">📋 주요 동향</div>
+  <div class="trend-list">
+    <div class="trend-item">
+      <div class="dot dot-blue"></div>
+      <div>중동 오만산 오퍼 부재 — <strong>$800/t fob 보합</strong>, 시장 사실상 미테스트 상태 지속</div>
+    </div>
+    <div class="trend-item">
+      <div class="dot dot-blue"></div>
+      <div>NW유럽 <strong>$910/t cfr</strong> 안정 — 신규 입찰·오퍼·거래 없음. 다운스트림 질산염 수요 심리 지지</div>
+    </div>
+    <div class="trend-item">
+      <div class="dot dot-gray"></div>
+      <div>프랑스 농민(450명 설문), 질소비료 가격 급등으로 <strong>2026·2027년 질소 사용량 감축</strong> 계획 — 밀 면적 줄이고 해바라기·옥수수 비중 조정</div>
+    </div>
+    <div class="trend-item">
+      <div class="dot dot-gray"></div>
+      <div>루마니아 Romgaz, <strong>Azomures 비료업체</strong> 투자 프로젝트에 대규모 세금 혜택 검토 — 가스 기반 암모니아 경쟁력 유지 정책</div>
+    </div>
+    <div class="trend-item">
+      <div class="dot dot-blue"></div>
+      <div>미국 10% 관세 법원 소송 항소법원 이관 — 트럼프 행정부 관세 집행 지속, 불확실성 일부 해소</div>
+    </div>
+  </div>
+
+  <!-- 모니터링 포인트 -->
+  <div class="section-label">👁 모니터링 포인트 (5월 13일)</div>
+  <div class="monitor-box">
+    <div class="monitor-title">⚠ 향후 30-60일 주요 체크포인트</div>
+    <div class="monitor-row">
+      <div class="monitor-key">IPL·Fact</div>
+      <div class="monitor-val">5월 18·19일 입찰 오퍼 가격 — $850/t 이상 성사 시 인도 공급 위기 현실화 신호</div>
+    </div>
+    <div class="monitor-row">
+      <div class="monitor-key">중국 수출</div>
+      <div class="monitor-val">5월 실수출 162,000t 달성 여부 + $800/t fob 이상 실거래 성사 여부 — 동아시아 현물 상한 테스트</div>
+    </div>
+    <div class="monitor-row">
+      <div class="monitor-key">호르무즈</div>
+      <div class="monitor-val">미-이란 협상 진전 속 오만 수출 오퍼 재개 시점 — 중동 공급 가용성 체크</div>
+    </div>
+    <div class="monitor-key" style="display:none"></div>
+    <div class="monitor-row">
+      <div class="monitor-key">한국 수요</div>
+      <div class="monitor-val">국내 비료 업체 6월 이후 가동률 유지 계획 + 암모니아 재고 수준 — 추가 현물 구매 압력 여부</div>
+    </div>
+  </div>
+
+  <!-- 하단 내비 -->
+  <div class="nav-btns">
+    <a class="nav-btn" href="20260512.html">← 이전 (5월 12일)</a>
+    <span style="padding:9px 16px;font-size:12px;color:#aaa;">최신 브리핑</span>
+  </div>
+
+  <!-- 푸터 -->
+  <div class="footer">
+    <span>Argus FMB Ammonia 26-91 | 2026.05.13</span>
+    <div class="footer-src">
+      <a href="../dashboard.html">← 아카이브</a>
+      <a href="https://www.argusmedia.com" target="_blank">Argus Media</a>
+    </div>
+  </div>
+
+</div>
+<script>
+AUTH.requireAuth();
+</script>
+</body>
+</html>
