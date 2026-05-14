@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>수소 브리핑 — 2026.05.12</title>
+<script src="../auth.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:#f4f6fa;color:#1a1a1a;font-size:14px;line-height:1.6}
+.wrap{max-width:720px;margin:24px auto;padding:0 16px 40px}
+.header{border-left:5px solid #3B1C7A;padding:12px 16px;margin-bottom:20px;background:#F7F0FF;border-radius:0 8px 8px 0}
+.header-badge{display:inline-block;font-size:10px;font-weight:700;background:#3B1C7A;color:#fff;padding:2px 8px;border-radius:20px;margin-bottom:6px;letter-spacing:.06em}
+.header-title{font-size:18px;font-weight:700;color:#3B1C7A}
+.header-meta{font-size:12px;color:#7B5EA7;margin-top:4px;display:flex;gap:12px;flex-wrap:wrap}
+.header-meta span{display:flex;align-items:center;gap:4px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#fff;border:1.5px solid #85B7EB;border-radius:7px;font-size:12px;font-weight:600;color:#0C447C;text-decoration:none;margin-bottom:16px;cursor:pointer}
+.back-btn:hover{background:#E6F1FB}
+.source-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.btn-src{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .15s}
+.btn-orig{background:#3B1C7A;color:#fff}
+.btn-orig:hover{background:#5A2DB2}
+.btn-trans{background:#fff;color:#3B1C7A;border:1.5px solid #B59BDB}
+.btn-trans:hover{background:#F7F0FF}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.08em;color:#888;text-transform:uppercase;margin:20px 0 10px}
+.h2-price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px}
+.h2-price-card{padding:10px 14px;border-radius:8px;border:0.5px solid #C4B5F0;background:#F7F0FF}
+.h2-price-label{font-size:11px;color:#7B5EA7;margin-bottom:2px}
+.h2-price-val{font-size:20px;font-weight:700;color:#3B1C7A}
+.h2-price-unit{font-size:11px;color:#7B5EA7;font-weight:400}
+.h2-price-sub{font-size:11px;color:#7B5EA7;margin-top:2px}
+.up{color:#D85A30}.nc{color:#639922}.dn{color:#378ADD}
+.issue-card{border-radius:10px;padding:14px 16px;margin-bottom:10px;border:0.5px solid}
+.issue-hot{background:#FFF4EF;border-color:#F0997B}
+.issue-hot .issue-title{color:#712B13}
+.issue-mid{background:#F0F7FF;border-color:#85B7EB}
+.issue-mid .issue-title{color:#0C447C}
+.issue-pol{background:#F7F0FF;border-color:#B59BDB}
+.issue-pol .issue-title{color:#3B1C7A}
+.issue-header{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px}
+.issue-badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.badge-hot{background:#F0997B;color:#4A1B0C}
+.badge-watch{background:#85B7EB;color:#042C53}
+.badge-pol{background:#B59BDB;color:#1E0A4A}
+.issue-title{font-weight:700;font-size:14px;line-height:1.4}
+.issue-divider{height:0.5px;background:#e0e0e0;margin:10px 0}
+.trans-quote{background:rgba(255,255,255,0.7);border-radius:6px;padding:8px 12px;margin:8px 0;font-size:12px;color:#555;line-height:1.7;border-left:3px solid #d0d0d0;font-style:italic}
+.trans-label{font-size:10px;font-weight:700;color:#aaa;letter-spacing:.06em;margin-bottom:4px}
+.issue-bullets{margin:0;padding:0;list-style:none}
+.issue-bullets li{font-size:13px;color:#333;padding:3px 0 3px 16px;position:relative;line-height:1.6}
+.issue-bullets li::before{content:'·';position:absolute;left:4px;color:#888;font-weight:700}
+.issue-bullets li strong{color:#3B1C7A}
+.arrow-point{font-size:12px;color:#185FA5;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #185FA5}
+.arrow-point-pol{font-size:12px;color:#3B1C7A;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #B59BDB}
+.trend-list{background:#fff;border-radius:8px;border:0.5px solid #e0e0e0;overflow:hidden;margin-bottom:16px}
+.trend-item{padding:10px 16px;border-bottom:0.5px solid #f0f0f0;font-size:13px;color:#333;display:flex;gap:10px;align-items:flex-start;line-height:1.6}
+.trend-item:last-child{border-bottom:none}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.dot-red{background:#D85A30}.dot-blue{background:#378ADD}.dot-gray{background:#aaa}
+.monitor-box{border-radius:8px;background:#FFFBEF;border:0.5px solid #FAC775;padding:14px 16px;margin-bottom:16px}
+.monitor-title{font-size:12px;font-weight:700;color:#854F0B;margin-bottom:10px;letter-spacing:.04em;display:flex;align-items:center;gap:6px}
+.monitor-row{font-size:13px;color:#412402;margin-bottom:8px;display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:baseline}
+.monitor-row:last-child{margin-bottom:0}
+.monitor-key{color:#854F0B;font-weight:700;font-size:12px}
+.monitor-val{line-height:1.6}
+.footer{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:0.5px solid #e0e0e0;font-size:12px;color:#888;flex-wrap:wrap;gap:8px}
+.footer-src{display:flex;gap:16px}
+.footer-src a{color:#185FA5;text-decoration:none;font-weight:500}
+.footer-src a:hover{text-decoration:underline}
+.nav-btns{display:flex;gap:8px;margin-top:20px;justify-content:space-between}
+.nav-btn{padding:9px 16px;border-radius:7px;font-size:12px;font-weight:600;text-decoration:none;background:#fff;color:#0C447C;border:1.5px solid #85B7EB}
+.nav-btn:hover{background:#E6F1FB}
+.nav-btn.next{background:#3B1C7A;color:#fff;border-color:#3B1C7A}
+.nav-btn.next:hover{background:#5A2DB2}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-btn" href="../dashboard.html">← 아카이브로 돌아가기</a>
+
+  <!-- 헤더 -->
+  <div class="header">
+    <div class="header-badge">ARGUS MEDIA · 수소·미래연료 주간지</div>
+    <div class="header-title">수소·미래연료 주간 브리핑</div>
+    <div class="header-meta">
+      <span>📅 2026년 5월 12일 (화)</span>
+      <span>📄 Argus Hydrogen &amp; Future Fuels 26-19</span>
+      <span>🏢 서부발전 수소사업실</span>
+    </div>
+  </div>
+
+  <!-- 원문 접근 -->
+  <div class="source-bar">
+    <a class="btn-src btn-orig" href="https://drive.google.com/drive/folders/1oMyl4hTVN8chOw5MPLQKYWdMonStRLxo" target="_blank">
+      <span>📂</span> 원문 PDF
+    </a>
+    <a class="btn-src btn-trans" href="https://docs.google.com/document/d/1rJ3MxXCIzU4kuXpJ04BZJcgVU_B5V52PPE6TWLoMptM/edit" target="_blank">
+      <span>📄</span> 번역본
+    </a>
+  </div>
+
+  <!-- 수소 생산 비용 -->
+  <div class="section-label">📊 수소 생산 비용 마커 (5월 12일 기준)</div>
+  <div class="h2-price-grid">
+    <div class="h2-price-card">
+      <div class="h2-price-label">NW유럽 SMR (capex 포함)</div>
+      <div class="h2-price-val">4.90 <span class="h2-price-unit">$/kg</span></div>
+      <div class="h2-price-sub up">전주比 +0.04 $/kg</div>
+    </div>
+    <div class="h2-price-card">
+      <div class="h2-price-label">북미 SMR (capex 포함)</div>
+      <div class="h2-price-val">2.15 <span class="h2-price-unit">$/kg</span></div>
+      <div class="h2-price-sub up">전주比 +0.04 $/kg</div>
+    </div>
+    <div class="h2-price-card">
+      <div class="h2-price-label">NE아시아 SMR (capex 포함)</div>
+      <div class="h2-price-val">4.47 <span class="h2-price-unit">$/kg</span></div>
+      <div class="h2-price-sub up">전주比 +0.11 $/kg</div>
+    </div>
+    <div class="h2-price-card">
+      <div class="h2-price-label">NW유럽 그린 PEM (Island)</div>
+      <div class="h2-price-val">8.69 <span class="h2-price-unit">$/kg</span></div>
+      <div class="h2-price-sub nc">전주比 보합</div>
+    </div>
+  </div>
+
+  <!-- 핵심 이슈 -->
+  <div class="section-label">🟣 핵심 이슈 — 수소·미래연료</div>
+
+  <div class="issue-card issue-pol">
+    <div class="issue-header">
+      <span class="issue-badge badge-pol">EU 정책</span>
+      <div class="issue-title">EU 3차 수소 은행 낙선 발표 — 9개 프로젝트 1.1GW, €1.09bn, 덴마크 프로젝트 절반 이상 수주</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "EU는 재생·저탄소 전해 수소 9개 프로젝트(총 1.1GW)를 3차 유럽 수소 은행 운영 지원 대상으로 선정했다. 덴마크 2개 프로젝트(MorGen, Hy2gen)가 전체 예산의 절반 이상을 확보하며 덴마크 수소 산업에 큰 힘을 실어줬다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>총 9개 프로젝트 선정, 합산 1.3mn t/yr H2 생산 가능(10년간), 총 보조금 <strong>€1.09bn</strong> (목표 €1.3bn 대비 미달)</li>
+      <li>MorGen(덴마크) <strong>300MW</strong>, €422.8mn — Esbjerg 항만, Trafigura 자회사</li>
+      <li>Hy2gen Nordic(덴마크) <strong>100MW</strong>, €139.8mn — 덴마크 H2 파이프라인(독일 연결) 수요 충족</li>
+      <li>가장 낮은 낙선 입찰가 <strong>€0.57/kg</strong> (Hellenic Hydrogen, 그리스 25MW) — 1·2차 대비 높은 수준</li>
+      <li>덴마크 2개 + 독일 AAAS 배분 시 총 지원금 <strong>€1.9bn</strong> 가능, H2 파이프라인 건설 실현성 제고</li>
+    </ul>
+    <div class="arrow-point-pol">→ 덴마크-독일 H2 파이프라인 연결 프로젝트 구체화 가능성 상승 — 북유럽 재생 수소 공급망이 아시아 수소 시장에도 간접 영향 예상(가격 기준점 형성)</div>
+  </div>
+
+  <div class="issue-card issue-pol">
+    <div class="issue-header">
+      <span class="issue-badge badge-pol">인도 정책</span>
+      <div class="issue-title">인도 SECI, e-메탄올 500,000 t/yr 입찰 절차 개시 — 3개 항만 벙커링용, 10년 계약</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>Solar Energy Corporation of India(SECI), e-메탄올 <strong>500,000 t/yr</strong> RFS 초안 공개 — 재생수소 기반</li>
+      <li>공급 항만: Paradip(오디샤), Deendayal/Kandla(구자라트), VO Chidambaranar(타밀나두) — 인도 3대 H2 허브</li>
+      <li>사업자당 <strong>50,000~250,000 t/yr</strong> 공급, 보조금 1년차 Rs9.50/kg · 2년차 Rs7.60/kg · 3년차 Rs5.70/kg</li>
+      <li>5월 15일 사전협의, <strong>6월 8일</strong> 초안 의견 마감 — 한국 기업 참여 기회 탐색 필요</li>
+    </ul>
+    <div class="arrow-point-pol">→ 서부발전 직결: 인도 e-메탄올 공급망 구조 파악 — 재생 암모니아에서 e-메탄올로 확장되는 인도 청정연료 수요 포트폴리오 변화 모니터링</div>
+  </div>
+
+  <div class="issue-card issue-hot">
+    <div class="issue-header">
+      <span class="issue-badge badge-hot">예산 삭감</span>
+      <div class="issue-title">호주, 수소 Headstart 예산 절반 삭감 — A$2bn→A$1bn, 지역 허브 자금도 축소</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>호주 2026-27 예산: Hydrogen Headstart 2차 라운드 <strong>A$2bn → A$1bn</strong> 으로 삭감 (50% 감소)</li>
+      <li>지역 수소 허브 프로그램도 A$78.6mn 재배분 (4년간)</li>
+      <li>A$2/kg 세금 크레딧(2030 FID까지) 배분은 유지 — 그러나 대부분 2030년대 이후 집행</li>
+      <li>이란 전쟁 대응 연료 안보 패키지(A$14.8bn)에 예산 우선 배분 — 그린 H2는 후순위</li>
+    </ul>
+    <div class="arrow-point">→ 호주 그린 수소 프로젝트 파이프라인 지연 불가피 — Murchison(CIP), Orica Hunter Valley 등 선정 프로젝트 FID 일정 재검토 예상</div>
+  </div>
+
+  <div class="issue-card issue-pol">
+    <div class="issue-header">
+      <span class="issue-badge badge-pol">독일 정책</span>
+      <div class="issue-title">독일 RFNBO 할당량 법안 연방참의원 통과 + CCfD 2차 입찰 €5bn 개시</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>독일 연방참의원(Bundesrat), RFNBO 할당량 법안 최종 승인 — 2026년 <strong>0.1%</strong>부터 2040년 <strong>10%</strong> 단계적 확대</li>
+      <li>수송 분야 재생수소 의무 사용 제도화 — EU RED III 전치 입법, 올해 1월부로 소급 적용</li>
+      <li>CCfD 2차 입찰 개시: <strong>€5bn</strong> 예산, 기술중립 방식, 탄소집약 업종(화학·금속·시멘트 등) 대상</li>
+      <li>최소 CO2 배출 5,000 t/yr으로 1차(10,000t) 대비 기준 완화 — 중소기업 참여 확대</li>
+      <li>수소 채택 기업 5개사, 1차 CCfD에서 15년간 총 100,000t H2 소비 계획 포함</li>
+    </ul>
+    <div class="arrow-point-pol">→ 독일 재생수소 수요 제도적 기반 강화 — RFNBO 할당량 확대에 따른 한국-독일 H2 연계 프로젝트(NH3 수입 등) 경제성 점진적 개선 예상</div>
+  </div>
+
+  <div class="issue-card issue-mid">
+    <div class="issue-header">
+      <span class="issue-badge badge-watch">시장 동향</span>
+      <div class="issue-title">PepsiCo, Fertiberia와 150,000 t/yr 저탄소 비료 계약 — TalusAg EAC 인증 체계 구축</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>PepsiCo, Fertiberia(스페인) Impact Zero 브랜드 저탄소 질산염 비료 <strong>150,000 t/yr까지</strong> 2030년까지 구매</li>
+      <li>Fertiberia Puertollano: 재생 암모니아 20,000 t/yr(20MW), 기존 가스 기반 암모니아 180,000 t/yr</li>
+      <li>TalusAg(아이오와, 1,000 t/yr 파일럿) — <strong>30,000t 공급계약</strong> + 최대 71,000t 옵션, EAC 발행</li>
+      <li>Book-and-claim EAC 모델: 농민 비용 부담 없이 식품기업이 저탄소 암모니아 인증서 구매</li>
+    </ul>
+    <div class="arrow-point">→ 식품·소비재 기업의 저탄소 암모니아 인증 수요 본격화 — EAC 시장 형성 시 청정 암모니아 프리미엄 가격화 메커니즘으로 발전 가능</div>
+  </div>
+
+  <!-- 주요 동향 -->
+  <div class="section-label">📋 주요 동향</div>
+  <div class="trend-list">
+    <div class="trend-item">
+      <div class="dot dot-red"></div>
+      <div>스웨덴 e-메탄올 개발사 <strong>Liquid Wind, 파산 신청</strong> — 6개 e-메탄올 프로젝트(각 100,000 t/yr) 운명 불투명, 시장 조건 악화 반영</div>
+    </div>
+    <div class="trend-item">
+      <div class="dot dot-blue"></div>
+      <div>영국 <strong>Solent CCS 클러스터 폐쇄</strong> 선언 — ExxonMobil 주도, 1.4GW 수소 플랜트 계획 사실상 취소. Track 1·2 미선정 클러스터 지원 공백 노출</div>
+    </div>
+    <div class="trend-item">
+      <div class="dot dot-blue"></div>
+      <div>일본 기업, 중동 H2 프로젝트 <strong>추가 지연 우려</strong> — 미-이란 전쟁으로 보험·해운 비용 상승, Inpex·Sumitomo 일부 계획 중단 또는 보류</div>
+    </div>
+    <div class="trend-item">
+      <div class="dot dot-gray"></div>
+      <div>네덜란드, 2030년 RFNBO 수송 할당량 <strong>증대 불가</strong> 결정(9.5PJ 유지) — 장기 궤도는 2025년 말 별도 검토</div>
+    </div>
+    <div class="trend-item">
+      <div class="dot dot-gray"></div>
+      <div>HyFive Energy(스페인), Iberia 기반 e-메탄올 <strong>Musel GreenMet 프로젝트</strong> FID 2027년 목표 — 용량의 60% 사전 오프테이크 합의</div>
+    </div>
+  </div>
+
+  <!-- 모니터링 포인트 -->
+  <div class="section-label">👁 모니터링 포인트 (5월 12일)</div>
+  <div class="monitor-box">
+    <div class="monitor-title">⚠ 향후 30-60일 주요 체크포인트</div>
+    <div class="monitor-row">
+      <div class="monitor-key">EU H2 뱅크</div>
+      <div class="monitor-val">덴마크-독일 AAAS 최종 배분 결과 및 파이프라인 용량 예약 진행 상황 (12월까지 공개 예정)</div>
+    </div>
+    <div class="monitor-row">
+      <div class="monitor-key">인도 e-메탄올</div>
+      <div class="monitor-val">6월 8일 SECI 초안 의견 마감 후 RFS 확정 — 한국 기업 참여 가능성 및 공급 구조 파악</div>
+    </div>
+    <div class="monitor-row">
+      <div class="monitor-key">호주 H2</div>
+      <div class="monitor-val">Headstart 2차 쇼트리스트 발표 지연 확인 — A$1bn 삭감이 Murchison·Hunter Valley FID에 미치는 영향</div>
+    </div>
+    <div class="monitor-row">
+      <div class="monitor-key">독일 CCfD</div>
+      <div class="monitor-val">9월 7일 입찰 마감 — 수소 채택 기업 수 및 H2 소비 계획 규모 추적</div>
+    </div>
+  </div>
+
+  <!-- 하단 내비 -->
+  <div class="nav-btns">
+    <a class="nav-btn" href="20260511.html">← 이전 (5월 11일)</a>
+    <a class="nav-btn next" href="20260513.html">다음 (5월 13일) →</a>
+  </div>
+
+  <!-- 푸터 -->
+  <div class="footer">
+    <span>Argus Hydrogen &amp; Future Fuels 26-19 | 2026.05.12</span>
+    <div class="footer-src">
+      <a href="../dashboard.html">← 아카이브</a>
+      <a href="https://www.argusmedia.com" target="_blank">Argus Media</a>
+    </div>
+  </div>
+
+</div>
+<script>
+AUTH.requireAuth();
+</script>
+</body>
+</html>
