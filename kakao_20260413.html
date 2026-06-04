@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argus 암모니아 브리핑 4/13</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+  background: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  padding: 20px 12px 40px;
+}
+.card {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 400px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+}
+.top-bar {
+  background: linear-gradient(135deg, #C0392B, #922B21);
+  padding: 18px 20px 14px;
+  color: #fff;
+}
+.top-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  opacity: .85;
+  margin-bottom: 6px;
+}
+.top-title {
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.top-meta {
+  font-size: 11px;
+  opacity: .8;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* 가격 섹션 */
+.section { padding: 14px 18px; border-bottom: 1px solid #f0f0f0; }
+.section-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #999;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.price-item {
+  background: #f8f8f8;
+  border-radius: 10px;
+  padding: 9px 12px;
+}
+.price-region { font-size: 10px; color: #888; margin-bottom: 2px; }
+.price-val { font-size: 18px; font-weight: 800; color: #1a1a1a; }
+.price-unit { font-size: 10px; color: #aaa; font-weight: 400; }
+.price-chg { font-size: 11px; font-weight: 600; margin-top: 2px; color: #27AE60; }
+.jklab {
+  background: #EBF5FB;
+  border-radius: 10px;
+  padding: 9px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.jklab-label { font-size: 11px; color: #1A5276; font-weight: 700; }
+.jklab-sub { font-size: 10px; color: #5DADE2; margin-top: 1px; }
+.jklab-val { font-size: 18px; font-weight: 800; color: #1A5276; }
+
+/* 이슈 */
+.issue-list { padding: 14px 18px; border-bottom: 1px solid #f0f0f0; }
+.issue-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 11px;
+  align-items: flex-start;
+}
+.issue-item:last-child { margin-bottom: 0; }
+.issue-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.dot-hot { background: #E74C3C; }
+.dot-mid { background: #2980B9; }
+.dot-pol { background: #8E44AD; }
+.issue-text { font-size: 13px; color: #222; line-height: 1.55; font-weight: 500; }
+.issue-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 20px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.tag-hot { background: #FADBD8; color: #922B21; }
+.tag-mid { background: #D6EAF8; color: #1A5276; }
+.tag-pol { background: #E8DAEF; color: #6C3483; }
+
+/* 동향 */
+.trend-list { padding: 14px 18px; border-bottom: 1px solid #f0f0f0; }
+.trend-row {
+  font-size: 12px;
+  color: #444;
+  line-height: 1.6;
+  padding: 5px 0;
+  border-bottom: 1px dashed #f0f0f0;
+  display: flex;
+  gap: 8px;
+}
+.trend-row:last-child { border-bottom: none; }
+.trend-arrow { color: #C0392B; font-weight: 700; flex-shrink: 0; }
+
+/* 모니터링 */
+.monitor { padding: 14px 18px; background: #FFFDE7; border-bottom: 1px solid #f0f0f0; }
+.monitor-title { font-size: 11px; font-weight: 700; color: #F39C12; margin-bottom: 8px; }
+.monitor-text { font-size: 12px; color: #5D4037; line-height: 1.65; }
+
+/* 푸터 */
+.footer {
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: #bbb;
+}
+.footer-logo { font-weight: 700; color: #C0392B; font-size: 11px; }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- 헤더 -->
+  <div class="top-bar">
+    <div class="top-badge">🔴 ARGUS MEDIA  ·  암모니아 일간 브리핑</div>
+    <div class="top-title">평화협상 결렬 — 미국, 이란 해상봉쇄 예고<br>가격 상승 모멘텀 지속</div>
+    <div class="top-meta">
+      <span>📅 2026년 4월 13일 (월)</span>
+      <span>📄 Issue 26-70</span>
+      <span>🏢 서부발전 수소사업실</span>
+    </div>
+  </div>
+
+  <!-- 가격 현황 -->
+  <div class="section">
+    <div class="section-title">📊 암모니아 현물가 ($/t)</div>
+    <div class="price-grid">
+      <div class="price-item">
+        <div class="price-region">중동 fob</div>
+        <div class="price-val">700 <span class="price-unit">$/t</span></div>
+        <div class="price-chg">━ 보합</div>
+      </div>
+      <div class="price-item">
+        <div class="price-region">동아시아 cfr</div>
+        <div class="price-val">725 <span class="price-unit">$/t</span></div>
+        <div class="price-chg">━ 보합</div>
+      </div>
+      <div class="price-item">
+        <div class="price-region">NW유럽 cfr</div>
+        <div class="price-val">830 <span class="price-unit">$/t</span></div>
+        <div class="price-chg">━ 보합</div>
+      </div>
+      <div class="price-item">
+        <div class="price-region">미국 걸프 cfr</div>
+        <div class="price-val">775 <span class="price-unit">$/t</span></div>
+        <div class="price-chg">━ 보합</div>
+      </div>
+    </div>
+    <div class="jklab">
+      <div>
+        <div class="jklab-label">JKLAB cfr 울산 (45Q 포함)</div>
+        <div class="jklab-sub">저탄소 암모니아 · 전주 대비 +$5.34</div>
+      </div>
+      <div class="jklab-val">686.74</div>
+    </div>
+  </div>
+
+  <!-- 핵심 이슈 -->
+  <div class="issue-list">
+    <div class="section-title">🔥 핵심 이슈</div>
+
+    <div class="issue-item">
+      <div class="issue-dot dot-hot"></div>
+      <div class="issue-text">
+        <span class="issue-tag tag-hot">긴급</span>
+        미국, 이란 전 항구 <strong>해상봉쇄 시행 예고</strong> — 주말 평화협상 결렬 후 군사적 조치 전환. 유럽 TTF 가스 +6% 급등
+      </div>
+    </div>
+
+    <div class="issue-item">
+      <div class="issue-dot dot-hot"></div>
+      <div class="issue-text">
+        <span class="issue-tag tag-hot">긴급</span>
+        이란, 봉쇄를 <strong>"해적 행위"</strong>로 규정 — 걸프 전역 항구 보복 타격 경고. 에스컬레이션 리스크 극대화
+      </div>
+    </div>
+
+    <div class="issue-item">
+      <div class="issue-dot dot-mid"></div>
+      <div class="issue-text">
+        <span class="issue-tag tag-mid">시장</span>
+        전 지역 가격 <strong>보합 유지</strong> — 신규 거래 부재에 따른 일시적 현상. 봉쇄 시행 시 즉각 상승 예상
+      </div>
+    </div>
+
+    <div class="issue-item">
+      <div class="issue-dot dot-pol"></div>
+      <div class="issue-text">
+        <span class="issue-tag tag-pol">정책</span>
+        <strong>EU CBAM 1분기 실적</strong> — 비료·철강 간 비용 흡수 능력 격차 뚜렷. NWE cfr (duty free) $886.67/t
+      </div>
+    </div>
+
+    <div class="issue-item">
+      <div class="issue-dot dot-pol"></div>
+      <div class="issue-text">
+        <span class="issue-tag tag-pol">정책</span>
+        인도 그린 암모니아 입찰 <strong>2개 구매자 철회</strong> — 고가 환경에서 장기 계약 이행 리스크 부각
+      </div>
+    </div>
+  </div>
+
+  <!-- 주요 동향 -->
+  <div class="trend-list">
+    <div class="section-title">📋 주요 동향</div>
+    <div class="trend-row">
+      <span class="trend-arrow">▸</span>
+      알제리 Arzew 출하 재개 — Marycam호 스페인향, Widuri호 포르투갈향 각 15,000t
+    </div>
+    <div class="trend-row">
+      <span class="trend-arrow">▸</span>
+      남아공 Foskor, 암모니아 공급 부족으로 MAP 생산 중단 중 (3월 말~)
+    </div>
+    <div class="trend-row">
+      <span class="trend-arrow">▸</span>
+      인도네시아 Bontang 5월 현물 제한적 — Eco Enchanted 4/28 선적 예정
+    </div>
+    <div class="trend-row">
+      <span class="trend-arrow">▸</span>
+      이란 요소 $750/t fob 오퍼 — 복수 공장 재가동 사전 준비 단계
+    </div>
+    <div class="trend-row">
+      <span class="trend-arrow">▸</span>
+      Argus 암모니아 생산비 산식 4/16부터 CO₂ 포함 신규 방식으로 변경
+    </div>
+  </div>
+
+  <!-- 모니터링 -->
+  <div class="monitor">
+    <div class="monitor-title">⚠ 모니터링 포인트</div>
+    <div class="monitor-text">
+      미국 해상봉쇄 시행 범위·강도 &nbsp;·&nbsp; 이란 보복 타격 실행 여부 &nbsp;·&nbsp; 인도 IPL 입찰 결과 (4/15 마감) &nbsp;·&nbsp; 한국 5~6월 spot 조달 동향 (동아시아 cfr 선도 5월 $735/t)
+    </div>
+  </div>
+
+  <!-- 푸터 -->
+  <div class="footer">
+    <span class="footer-logo">ARGUS MEDIA</span>
+    <span>서부발전 수소사업실 · 2026.04.13</span>
+  </div>
+
+</div>
+</body>
+</html>

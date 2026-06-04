@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>암모니아 브리핑 — 2026.05.15</title>
+<script src="../auth.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:#f4f6fa;color:#1a1a1a;font-size:14px;line-height:1.6}
+.wrap{max-width:720px;margin:24px auto;padding:0 16px 40px}
+.header{border-left:5px solid #185FA5;padding:12px 16px;margin-bottom:20px;background:#E6F1FB;border-radius:0 8px 8px 0}
+.header-badge{display:inline-block;font-size:10px;font-weight:700;background:#185FA5;color:#fff;padding:2px 8px;border-radius:20px;margin-bottom:6px;letter-spacing:.06em}
+.header-title{font-size:18px;font-weight:700;color:#0C447C}
+.header-meta{font-size:12px;color:#378ADD;margin-top:4px;display:flex;gap:12px;flex-wrap:wrap}
+.header-meta span{display:flex;align-items:center;gap:4px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#fff;border:1.5px solid #85B7EB;border-radius:7px;font-size:12px;font-weight:600;color:#0C447C;text-decoration:none;margin-bottom:16px;cursor:pointer}
+.back-btn:hover{background:#E6F1FB}
+.source-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.btn-src{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .15s}
+.btn-orig{background:#0C447C;color:#fff}
+.btn-orig:hover{background:#185FA5}
+.btn-trans{background:#fff;color:#0C447C;border:1.5px solid #85B7EB}
+.btn-trans:hover{background:#E6F1FB}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.08em;color:#888;text-transform:uppercase;margin:20px 0 10px}
+.price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px}
+.price-card{padding:10px 14px;border-radius:8px;border:0.5px solid #e0e0e0;background:#fff}
+.price-label{font-size:11px;color:#666;margin-bottom:2px}
+.price-val{font-size:22px;font-weight:700;color:#0C447C}
+.price-unit{font-size:11px;color:#888;font-weight:400}
+.price-chg{font-size:12px;font-weight:600;margin-top:3px}
+.up{color:#D85A30}.nc{color:#639922}.dn{color:#378ADD}
+.jklab-row{background:#F0F7FF;border-radius:8px;padding:10px 16px;margin-bottom:4px;border:0.5px solid #85B7EB;display:flex;justify-content:space-between;align-items:center}
+.jklab-label{font-size:12px;color:#0C447C;font-weight:600}
+.jklab-sub{font-size:11px;color:#378ADD;margin-top:2px}
+.jklab-val{font-size:18px;font-weight:700;color:#0C447C;text-align:right}
+.issue-card{border-radius:10px;padding:14px 16px;margin-bottom:10px;border:0.5px solid}
+.issue-hot{background:#FFF4EF;border-color:#F0997B}
+.issue-hot .issue-title{color:#712B13}
+.issue-mid{background:#F0F7FF;border-color:#85B7EB}
+.issue-mid .issue-title{color:#0C447C}
+.issue-pol{background:#F7F0FF;border-color:#B59BDB}
+.issue-pol .issue-title{color:#3B1C7A}
+.issue-header{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px}
+.issue-badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.badge-hot{background:#F0997B;color:#4A1B0C}
+.badge-watch{background:#85B7EB;color:#042C53}
+.badge-pol{background:#B59BDB;color:#1E0A4A}
+.issue-title{font-weight:700;font-size:14px;line-height:1.4}
+.issue-divider{height:0.5px;background:#e0e0e0;margin:10px 0}
+.trans-quote{background:rgba(255,255,255,0.7);border-radius:6px;padding:8px 12px;margin:8px 0;font-size:12px;color:#555;line-height:1.7;border-left:3px solid #d0d0d0;font-style:italic}
+.trans-label{font-size:10px;font-weight:700;color:#aaa;letter-spacing:.06em;margin-bottom:4px}
+.issue-bullets{margin:0;padding:0;list-style:none}
+.issue-bullets li{font-size:13px;color:#333;padding:3px 0 3px 16px;position:relative;line-height:1.6}
+.issue-bullets li::before{content:'·';position:absolute;left:4px;color:#888;font-weight:700}
+.issue-bullets li strong{color:#0C447C}
+.arrow-point{font-size:12px;color:#185FA5;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #185FA5}
+.arrow-point-pol{font-size:12px;color:#3B1C7A;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #B59BDB}
+.trend-list{background:#fff;border-radius:8px;border:0.5px solid #e0e0e0;overflow:hidden;margin-bottom:16px}
+.trend-item{padding:10px 16px;border-bottom:0.5px solid #f0f0f0;font-size:13px;color:#333;display:flex;gap:10px;align-items:flex-start;line-height:1.6}
+.trend-item:last-child{border-bottom:none}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.dot-red{background:#D85A30}.dot-blue{background:#378ADD}.dot-gray{background:#aaa}
+.monitor-box{border-radius:8px;background:#FFFBEF;border:0.5px solid #FAC775;padding:14px 16px;margin-bottom:16px}
+.monitor-title{font-size:12px;font-weight:700;color:#854F0B;margin-bottom:10px;letter-spacing:.04em;display:flex;align-items:center;gap:6px}
+.monitor-row{font-size:13px;color:#412402;margin-bottom:8px;display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:baseline}
+.monitor-row:last-child{margin-bottom:0}
+.monitor-key{color:#854F0B;font-weight:700;font-size:12px}
+.monitor-val{line-height:1.6}
+.footer{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:0.5px solid #e0e0e0;font-size:12px;color:#888;flex-wrap:wrap;gap:8px}
+.footer-src{display:flex;gap:16px}
+.footer-src a{color:#185FA5;text-decoration:none;font-weight:500}
+.footer-src a:hover{text-decoration:underline}
+.nav-btns{display:flex;gap:8px;margin-top:20px;justify-content:space-between}
+.nav-btn{padding:9px 16px;border-radius:7px;font-size:12px;font-weight:600;text-decoration:none;background:#fff;color:#0C447C;border:1.5px solid #85B7EB}
+.nav-btn:hover{background:#E6F1FB}
+.nav-btn.next{background:#0C447C;color:#fff;border-color:#0C447C}
+.nav-btn.next:hover{background:#185FA5}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-btn" href="../dashboard.html">← 아카이브로 돌아가기</a>
+  <div class="header">
+    <div class="header-badge">ARGUS MEDIA · 번역 정리본</div>
+    <div class="header-title">암모니아 일간 브리핑</div>
+    <div class="header-meta">
+      <span>📅 2026년 5월 15일 (금)</span>
+      <span>📄 Argus FMB Ammonia 26-93</span>
+      <span>🏢 서부발전 수소사업실</span>
+    </div>
+  </div>
+  <div class="source-bar">
+    <a class="btn-src btn-orig" href="https://drive.google.com/drive/folders/1oMyl4hTVN8chOw5MPLQKYWdMonStRLxo" target="_blank"><span>📂</span> 원문 PDF</a>
+    <a class="btn-src btn-trans" href="https://docs.google.com/document/d/1NmNMYLSA3nCOoQc8CaV2KnHKUSmREeADzh_PtedhJmY/edit" target="_blank"><span>📄</span> 번역본</a>
+  </div>
+<div class="section-label">📊 암모니아 일일 가격 (2026년 5월 15일)</div>
+<div class="price-grid">
+  <div class="price-card"><div class="price-label">중동 fob</div><div class="price-val">810 <span class="price-unit">$/t</span></div><span class="price-chg nc">━ 전일 동일 (보합)</span></div>
+  <div class="price-card"><div class="price-label">동아시아 cfr</div><div class="price-val">815 <span class="price-unit">$/t</span></div><span class="price-chg nc">━ 전일 동일 (보합)</span></div>
+  <div class="price-card"><div class="price-label">NW유럽 cfr</div><div class="price-val">910 <span class="price-unit">$/t</span></div><span class="price-chg nc">━ 전일 동일 (보합)</span></div>
+  <div class="price-card"><div class="price-label">미국 걸프 cfr</div><div class="price-val">825 <span class="price-unit">$/t</span></div><span class="price-chg nc">━ 전일 동일 (보합)</span></div>
+</div>
+<div class="jklab-row">
+  <div>
+    <div class="jklab-label">JKLAB (저탄소 cfr 울산, 45Q 포함)</div>
+    <div class="jklab-sub">Argus Japan-Korea-Australia Low-carbon Benchmark</div>
+  </div>
+  <div class="jklab-val">679.23 <span style="font-size:12px;font-weight:400;color:#D85A30">▲ ++2.11 $/t (전주比)</span></div>
+</div>
+
+  <div class="section-label">🔥 핵심 이슈</div>
+  <div class="issue-card issue-pol">
+    <div class="issue-header">
+      <span class="issue-badge badge-pol">정책</span>
+      <div class="issue-title">GPIC 암모니아 탱크 수리 완료 — 이란 드론 공격(4/5) 후 2km 반경 대피 해제</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "바레인 내무부는 이란 드론이 박힌 암모니아 탱크의 복구 작업이 완료됐으며 인근 주민들이 귀가했다고 밝혔다. 당시 드론이 탱크에 박혀 다량의 암모니아 누출 위험이 존재했다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>GPIC(Bahrain) 암모니아 탱크, 이란 드론 4월 5일 공격 → <strong>수리 완료</strong> 발표</li>
+      <li>탱크 인근 2km 반경 대피령 → 복구 완료로 해제</li>
+      <li>GPIC는 Nogas(바레인), Sabic(사우디), PIC(쿠웨이트) 공동 소유 — 암모니아·메탄올·요소 생산</li>
+    </ul>
+    <div class="arrow-point-pol">→ GPIC 복구 완료로 바레인 암모니아 공급 정상화 신호 — 중동 서부 공급 옵션 일부 회복</div>
+  </div>
+  <div class="issue-card issue-hot">
+    <div class="issue-header">
+      <span class="issue-badge badge-hot">🔥 긴급</span>
+      <div class="issue-title">미국 대이란 봉쇄 효과 제한적 — 원유 수출 타격, 암모니아 생산량 급감 미발생</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>약 1개월간 이란 항구 봉쇄 — 원유 수출은 크게 위축</li>
+      <li>이란 암모니아 생산량은 미국 당국 예상과 달리 급격 감소 없음</li>
+      <li>Hengam, Bandar Imam 등 주요 설비는 간헐적으로 가동 중</li>
+    </ul>
+    <div class="arrow-point">→ 봉쇄 지속에도 이란 생산 유지 → 호르무즈 협상 전망에 따라 공급 리스크 재평가 필요</div>
+  </div>
+  <div class="issue-card issue-pol">
+    <div class="issue-header">
+      <span class="issue-badge badge-pol">정책</span>
+      <div class="issue-title">Petrobras Fafen Bahia N, 90% 가동 복귀 — 정기 보수 후 정상화</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>브라질 Petrobras Fafen(바이아 주) 설비 정기 보수 마무리 → <strong>90%</strong> 가동 재개</li>
+      <li>5월 초 트레이더에게 포뮬러 기준 5월 말 선적 카고 매각 보도</li>
+    </ul>
+    <div class="arrow-point-pol">→ 브라질 공급 복귀는 서반구 스폿 가용성 소폭 개선 — 미국 걸프와 함께 대서양 공급 선택지 넓힘</div>
+  </div>
+  <div class="issue-card issue-pol">
+    <div class="issue-header">
+      <span class="issue-badge badge-pol">정책</span>
+      <div class="issue-title">호주 Hiringa Energy, NSW 4,500 t/yr 그린 NH3 프로젝트 착공</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>Hiringa(NZ)+Sundown Pastoral+NSW 주정부, Good Earth GEGHA 착공 발표</li>
+      <li>4,500 t/yr 규모, NSW 농업용 수소·암모니아 — 재생에너지 활용</li>
+    </ul>
+    <div class="arrow-point-pol">→ 소규모 그린 암모니아 실증 프로젝트 — 호주 농업용 그린 NH3 상업화 선도 사례</div>
+  </div>
+  <div class="section-label">📋 주요 동향</div>
+<div class="trend-list">
+    <div class="trend-item"><div class="dot dot-blue"></div><div>중동 <strong>$810/t fob</strong> 보합 — 신규 스폿 거래 없음</div></div>
+    <div class="trend-item"><div class="dot dot-blue"></div><div>동아시아 <strong>$815/t cfr</strong> 보합 — 수급 긴장 속 관망세 지속</div></div>
+    <div class="trend-item"><div class="dot dot-blue"></div><div>NW유럽 <strong>$910/t cfr</strong> 보합 — 바이어 협상 중, 미결</div></div>
+    <div class="trend-item"><div class="dot dot-gray"></div><div>베네수엘라 Gas Juli, Jose항에서 5,000t 선적 → 콜롬비아 바란키야 인도</div></div>
+    <div class="trend-item"><div class="dot dot-gray"></div><div>인도 IPL 입찰 18일 마감 — 주말 전 구매자 대부분 관망세</div></div>
+</div>
+  <div class="section-label">👁 모니터링 포인트</div>
+<div class="monitor-box">
+  <div class="monitor-title">⚠ 향후 30-60일 주요 체크포인트</div>
+  <div class="monitor-row"><div class="monitor-key">IPL 입찰</div><div class="monitor-val">5월 18일 마감 오퍼 — $890/t 이상 성사 시 인도 공급 위기 현실화</div></div>
+  <div class="monitor-row"><div class="monitor-key">Hengam</div><div class="monitor-val">이란 Hengam 추가 선박 선적 성공 여부</div></div>
+  <div class="monitor-row"><div class="monitor-key">필바라</div><div class="monitor-val">Yara 필바라 이번 주 재가동 시도 — 성공 시 호주 공급 개선</div></div>
+  <div class="monitor-row"><div class="monitor-key">Tampa</div><div class="monitor-val">6월 Tampa 결산 협상 (Yara+Mosaic) 개시 예정</div></div>
+</div>
+  <div class="nav-btns"><a class="nav-btn" href="20260514.html">← 이전 (5월 14일)</a><a class="nav-btn next" href="20260518.html">다음 (5월 18일) →</a></div>
+  <div class="footer">
+    <span>Argus FMB Ammonia 26-93 | 2026.05.15</span>
+    <div class="footer-src">
+      <a href="../dashboard.html">← 아카이브</a>
+      <a href="https://www.argusmedia.com" target="_blank">Argus Media</a>
+    </div>
+  </div>
+</div>
+<script>AUTH.requireAuth();</script>
+</body>
+</html>

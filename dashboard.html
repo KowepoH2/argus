@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>수소·암모니아 브리핑 아카이브</title>
+<script src="auth.js"></script>
+<script>
+  // 페이지 로드 즉시 인증 확인 — 미인증 시 로그인 페이지로 리다이렉트
+  (function() { AUTH.requireAuth(); })();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:#f4f6fa;color:#1a1a1a;font-size:14px;line-height:1.6}
+.app{max-width:780px;margin:0 auto;padding:20px 16px 48px}
+
+/* 상단바 */
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:14px;border-bottom:0.5px solid #d8dde8}
+.topbar-badge{display:inline-block;font-size:10px;font-weight:700;background:#0C447C;color:#fff;padding:2px 8px;border-radius:20px;margin-bottom:5px;letter-spacing:.06em}
+.topbar-title{font-size:18px;font-weight:700;color:#0C447C}
+.topbar-sub{font-size:12px;color:#888;margin-top:2px}
+.topbar-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.topbar-count{text-align:right;font-size:12px;color:#888}
+.topbar-count strong{color:#0C447C;font-size:18px;font-weight:700}
+.btn-logout{padding:5px 12px;background:#fff;color:#888;border:0.5px solid #d0d0d0;border-radius:20px;font-size:11px;cursor:pointer;transition:all .15s}
+.btn-logout:hover{border-color:#D85A30;color:#D85A30}
+
+/* 탭 */
+.nav{display:flex;gap:6px;margin-bottom:20px;border-bottom:0.5px solid #d8dde8}
+.nav-btn{padding:8px 18px;border-radius:8px 8px 0 0;border:0.5px solid transparent;background:transparent;font-size:13px;cursor:pointer;color:#666;transition:all .15s;margin-bottom:-0.5px;font-weight:500}
+.nav-btn.active{background:#fff;color:#0C447C;border-color:#d8dde8;border-bottom-color:#fff;font-weight:700}
+.nav-btn:hover:not(.active){background:#f0f4ff;color:#0C447C}
+.panel{display:none}.panel.active{display:block}
+
+/* 아카이브 */
+.archive-grid{display:grid;grid-template-columns:200px 1fr;gap:16px}
+.month-label{font-size:11px;font-weight:700;color:#888;letter-spacing:.07em;margin-bottom:10px}
+.date-list{display:flex;flex-direction:column;gap:5px}
+.date-item{padding:10px 12px;border-radius:8px;border:0.5px solid #e0e0e0;cursor:pointer;transition:all .15s;background:#fff}
+.date-item:hover{border-color:#85B7EB;background:#F0F7FF}
+.date-item.selected{border-color:#185FA5;background:#E6F1FB;box-shadow:0 1px 4px rgba(24,95,165,.1)}
+
+/* 모바일 반응형 */
+@media(max-width:640px){
+  .app{padding:12px 12px 40px}
+  .archive-grid{grid-template-columns:1fr;gap:10px}
+  .date-list{flex-direction:row;overflow-x:auto;padding-bottom:6px;gap:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .date-list::-webkit-scrollbar{display:none}
+  .date-item{min-width:130px;flex-shrink:0;padding:8px 10px}
+  .month-label{margin-bottom:6px}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .topbar-title{font-size:16px}
+  .topbar-count strong{font-size:16px}
+  .nav-btn{padding:7px 13px;font-size:12px}
+  .preview-footer{flex-direction:column;align-items:stretch;gap:6px}
+  .preview-footer>div{display:flex;gap:6px}
+  .btn-view{text-align:center}
+}
+.d-date{font-size:13px;font-weight:700;color:#0C447C}
+.d-tag{font-size:11px;color:#888;margin-top:2px;line-height:1.4}
+.d-badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:10px;background:#F0997B;color:#4A1B0C;margin-top:4px;font-weight:700}
+
+/* 프리뷰 */
+.preview-card{background:#fff;border-radius:10px;border:0.5px solid #e0e0e0;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.preview-header{padding:14px 18px;background:#E6F1FB;border-bottom:0.5px solid #B5D4F4}
+.preview-header-title{font-size:15px;font-weight:700;color:#0C447C}
+.preview-header-meta{font-size:11px;color:#378ADD;margin-top:3px}
+.preview-body{padding:14px 18px}
+.price-sec-label{font-size:10px;font-weight:700;color:#888;letter-spacing:.07em;margin-bottom:8px}
+.price-table{width:100%;border-collapse:collapse;margin-bottom:14px}
+.price-table td{padding:5px 6px;font-size:13px;border-bottom:0.5px solid #f0f0f0}
+.price-table tr:last-child td{border-bottom:none}
+.price-table .region{color:#555}
+.price-table .num{font-weight:700;color:#0C447C;text-align:right}
+.price-table .chg{text-align:right;font-size:12px;font-weight:600;padding-left:8px}
+.issue-sec-label{font-size:10px;font-weight:700;color:#888;letter-spacing:.07em;margin:12px 0 7px}
+.issue-mini-item{font-size:12px;color:#333;padding:6px 10px 6px 12px;background:#f8f9fc;border-radius:6px;margin-bottom:4px;border-left:3px solid #85B7EB;line-height:1.5}
+.issue-mini-item.hot{border-left-color:#F0997B;background:#FFF4EF;color:#712B13}
+.issue-mini-item.pol{border-left-color:#B59BDB;background:#F7F0FF;color:#3B1C7A}
+.monitor-mini{margin-top:10px;padding:8px 12px;background:#FFFBEF;border-radius:6px;border-left:3px solid #FAC775;font-size:12px;color:#412402;line-height:1.6}
+.monitor-mini strong{color:#854F0B;display:block;margin-bottom:2px;font-size:11px}
+.preview-footer{padding:11px 18px;border-top:0.5px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.btn-src-sm{padding:7px 13px;background:#fff;color:#0C447C;border:0.5px solid #85B7EB;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:all .15s;text-decoration:none}
+.btn-src-sm:hover{background:#E6F1FB}
+.btn-view{padding:7px 16px;background:#0C447C;color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer;font-weight:700;transition:all .15s;text-decoration:none}
+.btn-view:hover{background:#185FA5}
+.empty-msg{padding:50px;text-align:center;color:#aaa;font-size:13px}
+
+/* 가격 추이 */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+.stat-card{background:#fff;border-radius:8px;padding:12px 14px;border:0.5px solid #e0e8ff}
+.stat-label{font-size:11px;color:#888;margin-bottom:4px}
+.stat-val{font-size:22px;font-weight:700;color:#0C447C}
+.stat-sub{font-size:11px;color:#888;margin-top:3px}
+.chart-wrap{background:#fff;border-radius:10px;border:0.5px solid #e0e0e0;padding:18px;margin-bottom:16px}
+.chart-title{font-size:13px;font-weight:700;color:#333;margin-bottom:4px}
+.chart-sub{font-size:11px;color:#888;margin-bottom:14px}
+.chart-container{position:relative;height:220px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:12px;color:#555}
+.legend-dot{width:10px;height:10px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div>
+      <div class="topbar-badge">ARGUS MEDIA · 아카이브</div>
+      <div class="topbar-title">수소·암모니아 브리핑 아카이브</div>
+      <div class="topbar-sub">서부발전 수소사업실 &nbsp;·&nbsp; Argus Media Daily</div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-count">누적 <strong id="totalCount">0</strong>건</div>
+      <button class="btn-logout" onclick="handleLogout()">로그아웃</button>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="nav-btn active" onclick="switchTab('archive',this)">📋 브리핑 목록</button>
+    <button class="nav-btn" onclick="switchTab('trend',this)">📈 가격 추이</button>
+  </div>
+
+  <div id="archive" class="panel active">
+    <div class="archive-grid">
+      <div>
+        <div class="month-label">2026년 4-5월</div>
+        <div class="date-list" id="dateList"></div>
+      </div>
+      <div id="previewCol"><div class="empty-msg">← 날짜를 선택하세요</div></div>
+    </div>
+  </div>
+
+  <div id="trend" class="panel">
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-label">중동 fob 최근 고점</div><div class="stat-val">$765</div><div class="stat-sub">2026. 4. 16.</div></div>
+      <div class="stat-card"><div class="stat-label">4월 NW유럽 최고치</div><div class="stat-val">$850</div><div class="stat-sub">4월 16일 cfr</div></div>
+      <div class="stat-card"><div class="stat-label">JKLAB cfr 울산</div><div class="stat-val">$681</div><div class="stat-sub">45Q 포함 · 4월 16일</div></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">암모니아 현물가 추이 ($/t)</div>
+      <div class="chart-sub">지역별 가격 비교 — 최근 6거래일</div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#D85A30"></div>중동 fob</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#185FA5"></div>동아시아 cfr</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#639922"></div>NW유럽 cfr</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#8B5CF6"></div>미국걸프 cfr</div>
+      </div>
+      <div class="chart-container"><canvas id="priceChart"></canvas></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">JKLAB — 저탄소 암모니아 cfr 울산 추이</div>
+      <div class="chart-sub">미국 45Q 세액공제 포함 기준</div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#0C447C"></div>JKLAB cfr 울산</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#FAC775"></div>중동 fob (참조)</div>
+      </div>
+      <div class="chart-container"><canvas id="jklabChart"></canvas></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const briefs = [
+  { date:'2026-06-01', label:'6월 1일', day:'월', hot:true, tags:'이란-미국충돌 · TTF급등 · OCI인수',
+    ocrUrl:'https://docs.google.com/document/d/1lf4pMesoW5oJmwt7-CVaEUCGeEu5aRD_OmEm7fZ0-B8/edit?usp=drivesdk&ouid=112171435946091511989',
+    prices:{me:815,ea:835,nwe:900,usg:775,jklab:826.72}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'이란 혁명수비대, 미군 공군기지 공격 — 이란-미국 충돌 격화, 호르무즈 리스크 재부상'},
+      {type:'',    text:'TTF 6% 급등($16.55/MMBtu) → 유럽 암모니아 생산비용 상승, NWE 가격 지지'},
+      {type:'',    text:'아그로페르트, OCI 네덜란드 비료 공장 지분 50% 인수 합의'},
+      {type:'pol', text:'EU 관세 면제 발효(5/30~) — 미국산 암모니아 유럽 유입 개시, 30만t 쿼터'},
+    ], monitor:'이란-미국 충돌 확전 여부 · TTF 상승과 NWE 가격 영향 · EU 관세 면제 후 실물 유입 속도' },
+  { date:'2026-05-29', label:'5월 29일', day:'금', hot:true, tags:'Tampa-50 · EU관세발효 · FTC조사',
+    ocrUrl:'https://docs.google.com/document/d/1-RXVgjyxAPFwySiVvkP-oefuu-1mcEQQ7u0zZQ2S3vk/edit',
+    prices:{me:815,ea:835,nwe:900,usg:775,jklab:826.72}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'-50'},
+    issues:[
+      {type:'hot', text:'Tampa 6월 결산 -$50 확정 ($775/t) — Yara-Mosaic 합의, 3월 이후 첫 하락'},
+      {type:'pol', text:'EU 비료 관세 5/30부터 1년 면제 발효 — 암모니아 30만 톤 쿼터'},
+      {type:'pol', text:'FTC, 미국 비료 가격 공식 조사 착수'},
+      {type:'',    text:'OCP 카자흐스탄 황 감소로 생산 추가 감축 우려'}
+    ], monitor:'Tampa 하락 유럽·아시아 파급 속도 · EU관세 발효 후 미국→EU 흐름 · 호르무즈 합의 확정 여부' },
+  { date:'2026-05-28', label:'5월 28일', day:'목', hot:true, tags:'PGSA제재 · 인도저항 · EU관세유예',
+    ocrUrl:'https://docs.google.com/document/d/1Rh-v9IyP_V5dfQHDubjDn6TzZr9o6FXEIp0VLQSqeEI/edit',
+    prices:{me:815,ea:835,nwe:900,usg:825,jklab:690.72}, chg:{me:'nc',ea:'nc',nwe:'-10',usg:'nc'},
+    issues:[
+      {type:'hot', text:'미국 PGSA(호르무즈 관리청) 제재 부과 — 해협 통항 불확실성 추가'},
+      {type:'hot', text:'인도 수요 감소 가격 -$10 ($870~910) — FACT 입찰 취소, $900 저항선 형성'},
+      {type:'pol', text:'EU 비료 관세 1년 유예 승인 — 암모니아 30만 톤 쿼터'},
+      {type:'',    text:'OCP 카자흐스탄 황 감소 이중 타격 · Yara 필바라 재가동 성공'}
+    ], monitor:'Tampa 6월 결산 발표 · PGSA 제재 후 통항 재개 여부 · 인도 $900 저항선 돌파 신호' },
+  { date:'2026-05-27', label:'5월 27일', day:'수', hot:true, tags:'호르무즈합의초안 · VLCC피격 · REDIII진전',
+    ocrUrl:'https://docs.google.com/document/d/132FA1XvvxxB6ri42T3gXClbOfPo6DsqrCm8RkqBve6Y/edit',
+    prices:{me:815,ea:835,nwe:910,usg:825,jklab:690.72}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'이란-미국 합의 초안 — 호르무즈 1개월 내 전쟁 전 수준 회복 약속 포함'},
+      {type:'hot', text:'오만만 VLCC(초대형 유조선) 피격 — 페르시아만 인근 해상 안전 우려'},
+      {type:'pol', text:'EU RED III 진전 — 재생수소 할당량 명확성 증가, 업계 분위기 고조'},
+      {type:'pol', text:'Namibia Hyphen+SwitcH2 FPSO 225,000t/yr · 스페인 EU수소銀행 30/57'}
+    ], monitor:'이란-미국 합의 최종 확정 · Tampa 결산 발표 · VLCC 피격 후 해협 안전 상황' },
+  { date:'2026-05-26', label:'5월 26일', day:'화', hot:false, tags:'호르무즈교착 · 이란공급 · SE아시아개선',
+    ocrUrl:'https://docs.google.com/document/d/1nnL9M112XHHI72_cYpC1flsBiEJTBLsglKpJ09kciAs/edit',
+    prices:{me:815,ea:835,nwe:910,usg:825,jklab:690.72}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'미-이란 호르무즈 협상 교착 — 낙관론에도 핵심 쟁점 미해결'},
+      {type:'',    text:'이란 Hengam 5월 수출 95,000t+ — 오만+이란 3척 선적'},
+      {type:'',    text:'SE아시아 6월 초 공급 개선 예상 (Kerteh+Luwuk 복귀)'},
+      {type:'pol', text:'Namibia Hyphen, SwitcH2 225,000 t/yr 부유식 NH3 설비 추가'}
+    ], monitor:'Tampa 6월 결산 이번 주 발표 · 호르무즈 핵심쟁점 합의 여부 · SE아시아 복귀 확인' },
+  { date:'2026-05-21', label:'5월 21일', day:'목', hot:true, tags:'동아시아급등 · 인도930 · 필바라실패',
+    ocrUrl:'https://docs.google.com/document/d/1VC_bkNrlgHgYSZornrsxb5emi09N7xbO8rfxCZv3qUc/edit',
+    prices:{me:815,ea:835,nwe:910,usg:825,jklab:692.99}, chg:{me:'+5',ea:'+20',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'동아시아 cfr $835 (+$20) 급등 — IPL 실패 후 공급자 오퍼 상승'},
+      {type:'hot', text:'인도 현물 $870-930/t cfr (+$25), Hengam 5·6월 셀 텐더 발행'},
+      {type:'hot', text:'Yara 필바라 재가동 실패 — 호주 공급 차질 지속'},
+      {type:'pol', text:'Adnoc CEO: 호르무즈 공급 차질 2027년 중반까지 지속 가능'}
+    ], monitor:'필바라 재가동 시기 · Hengam 낙찰가 · Tampa 6월 결산' },
+  { date:'2026-05-20', label:'5월 20일', day:'수', hot:true, tags:'IPL취소 · 확전경고 · $900시장',
+    ocrUrl:'https://docs.google.com/document/d/1KMBknA5C4rFj-0ZclcP2A_K_S_S6WFPRkP8iu7ge1P4/edit',
+    prices:{me:810,ea:815,nwe:910,usg:825,jklab:692.99}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'IPL 521,000t 입찰 공식 취소 — 전체 공급자 $850/t cfr 거절'},
+      {type:'hot', text:'이란 IRGC, 미·이스라엘 재공격 시 전쟁 확전 경고'},
+      {type:'pol', text:'인도 안드라프라데시, Yamna 500,000 t/yr 그린 NH3 승인'},
+      {type:'',    text:'USDA, CF Industries 루이지애나 허가 임박 발표'}
+    ], monitor:'IPL 실패 후 인도 스폿 $900 결제 여부 · 호르무즈 협상 · SE아시아 복귀' },
+  { date:'2026-05-19', label:'5월 19일', day:'화', hot:true, tags:'IPL거절 · 호르무즈플랫폼 · JKLAB급등',
+    ocrUrl:'https://docs.google.com/document/d/1obNtgjhAg1Gel_W79qpclhVR_hAG-G85a3bbuE9wWAI/edit',
+    prices:{me:810,ea:815,nwe:910,usg:825,jklab:692.99}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'IPL 카운터비드 $850/t cfr 전면 거절 — 입찰 사실상 실패'},
+      {type:'hot', text:'이란, 호르무즈 해상 플랫폼 신설 — 통항 통제 강화'},
+      {type:'pol', text:'EU 비료 행동 계획 발표 — 공급 회복력·저탄소 전환 지원'},
+      {type:'pol', text:'호주 Headstart 2차 7개 프로젝트 선정 (A$1bn)'}
+    ], monitor:'IPL 취소 후 인도 스폿 가격 · Fact 낙찰 · 호르무즈 통항 통제 범위' },
+  { date:'2026-05-18', label:'5월 18일', day:'월', hot:true, tags:'IPL239kt · VLGC사상최고 · 자잔NH3',
+    ocrUrl:'https://docs.google.com/document/d/14j3PtWvZzRxCudqaK-D574UbfX6QSWHkqVlK2H1yNBA/edit',
+    prices:{me:810,ea:815,nwe:910,usg:825,jklab:679.23}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'IPL 239,000t 오퍼 수령 (목표 521,000t 미달) — 최저 $890/t cfr'},
+      {type:'hot', text:'VLGC 운임 사상 최고 $305/t (휴스턴-치바) — 이란 전쟁 여파'},
+      {type:'pol', text:'사우디 Sarco+중국 Ally Hydrogen, 자잔 그린 NH3 MOU'},
+      {type:'',    text:'이란 협상 지속 발표, Hengam 선박 호르무즈 통과'}
+    ], monitor:'IPL 카운터비드 수준 · VLGC 운임 지속 여부 · 호르무즈 협상' },
+  { date:'2026-05-15', label:'5월 15일', day:'금', hot:false, tags:'GPIC복구 · Fafen복귀 · 봉쇄효과제한',
+    ocrUrl:'https://docs.google.com/document/d/1NmNMYLSA3nCOoQc8CaV2KnHKUSmREeADzh_PtedhJmY/edit',
+    prices:{me:810,ea:815,nwe:910,usg:825,jklab:679.23}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'pol', text:'GPIC 암모니아 탱크 수리 완료 — 이란 드론 공격(4/5) 후 복구'},
+      {type:'hot', text:'미국 대이란 봉쇄 효과 제한적 — 암모니아 생산량 급감 미발생'},
+      {type:'pol', text:'Petrobras Fafen Bahia N, 90% 가동 복귀'},
+      {type:'pol', text:'호주 Hiringa, NSW 4,500 t/yr 그린 NH3 프로젝트 착공'}
+    ], monitor:'IPL 18일 마감 오퍼 · Yara 필바라 재가동 시도' },
+  { date:'2026-05-14', label:'5월 14일', day:'목', hot:true, tags:'이란재개 · 인도급등 · Mosaic감산',
+    ocrUrl:'https://docs.google.com/document/d/1Qjb1dopWZ3_mW63W-myOxR1_XdIiSKfY8kaaFueJjKY/edit',
+    prices:{me:810,ea:815,nwe:910,usg:825,jklab:679.23}, chg:{me:'+10',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'중동 fob $810 (+$10) — 이란 Hengam 재가동, 핸디사이즈 2척 입항'},
+      {type:'hot', text:'인도 현물 $850-900/t cfr (+$25), IPL 입찰 마감 5/18'},
+      {type:'',    text:'Mosaic 인산 생산 감축 — 높은 암모니아·황 비용'},
+      {type:'',    text:'중국 수출 2026년 누계 465,000t+, 4월 130,000t(전년 4배)'}
+    ], monitor:'IPL 오퍼 가격 · Hengam 선박 성공 여부 · Yara 필바라 재가동' },
+  { date:'2026-05-13', label:'5월 13일', day:'수', hot:false, tags:'중국수출급증 · 인도공급공백 · Fact재입찰',
+    ocrUrl:'https://docs.google.com/document/d/1kpHIfJKtZStg8BlPASi9n7Z47waZkSRHdK9oyj_r6-8/edit',
+    prices:{me:800,ea:815,nwe:910,usg:825,jklab:679.23}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'',   text:'중국 암모니아 수출 2026년 누적 465,000t+ — 4월 130,000t(전년比 4배), 5월 162,000t 예상'},
+      {type:'',   text:'동아시아 $815/t cfr 보합 — 대만 화학플랜트 60-70% 가동, 한국 비료 고가동 6월까지'},
+      {type:'',   text:'Fact(인도) 6월 코치 입찰 재공고 8,000t — 이전 입찰 오퍼 전무, 인도 공급 극도 타이트'},
+      {type:'pol',text:'미국 상원, 비료 시장 투명성 청문회 — 가격 급등·독점 우려 대응 입법 논의'}
+    ], monitor:'IPL 5/18·Fact 5/19 낙찰가 · 중국 $800 fob 실거래 · 오만 수출 재개 · 한국 비료업체 6월 수요' },
+  { date:'2026-05-12-amm', label:'5월 12일 (암)', day:'화', hot:false, tags:'수요파괴지속 · IPL521kt · IRGC호르무즈확대',
+    ocrUrl:'https://docs.google.com/document/d/1KoEGUJ5BERonBcCuUQe1JuizQOIdAtxx-8Tnioc3BmQ/edit',
+    prices:{me:800,ea:815,nwe:910,usg:825,jklab:null}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'',   text:'전 지역 거래 전무·가격 전면 보합 — 수요 파괴 징후 지속, 인도 바이어 IPL 결과 대기'},
+      {type:'',   text:'IFFCO Paradip 50% 가동·IPL 521,000t 입찰 마감 5/18 — 현물 ~$850, 입찰 오퍼 $900s/t cfr 예상'},
+      {type:'hot',text:'IRGC, 호르무즈 "광범위 작전 구역" 재정의 — Jask~Siri Island, 통항 불확실성 지속'},
+      {type:'pol',text:'Ming Yang(중국), 에티오피아 재생에너지+그린 NH3 $14.1bn 투자 허가'}
+    ], monitor:'IPL 5/18 낙찰가 · 호르무즈 재개 여부 · Mosaic 생산 감축 규모 · 방글라데시 DAP·KAFCO 가동률' },
+  { date:'2026-05-12', label:'5월 12일 (수소)', day:'화', hot:true, tags:'EU수소뱅크3차 · 호주예산삭감 · 독일RFNBO',
+    ocrUrl:'https://docs.google.com/document/d/1rJ3MxXCIzU4kuXpJ04BZJcgVU_B5V52PPE6TWLoMptM/edit',
+    prices:{me:null,ea:null,nwe:null,usg:null,jklab:677.12}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'pol',text:'EU 3차 수소 은행 9개 프로젝트 선정 — 1.1GW, €1.09bn, 덴마크 MorGen+Hy2gen이 절반 이상 수주'},
+      {type:'pol',text:'인도 SECI, e-메탄올 500,000 t/yr 입찰 개시 — 재생수소 기반, 3개 항만 벙커링, 10년 계약'},
+      {type:'hot',text:'호주 Headstart 예산 A$2bn→A$1bn 절반 삭감 + 지역 허브 자금 축소 — 이란 전쟁 연료 안보 우선'},
+      {type:'pol',text:'독일 RFNBO 할당량 법안 연방참의원 최종 통과 — 2026년 0.1%~2040년 10% 단계 확대'},
+      {type:'',   text:'스웨덴 Liquid Wind, 파산 신청 — e-메탄올 6개 프로젝트(각 100,000 t/yr) 운명 불투명'}
+    ], monitor:'덴마크-독일 AAAS 배분 결과 · SECI e-메탄올 RFS 확정(6/8) · 호주 Headstart 쇼트리스트 · 독일 CCfD 2차(9/7 마감)' },
+  { date:'2026-05-11', label:'5월 11일', day:'월', hot:false, tags:'IPL521kt대기 · Hynfra요르단 · 선박부족',
+    ocrUrl:'https://docs.google.com/document/d/1L6o0Zb27U01wgM25NWUP3PMamLV6w2pgqJHincbcTU4/edit',
+    prices:{me:800,ea:815,nwe:910,usg:825,jklab:677.12}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'',   text:'IPL 521,000t 입찰 대기 — 인도 바이어 스폿 구매 보류, 현물 ~$850/t cfr, 마감 5월 18일'},
+      {type:'',   text:'전일 신규 거래 없음 — 가격 전면 보합, MGC 추가 선박 확보 경쟁 지속'},
+      {type:'pol',text:'요르단 정부, Hynfra 그린 암모니아 100,000 t/yr $1bn 플랜트 공식 승인 — 아카바항'}
+    ], monitor:'IPL 5/18 낙찰 결과 · 호르무즈 협상 공식 타결 · Petrobras 2개 설비 재가동 일정 · Hynfra FID 일정' },
+  { date:'2026-05-08', label:'5월 8일', day:'금', hot:false, tags:'Nutrien트리니다드 · 동남아공급절박 · Gen2노르웨이',
+    ocrUrl:'https://docs.google.com/document/d/1EFPbaw1L40wy9qTTh0Zzu_Dytq_ZWrGe_5953lz-FmQ/edit',
+    prices:{me:800,ea:815,nwe:910,usg:825,jklab:677.12}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'Nutrien, 트리니다드 암모니아 4개 플랜트 매각 검토 — 2025년 10월부터 가동 중단, 항만비·가스 공급 분쟁'},
+      {type:'',    text:'동아시아 $815/t cfr 보합 — 동남아 현물 공급 극도 제한, 공급자 협상력 유지'},
+      {type:'',    text:'중국·동남아, $800/t fob 수출 오퍼 테스트 중 — 실거래 미확인'},
+      {type:'',    text:'Gen2 Energy(노르웨이) 150MW 전력망 접속 완료 — 수력 기반 그린 H2·암모니아 생산 개시'},
+      {type:'',    text:'IPL 입찰 521,000t 마감(5/18) 앞두고 시장 관망 지속'}
+    ], monitor:'IPL 5/18 낙찰가 · 호르무즈 협상 타결 여부 · Nutrien 매각 구매자 · 동남아 $800 fob 거래 성사 여부' },
+  { date:'2026-05-07', label:'5월 7일', day:'목', hot:false, tags:'IPL입찰521kt · 탬파825정착 · 서방공급개선',
+    ocrUrl:'https://docs.google.com/document/d/1XlPuZ4Aj7ET8EBtsAjVZcdYSZGmE_XuKrjHEnTYVAKM/edit',
+    prices:{me:800,ea:815,nwe:910,usg:825,jklab:677.12}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'인도 IPL 입찰 521,000t 공고 — 6~8월 분할 인도, 마감 5월 18일, 가격 상방 압력'},
+      {type:'hot', text:'Tampa 5월 $825/t 정착 (+$50), US Gulf FMB 주간 $827.5/t (+$15) — 대서양 가격 레벨업'},
+      {type:'',    text:'미국 걸프 고가동 + 존스법 유예 연장 — 서방 공급 개선, 바이어 저항으로 스폿 거래 제한적'},
+      {type:'',    text:'호르무즈 미개통 시 6월 이후 공급 부족 현실화 — 바이어 관망과 공급자 강세 교착 국면'},
+      {type:'',    text:'NWE 주간 인덱스 $910 (+$2), 북아프리카 $840 보합'}
+    ], monitor:'IPL 5/18 낙찰 결과 · 호르무즈 재개 공식 발표 · Tampa 6월 협상 개시 · Jones Act 유예 종료 여부' },
+  { date:'2026-05-06', label:'5월 6일', day:'수', hot:true, tags:'트럼프이란협상 · EU CBAM · NE아시아그린전환',
+    ocrUrl:'https://docs.google.com/document/d/1EiesbnEwtxTcjr36IXdfwKUV-2l52zvOAW-ebkTPq-U/edit',
+    prices:{me:800,ea:815,nwe:910,usg:825,jklab:677.12}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'트럼프, 이란 핵협상 타결 임박 시사 — 호르무즈 재개 기대 선반영, TFC 대만 $800/t cfr 스폿 -$50'},
+      {type:'',    text:'인도 PPL 중국산 31,000t 계약, 중국 $800 fob 오퍼 — 실거래 미성사'},
+      {type:'pol', text:'EU 의회 CBAM 27a 농업면제 삭제 지지 + PepsiCo 인증 저탄소 암모니아 계약 체결'},
+      {type:'',    text:'[수소] NE아시아 블루→그린 전환 가속 — 삼성물산-Reliance $30억, IHI-Acme 오디샤 400kt/yr'},
+      {type:'pol', text:'[수소] IMO MEPC 84 해운 GHG 부과금 최종 합의 불발 — 85차 재논의'}
+    ], monitor:'이란 협상 공식 타결 여부 · CBAM 27a 입법 진행 · MEPC 85차 GHG 합의 가능성 · 인도산 그린NH3 FID 일정' },
+  { date:'2026-05-05', label:'5월 5일', day:'화', hot:true, tags:'Tampa825+50 · 이집트질소관세 · 호르무즈충돌',
+    ocrUrl:'https://docs.google.com/document/d/1OO3Leru303WG-tTGnNaOQdbEwYOtRdv6wjriqZTfH1k/edit',
+    prices:{me:800,ea:815,nwe:910,usg:825,jklab:677.12}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'+5'},
+    issues:[
+      {type:'hot', text:'Tampa 5월 $825/t 정산 확정 (+$50) — 이란-미국 Hormuz 교전 직후 협상 타결, 연간 최고치'},
+      {type:'hot', text:'이란-미국 호르무즈 충돌 — 휴전 발표에도 실질 통항 차단 지속, 보험 불확실성'},
+      {type:'pol', text:'이집트, 질소비료 수출세 $90/t 도입 — 글로벌 유럽·아시아 공급 타이트 심화'},
+      {type:'',    text:'중동 fob $800 보합, 동아시아 $815 보합 — JKLAB $677.12 (-$2.49)'},
+      {type:'',    text:'미국 걸프 $825 (+$5) → 대서양 수급 개선이지만 중동 공급 재개까지 여전히 긴장'}
+    ], monitor:'이집트 수출세 실제 적용 여부 · Tampa 6월 협상 · 호르무즈 실질 재개 · 중동 fob 추가 상승 가능성' },
+  { date:'2026-05-01', label:'5월 1일', day:'금', hot:false, tags:'Tampa협상진행 · 중동전쟁2022수준 · 인도DAP',
+    ocrUrl:'https://docs.google.com/document/d/1WhPubRI2aSEl675DBObn5IZ7QV8YzL0p_n5Rf5dxz2Y/edit',
+    prices:{me:800,ea:815,nwe:910,usg:820,jklab:679.61}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'',    text:'Tampa 5월 협상 진행 중 — 바이어 $775, 공급자 $850+ 이견 지속, 최종 합의 지연'},
+      {type:'',    text:'중동 전쟁, 2022년 우크라이나 수준 가격 재현 가능성 낮다는 분석 — 아시아 수요 구조 다름'},
+      {type:'pol', text:'인도 컨소시엄, DAP·TSP 비료 합동 입찰 — 수입 물량 확보 경쟁 지속'},
+      {type:'',    text:'중동 fob $800, 동아시아 $815, NWE $910 모두 보합 — 공급 위기 속 가격 안정 구간'},
+      {type:'',    text:'JKLAB $679.61 전일 동일 — 저탄소 프리미엄 지속'}
+    ], monitor:'Tampa 5월 최종 정산가 · 인도 DAP/TSP 입찰 낙찰 · 중동 공급 재개 시나리오 시뮬레이션' },
+  { date:'2026-04-30', label:'4월 30일', day:'목', hot:false, tags:'IFFCO감산60% · 서방공급개선 · Tampa신중',
+    ocrUrl:'https://docs.google.com/document/d/1LwXLRU_m-ywxch1s3bsRoDLoN96AmiMA0-enJSIw0Zo/edit',
+    prices:{me:800,ea:815,nwe:910,usg:820,jklab:679.61}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'인도 IFFCO, 암모니아 생산량 60-65% 감산 — 중동 공급 차질로 원료 확보 실패'},
+      {type:'',    text:'수에즈 서쪽(NWE·미국) 공급 개선세 — 알제리·미국 대서양 공급 정상화 진행'},
+      {type:'',    text:'Tampa 5월 정산 예상치 신중 — 협상 진행 중, $800-825 범위 예상'},
+      {type:'',    text:'중동 fob $800, 동아시아 $815 — JKLAB $679.61 (+$4.76)'},
+      {type:'',    text:'호르무즈 봉쇄 지속 — 중동산 재고 극히 제한적, 바이어 대안 조달 지속'}
+    ], monitor:'IFFCO 생산 재개 여부 · Tampa 5월 정산 확정 · 호르무즈 통항 재개 · NWE 공급 정상화 속도' },
+  { date:'2026-04-28', label:'4월 28일', day:'월', hot:false, tags:'독일RFNBO확정 · 일본전력경매 · Atome파라과이',
+    ocrUrl:'https://docs.google.com/document/d/1_CU89abupBR1tsUbY1pSlokGJVaGYBn66OkfhC-Apso/edit',
+    prices:{me:800,ea:815,nwe:900,usg:810,jklab:674.85}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'pol', text:'독일, 2030년 RFNBO 쿼터 1.5%·2032년 3% 확정 입법 — 수소 파생물 수요 의무화 구체화'},
+      {type:'hot', text:'일본 전력 경매, 암모니아 혼소 사업 입찰 저조 — 비용 경쟁력 미흡, 그린 전환 압박'},
+      {type:'',    text:'Atome Energy, 파라과이 그린 암모니아 FID — 2028년 생산 목표, 유럽향 수출 계획'},
+      {type:'',    text:'이토추(Itochu)-L&T, 인도산 그린 암모니아 300kt/yr 공급 협약 체결'},
+      {type:'pol', text:'미국 45V 청정수소 세액공제 재설정 논의 — IRA 개정 속 수소 인센티브 유지 여부 불확실'}
+    ], monitor:'독일 RFNBO 입법 시행 일정 · 일본 혼소 경쟁력 재검토 · Atome FID 후속 자금 조달 · 45V 최종 결정' },
+  { date:'2026-04-24', label:'4월 24일', day:'금', hot:true, tags:'필바라재가동 · 벨플레인정비 · 공급차질',
+    ocrUrl:'https://docs.google.com/document/d/1hZWBdSMgaM2502ZvoTc7xrGnwQQY_Va4Pbhr98ALOHI/edit',
+    prices:{me:800,ea:815,nwe:900,usg:810,jklab:674.85}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'야라 필바라(호주) 75만t/yr 공장 5월 상반기 재가동 — 9~10주 가동 중단, 14만t 공급 손실'},
+      {type:'hot', text:'야라 벨플레인(캐나다) 72.5만t/yr 6월 대규모 정비 — 15만t 추가 공급 손실 예상'},
+      {type:'',    text:'야라, 유럽 전 암모니아 공장 최대 가동 — 가스 가격 급등 시 감산 가능성 시사'},
+      {type:'pol', text:'트럼프, 존스법 면제 90일 추가 연장 — 외국 선박 미국 항구 간 운항 8월 15일까지'},
+      {type:'hot', text:'레바논 휴전 3주 추가 연장 — 이스라엘 4월 26일 이후 군사작전 중단 지속'}
+    ], monitor:'필바라 5월 재가동 확인 · 벨플레인 6월 정비 공급 영향 · 탬파 정산가 발표 · 호르무즈 재개방 여부' },
+  { date:'2026-04-22', label:'4월 22일', day:'수', hot:true, tags:'이란포격 · 호르무즈봉쇄 · 바이어저항',
+    ocrUrl:'https://docs.google.com/document/d/1S4y8dagCPkigdQ4PEuJAV3T028mJ0sc81UxFBg0ygYw/edit',
+    prices:{me:765,ea:800,nwe:850,usg:780,jklab:674.85}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'이란, 호르무즈서 컨테이너선 포격 — 미국 무기한 휴전 선언 불과 몇 시간 만에 발생'},
+      {type:'hot', text:'호르무즈 신규 휴전에도 해협 봉쇄 유지 — 미 해군 이란 무역 봉쇄 계속'},
+      {type:'',    text:'동아시아 $800 cfr 보합 — 5월 물량 매진, 6월 물량 탐색 시작'},
+      {type:'pol', text:'EU, 러시아 에너지 수입 단계적 금지 재확인 — 천연가스 법안 변경 계획 없음'},
+      {type:'',    text:'인도 L&T·일본 Itochu, 그린암모니아 오프테이크 계약 상업 조건 진전'}
+    ], monitor:'이란 포격 이후 실질 협상 진전 여부 · 중국 6월 수출 확정 · 호주 Pilbara 재가동 공식 발표' },
+  { date:'2026-04-21', label:'4월 21일', day:'화', hot:true, tags:'동아시아급등 · 수에즈공급난 · 미국허브',
+    ocrUrl:'https://docs.google.com/document/d/1tP1aDPIyVONLumaA1h7j15DRNmLJwEVA9-pCpNrWTKY/edit',
+    prices:{me:765,ea:800,nwe:850,usg:780,jklab:674.85}, chg:{me:'nc',ea:'+25',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'호르무즈 봉쇄 완전 지속 — MGC 3척 완전 적재 상태로 페르시아만 억류, 오만 선적 화물 없음'},
+      {type:'hot', text:'동아시아 cfr +$25 → $800/t — 5·6월 물량 매진, 호주 Pilbara 6월 전 재가동 불가'},
+      {type:'',    text:'NW유럽 4월 인도량 ~10만t 감소 — 알제리 급감, 미국·트리니다드로 대체'},
+      {type:'pol', text:'미국 5개 수소 허브 $48억 유지 확정 — Arches(CA)·PNWH2(OR/WA) 취소 유지'},
+      {type:'pol', text:'EU 재생수소 생산기준 6월 재검토 예고 — 추가성·시간상관관계 완화 가능성'}
+    ], monitor:'중동 최초 상업 통항 시점 · 중국 6월 수출물량 · EU 기준 재검토 최종 채택 · 독일 GHG법 표결' },
+  { date:'2026-04-20', label:'4월 20일', day:'월', hot:true, tags:'인도공급난 · 이란불참 · 아시아갈등',
+    ocrUrl:'https://docs.google.com/document/d/1owBLevXcLt1U72RZsm5m5yWa4sW5pNcbCg0JaloeA6I/edit',
+    prices:{me:765,ea:775,nwe:850,usg:780,jklab:681.47}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'인도 4월 수입 150,000t — 평상시 대비 25% 급감, 바이어 최대 $850/t cfr 저항'},
+      {type:'hot', text:'이란, 파키스탄 휴전 협상 미온적 — 강한 불신 표명, 공급 차질 장기화'},
+      {type:'hot', text:'공급 차질로 아시아 에너지 안보 균열 — 동남아 경쟁·갈등 vs 선진국 협력 대조'},
+      {type:'',    text:'Brunei BFI, 759,000 t/yr 공장 수출 터미널 건설 타당성 검토 착수'},
+      {type:'pol', text:'NYK·Yara·Golden Island, 싱가포르 저탄소 암모니아 선박연료 공급 협력 협약 체결'}
+    ], monitor:'이란 협상 참여 여부 · 인도 5월 수입 동향 · 호르무즈 첫 통항 · BFI 터미널 프로젝트 진행' },
+  { date:'2026-04-17', label:'4월 17일', day:'금', hot:true, tags:'호르무즈재개 · 통항신중 · 비료경제성',
+    ocrUrl:'https://docs.google.com/document/d/1IDlBo5ubSwamOCgesPSRmGDTxoX6nD3yIeYHAxlaCd0/edit',
+    prices:{me:765,ea:775,nwe:850,usg:780,jklab:681.47}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'이란 외무장관, 호르무즈 상업선박 통과 공식 선언 — 브렌트유 -13%, TTF -9% 급락'},
+      {type:'hot', text:'선박 소유주들 즉각 통항 자제 — 보안 위험·조건 불명확, 실질 공급 재개까지 수주 소요'},
+      {type:'hot', text:'글로벌 비료 경제성 5년래 최저 — 중동전쟁 가격 급등, 작물가격 상쇄 불충분'},
+      {type:'',    text:'인도 IPL, 우레아 2.79mn t 낙찰 — 동해안 $959/t cfr, 서해안 $935/t cfr'},
+      {type:'pol', text:'호주 Mitsui·Yara 선박 Beaumont(Woodside) 선적 확정 — 중동 우회 공급망 정착화'}
+    ], monitor:'실제 암모니아 선박 통항 시점 · 인도 IPL 최종 낙찰량 · 가격 조정 속도 · 황 공급 부족 파급' },
+  { date:'2026-04-16', label:'4월 16일', day:'목', hot:true, tags:'중동급등 · 동남아최고 · Tampa결제',
+    ocrUrl:'https://docs.google.com/document/d/16E6LRlHS13exVf8DfsKuRnGrRQZDwMjg7gQKE5pXPdY/edit',
+    prices:{me:765,ea:775,nwe:850,usg:780,jklab:681.47}, chg:{me:'+40',ea:'+50',nwe:'+20',usg:'+5'},
+    issues:[
+      {type:'hot', text:'중동 fob +$40 → $765/t — 오만 단독 공급 구조, 인도향 $870-880/t cfr 성사'},
+      {type:'hot', text:'동남아 fob +$100 → $725/t (2023.1 이후 최고) — 동아시아 cfr +$50 → $775/t'},
+      {type:'hot', text:'미군 이란 봉쇄 도전 선박 13척 차단 + NPC 수출 중단 — 봉쇄 이중 구조화'},
+      {type:'',    text:'알제리 Sorfert $800-810/t fob 판매 + 미국 4월 수출 170,000t+(YoY +22%)'},
+      {type:'pol', text:'Tampa 5월 결제 $820-840/t cfr 예상 + 신규 CO2 포함 생산비 지표 공개'}
+    ], monitor:'호르무즈 봉쇄 지속 · Tampa 5월 결제 확정 · 중국 수출 쿼터 결정 · Yara Pilbara 재가동' },
+  { date:'2026-04-15', label:'4월 15일', day:'수', hot:true, tags:'이란NPC · 공급절박 · fob급등',
+    ocrUrl:'https://docs.google.com/document/d/1rH4PoIeylufNOBDJnR9Jl8dNqJUsXHOdKwYJpzB3A9U/edit',
+    prices:{me:725,ea:725,nwe:830,usg:775,jklab:681.47}, chg:{me:'+25',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'이란 NPC, 4월 13일부터 석유화학 수출 전면 중단 — 암모니아·요소·유황 포함, 기 선적 화물도 적용'},
+      {type:'hot', text:'중동 fob +$25 → $725/t — 오만만 공급 가능, 이란 화물 Kandla $870s cfr 성사'},
+      {type:'hot', text:'동아시아 5-6월 spot 확보 절박 — 인도 $1,000/t cfr 전망, 중국만 대안'},
+      {type:'',    text:'NW유럽 ICE AOA 6월 선물 $790/t cfr 거래 — 현물 $830 보합 유지'},
+      {type:'pol', text:'MB Energy, 함부르크 항 60만 t/yr 암모니아 수입 터미널 건설 허가 취득'}
+    ], monitor:'이란 NPC 수출 재개 여부 · 인도 $1,000/t cfr 도달 · 중국 수출 쿼터 공식 결정 · Argus 신규 생산비 산식(4/16)' },
+  { date:'2026-04-14', label:'4월 14일', day:'화', hot:true, tags:'이란봉쇄 · 러시아피해 · 5월수요',
+    ocrUrl:'https://docs.google.com/document/d/1K3OdtZ8_cnEvLL_ypuoX8zAOQP-GepramvYKbrTTlh8/edit',
+    prices:{me:700,ea:725,nwe:830,usg:775,jklab:681.47}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'미국, 4월 13일부터 이란 모든 항구 해상 봉쇄 시행 — 호르무즈 경유 이란행 선박 전면 차단'},
+      {type:'hot', text:'러시아 Phosagro Cherepovets 암모니아 생산시설 분쟁 피해 보고 — 규모 미확인'},
+      {type:'',    text:'전 지역 가격 보합 — 신규 거래 부재, 5월 인도분 구매 문의 인도·동아시아서 활발'},
+      {type:'',    text:'이란산 23,000t 사전 선적 화물 Kandla 입항 — 비제재 현물 오퍼 최고 $1,000/t cfr'},
+      {type:'pol', text:'Argus 암모니아 생산비 산식 4월 16일부터 CO2 포함 신규 방식으로 전환'}
+    ], monitor:'미국 봉쇄 실효성 · Phosagro 피해 규모 · 중국 수출 쿼터 결정 · 인도 IPL 결과(4/15) · 생산비 신규 산식(4/16)' },
+  { date:'2026-04-13', label:'4월 13일', day:'월', hot:true, tags:'해상봉쇄 · 협상결렬 · 보복위협',
+    ocrUrl:'https://docs.google.com/document/d/1fWuIS1l1H0KhRouwxfwGPskUQcQOj7wdt1z38TzqRxA/edit',
+    prices:{me:700,ea:725,nwe:830,usg:775,jklab:686.74}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'미국, 이란 전 항구 해상 봉쇄 월요일 시행 예고 — 평화 협상 결렬'},
+      {type:'hot', text:'이란, 봉쇄를 해적 행위로 규정 — 걸프 항구 보복 타격 경고'},
+      {type:'',    text:'전 지역 가격 보합 — 신규 거래 부재, 그러나 봉쇄 시행 시 즉각 인상 전망'},
+      {type:'pol', text:'EU CBAM 1분기 실적 — 비료·철강 간 비용 흡수 능력 격차 뚜렷'},
+      {type:'pol', text:'인도 그린 암모니아 입찰 2개 구매자 철회 — 물량 재배분 가능성'}
+    ], monitor:'미국 해상 봉쇄 시행 범위 · 이란 보복 타격 실행 여부 · 인도 IPL 입찰(4/15) · CBAM 무역 흐름 변화' },
+  { date:'2026-04-10', label:'4월 10일', day:'금', hot:true, tags:'휴전 불안 · 호르무즈 정체 · 보합',
+    ocrUrl:'https://docs.google.com/document/d/17PI2KQPORxw05rcfVuIWfPvYOsO4lCA1lyUNKELlXzo/edit',
+    prices:{me:700,ea:725,nwe:830,usg:775,jklab:686.74}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'휴전 3일째 호르무즈 통행 오히려 감소 — 하루 8척 미만, 트럼프 불만 표시'},
+      {type:'hot', text:'전쟁 위험 보험료 소폭 하락 시작 — 실질 통항 재개 조건 아직 미충족'},
+      {type:'',    text:'파나마 운하 경매가 Argus 사상 최고치 — 호르무즈 차단 여파로 태평양 수요 급증'},
+      {type:'',    text:'IHI·Gentari·Petronas Chemicals, 말레이시아 2MW 암모니아 전소 가스터빈 추진'},
+      {type:'pol', text:'Argus 암모니아 생산비용 산식 변경 예고 (4월 16일~, CO2 포함 신규 산식)'}
+    ], monitor:'호르무즈 실질 통행 재개 조건 충족 여부 · 인도 IPL 입찰 결과(4/15) · 전쟁위험 보험료 완화 속도' },
+  { date:'2026-04-09', label:'4월 9일', day:'목', hot:true, tags:'공급위기 · 드론공격 · 가격급등',
+    ocrUrl:'https://docs.google.com/document/d/1nndoKFvC75xqav2Bb9ePeUFKvHzMDI-OXmZrB1D516s/edit',
+    prices:{me:700,ea:725,nwe:830,usg:775,jklab:686.74}, chg:{me:'+10',ea:'+25',nwe:'+20',usg:'nc'},
+    issues:[
+      {type:'hot', text:'공급 위기 출구 없음 — 인도 +$50, 동아시아 +$25, NW유럽 +$20 일제 상승'},
+      {type:'hot', text:'이란산 암모니아 화물 호르무즈 해협 통과 — 전쟁 발발 이후 최초 (제재 선박 이용)'},
+      {type:'hot', text:'사우디 주바일 드론 공격 재확인 — Sabic 암모니아 3플랜트(230만 t) 피해 미확인'},
+      {type:'',    text:'미국 GCA·Woodside 수출 재개 — 글로벌 부족 완충 효과 제한적'},
+      {type:'pol', text:'인도네시아 Luwuk 5월 1개월 정기보수 — 동아시아 추가 공급 감소 예정'}
+    ], monitor:'호르무즈 선주보험 기준 합의 / Sabic 피해 공식 확인 / 한국 5-6월 spot 조달 긴박화' },
+  { date:'2026-04-08', label:'4월 8일', day:'수', hot:true, tags:'휴전 · 한국H2전략 · 암모니아혼소',
+    ocrUrl:'https://docs.google.com/document/d/10hIy1Ag8zjuIJ_hPXMiNsS2o9FDZMrjQ1usyrp9Tz18/edit',
+    prices:{me:690,ea:700,nwe:810,usg:775,jklab:686.74}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'미국-이란 2주 휴전 발표에도 호르무즈 통항 재개 없어 — MGC 3척 5주째 봉쇄'},
+      {type:'hot', text:'FACT 인도 입찰 취소 — 오퍼 ~$1,000/t cfr, 수요 파괴 신호'},
+      {type:'pol', text:'[수소] 한국 청정수소 전략 전환 — 암모니아 혼소 장기 계획 사실상 소멸'},
+      {type:'pol', text:'[수소] Samsung C&T, 인도 Reliance 재생암모니아 $3bn 공급 계약 체결'},
+      {type:'',    text:'[수소] 그리스, 2030년 도로 운송 RFNBO 1% 의무화 입법 추진'}
+    ], monitor:'한국 청정수소발전 2차 입찰 재개 방향 / Reliance 재생암모니아 공급 현실성 / 인도 수요 동향' },
+  { date:'2026-04-07', label:'4월 7일', day:'화', hot:true, tags:'주바일공격 · FACT입찰 · 공급봉쇄',
+    ocrUrl:'https://docs.google.com/document/d/1pT52oz494yM-CgbsLFNq-O9L0_TMcGCazWHbVIp4DhU/edit',
+    prices:{me:690,ea:700,nwe:810,usg:775,jklab:686.74}, chg:{me:'+40',ea:'+50',nwe:'+45',usg:'+90'},
+    issues:[
+      {type:'hot', text:'사우디 주바일 산업단지 공격 — Sabic 암모니아 2.3mn t/yr 위협'},
+      {type:'hot', text:'호르무즈 해협 통항 여전히 봉쇄 — 중동 암모니아 사실상 시장 차단'},
+      {type:'hot', text:'FACT 인도 입찰 취소 — 오퍼 가격 ~$1,000/t cfr 수준 도달'},
+      {type:'',    text:'미국 걸프 암모니아 수출 재개 — GCA·Woodside 출하 시작'},
+      {type:'pol', text:'동아시아 바이어들 5-6월 물량 확보 움직임 — 한국 포함'}
+    ], monitor:'Sabic 피해 규모 확인 / 호르무즈 보험 기준 / 인도 DAP 보조금 / Luwuk 보수 일정' },
+];
+
+function chgClass(v){ return v.startsWith('+') ? 'up' : v==='nc' ? 'nc' : 'dn'; }
+function chgLabel(v){ return v==='nc' ? '→ 보합' : v.startsWith('+') ? '▲ '+v : '▼ '+v; }
+const clrMap = {up:'#D85A30', nc:'#639922', dn:'#185FA5'};
+
+function renderDates(){
+  const list = document.getElementById('dateList');
+  list.innerHTML = '';
+  briefs.forEach((b,i)=>{
+    const el = document.createElement('div');
+    el.className = 'date-item'+(i===0?' selected':'');
+    el.innerHTML = `<div class="d-date">${b.label} (${b.day})</div><div class="d-tag">${b.tags}</div>${b.hot?'<div class="d-badge">긴급이슈</div>':''}`;
+    el.onclick = ()=>{ document.querySelectorAll('.date-item').forEach(x=>x.classList.remove('selected')); el.classList.add('selected'); renderPreview(b); };
+    list.appendChild(el);
+  });
+  renderPreview(briefs[0]);
+}
+
+function renderPreview(b){
+  const col = document.getElementById('previewCol');
+  const issueHtml = b.issues.map(iss=>`<div class="issue-mini-item${iss.type==='hot'?' hot':iss.type==='pol'?' pol':''}">${iss.text}</div>`).join('');
+  col.innerHTML = `
+    <div class="preview-card">
+      <div class="preview-header">
+        <div class="preview-header-title">번역 정리 — ${b.label} (${b.day})</div>
+        <div class="preview-header-meta">Argus Media &nbsp;·&nbsp; ${b.tags}</div>
+      </div>
+      <div class="preview-body">
+        <div class="price-sec-label">암모니아 현물가 ($/t)</div>
+        <table class="price-table">
+          <tr><td class="region">중동 fob</td><td class="num">${b.prices.me}</td><td class="chg" style="color:${clrMap[chgClass(b.chg.me)]}">${chgLabel(b.chg.me)}</td></tr>
+          <tr><td class="region">동아시아 cfr</td><td class="num">${b.prices.ea}</td><td class="chg" style="color:${clrMap[chgClass(b.chg.ea)]}">${chgLabel(b.chg.ea)}</td></tr>
+          <tr><td class="region">NW유럽 cfr</td><td class="num">${b.prices.nwe}</td><td class="chg" style="color:${clrMap[chgClass(b.chg.nwe)]}">${chgLabel(b.chg.nwe)}</td></tr>
+          <tr><td class="region">미국걸프 cfr</td><td class="num">${b.prices.usg}</td><td class="chg" style="color:${clrMap[chgClass(b.chg.usg)]}">${chgLabel(b.chg.usg)}</td></tr>
+        </table>
+        <div class="issue-sec-label">핵심 이슈 (5)</div>
+        ${issueHtml}
+        <div class="monitor-mini"><strong>★ 모니터링 포인트</strong>${b.monitor}</div>
+      </div>
+      <div class="preview-footer">
+        <div style="display:flex;gap:8px">
+          <a href="https://drive.google.com/drive/folders/1JOUk34BldofDOoZJMqAO4pXajJ7EO5IM" target="_blank" class="btn-src-sm">📄 원문 PDF</a>
+          <a href="${b.ocrUrl||'#'}" target="_blank" class="btn-src-sm">📝 번역본</a>
+        </div>
+        <a href="briefs/${b.date.replace(/-/g,'')}.html" class="btn-view">전체 정리본 →</a>
+      </div>
+    </div>`;
+}
+
+function renderCharts(){
+  const sorted = briefs.slice().reverse();
+  // 암모니아 가격이 있는 항목만 가격 차트에 사용 (수소 전용 브리핑 제외 → 선 끊김 방지)
+  const ammOnly  = sorted.filter(b => b.prices.me !== null);
+  const jklabOnly = sorted.filter(b => b.prices.jklab !== null);
+  const opts = {
+    responsive:true, maintainAspectRatio:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',borderColor:'#d8dde8',borderWidth:1,titleColor:'#0C447C',bodyColor:'#444',padding:10,callbacks:{label:c=>` ${c.dataset.label}: $${c.parsed.y}`}}},
+    scales:{x:{grid:{color:'#f0f0f0'},ticks:{color:'#888',font:{size:11}}},y:{grid:{color:'#f0f0f0'},ticks:{color:'#888',font:{size:11},callback:v=>'$'+v}}}
+  };
+  new Chart(document.getElementById('priceChart'),{type:'line',data:{labels:ammOnly.map(b=>b.label),datasets:[
+    {label:'중동 fob',      data:ammOnly.map(b=>b.prices.me),  borderColor:'#D85A30',borderWidth:2,pointRadius:4,tension:.3,fill:false},
+    {label:'동아시아 cfr',  data:ammOnly.map(b=>b.prices.ea),  borderColor:'#185FA5',borderWidth:2,pointRadius:4,tension:.3,fill:false},
+    {label:'NW유럽 cfr',    data:ammOnly.map(b=>b.prices.nwe), borderColor:'#639922',borderWidth:2,pointRadius:4,tension:.3,fill:false},
+    {label:'미국걸프 cfr',  data:ammOnly.map(b=>b.prices.usg), borderColor:'#8B5CF6',borderWidth:2,pointRadius:4,tension:.3,fill:false,borderDash:[4,3]}
+  ]},options:opts});
+  new Chart(document.getElementById('jklabChart'),{type:'line',data:{labels:jklabOnly.map(b=>b.label),datasets:[
+    {label:'JKLAB cfr 울산', data:jklabOnly.map(b=>b.prices.jklab), borderColor:'#0C447C',backgroundColor:'rgba(12,68,124,.1)',borderWidth:2.5,pointRadius:5,tension:.3,fill:true},
+    {label:'중동 fob (참조)', data:jklabOnly.map(b=>b.prices.me),   borderColor:'#FAC775',borderWidth:2,pointRadius:4,tension:.3,fill:false,borderDash:[5,4]}
+  ]},options:opts});
+}
+
+function switchTab(tab,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+function handleLogout(){
+  AUTH.logout();
+  window.location.replace('login.html');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('totalCount').textContent = briefs.length;
+  renderDates();
+  renderCharts();
+});
+</script>
+</body>
+</html>
