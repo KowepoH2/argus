@@ -33,11 +33,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',san
 .nav-btn:hover:not(.active){background:#f0f4ff;color:#0C447C}
 .panel{display:none}.panel.active{display:block}
 
+/* 검색·필터 */
+.search-row{margin-bottom:14px;display:flex;flex-direction:column;gap:8px}
+.search-input{width:100%;padding:9px 14px 9px 36px;border:1.5px solid #d8dde8;border-radius:8px;font-size:13px;font-family:inherit;outline:none;transition:border .15s;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") 10px center/16px no-repeat}
+.search-input:focus{border-color:#85B7EB}
+.search-input::placeholder{color:#bbb}
+.filter-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.filter-chips{display:flex;gap:5px;flex-wrap:wrap}
+.chip{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;border:1.5px solid #d8dde8;background:#fff;color:#666;cursor:pointer;transition:all .15s;letter-spacing:.02em}
+.chip:hover{border-color:#85B7EB;color:#0C447C}
+.chip.active{background:#0C447C;color:#fff;border-color:#0C447C}
+.chip-hot.active{background:#D85A30;border-color:#D85A30;color:#fff}
+.chip-pol.active{background:#7B5EA7;border-color:#7B5EA7;color:#fff}
+.chip-h2.active{background:#3B1C7A;border-color:#3B1C7A;color:#fff}
+.result-count{font-size:11px;color:#aaa;white-space:nowrap}
+
 /* 아카이브 */
-.archive-grid{display:grid;grid-template-columns:200px 1fr;gap:16px}
-.month-label{font-size:11px;font-weight:700;color:#888;letter-spacing:.07em;margin-bottom:10px}
-.date-list{display:flex;flex-direction:column;gap:5px}
-.date-item{padding:10px 12px;border-radius:8px;border:0.5px solid #e0e0e0;cursor:pointer;transition:all .15s;background:#fff}
+.archive-grid{display:grid;grid-template-columns:190px 1fr;gap:16px}
+.date-scroll{max-height:560px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#d0d8e8 transparent;padding-right:2px}
+.date-scroll::-webkit-scrollbar{width:3px}
+.date-scroll::-webkit-scrollbar-thumb{background:#d0d8e8;border-radius:2px}
+.month-group{margin-bottom:10px}
+.month-header{font-size:10px;font-weight:700;color:#aaa;letter-spacing:.09em;padding:3px 4px 6px;border-bottom:1px solid #eee;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center}
+.month-count{background:#f0f4f8;color:#888;font-size:10px;padding:1px 6px;border-radius:8px;font-weight:600}
+.date-item{padding:8px 10px;border-radius:7px;border:0.5px solid #e0e0e0;cursor:pointer;transition:all .15s;background:#fff;margin-bottom:4px}
 .date-item:hover{border-color:#85B7EB;background:#F0F7FF}
 .date-item.selected{border-color:#185FA5;background:#E6F1FB;box-shadow:0 1px 4px rgba(24,95,165,.1)}
 
@@ -45,10 +64,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',san
 @media(max-width:640px){
   .app{padding:12px 12px 40px}
   .archive-grid{grid-template-columns:1fr;gap:10px}
-  .date-list{flex-direction:row;overflow-x:auto;padding-bottom:6px;gap:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .date-list::-webkit-scrollbar{display:none}
-  .date-item{min-width:130px;flex-shrink:0;padding:8px 10px}
-  .month-label{margin-bottom:6px}
+  .date-scroll{max-height:200px;overflow-y:auto}
+  .date-item{margin-bottom:4px}
   .stat-grid{grid-template-columns:1fr 1fr}
   .topbar-title{font-size:16px}
   .topbar-count strong{font-size:16px}
@@ -56,10 +73,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',san
   .preview-footer{flex-direction:column;align-items:stretch;gap:6px}
   .preview-footer>div{display:flex;gap:6px}
   .btn-view{text-align:center}
+  .filter-chips{gap:4px}
+  .chip{padding:4px 10px;font-size:10px}
 }
-.d-date{font-size:13px;font-weight:700;color:#0C447C}
-.d-tag{font-size:11px;color:#888;margin-top:2px;line-height:1.4}
-.d-badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:10px;background:#F0997B;color:#4A1B0C;margin-top:4px;font-weight:700}
+.d-date{font-size:13px;font-weight:700;color:#0C447C;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.d-latest{display:inline-block;font-size:9px;background:#0C447C;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700;letter-spacing:.04em;flex-shrink:0}
+.d-badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:10px;background:#F0997B;color:#4A1B0C;margin-top:3px;font-weight:700}
 
 /* 프리뷰 */
 .preview-card{background:#fff;border-radius:10px;border:0.5px solid #e0e0e0;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
@@ -123,10 +142,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',san
   </div>
 
   <div id="archive" class="panel active">
+    <div class="search-row">
+      <input type="text" class="search-input" id="searchInput" placeholder="키워드 검색 (이슈·지역·가격·국가 등)..." oninput="onSearch()">
+      <div class="filter-row">
+        <div class="filter-chips">
+          <button class="chip active"    data-f="all" onclick="setFilter('all',this)">전체</button>
+          <button class="chip chip-hot"  data-f="hot" onclick="setFilter('hot',this)">🔴 긴급이슈</button>
+          <button class="chip chip-pol"  data-f="pol" onclick="setFilter('pol',this)">🟣 정책·규제</button>
+          <button class="chip chip-h2"   data-f="h2"  onclick="setFilter('h2',this)">💧 수소</button>
+        </div>
+        <div class="result-count" id="resultCount"></div>
+      </div>
+    </div>
     <div class="archive-grid">
       <div>
-        <div class="month-label">2026년 4-5월</div>
-        <div class="date-list" id="dateList"></div>
+        <div class="date-scroll" id="dateScroll">
+          <div id="dateList"></div>
+        </div>
       </div>
       <div id="previewCol"><div class="empty-msg">← 날짜를 선택하세요</div></div>
     </div>
@@ -134,9 +166,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',san
 
   <div id="trend" class="panel">
     <div class="stat-grid">
-      <div class="stat-card"><div class="stat-label">중동 fob 최근 고점</div><div class="stat-val">$765</div><div class="stat-sub">2026. 4. 16.</div></div>
-      <div class="stat-card"><div class="stat-label">4월 NW유럽 최고치</div><div class="stat-val">$850</div><div class="stat-sub">4월 16일 cfr</div></div>
-      <div class="stat-card"><div class="stat-label">JKLAB cfr 울산</div><div class="stat-val">$681</div><div class="stat-sub">45Q 포함 · 4월 16일</div></div>
+      <div class="stat-card" id="statMe"><div class="stat-label">중동 fob 현재</div><div class="stat-val">—</div><div class="stat-sub">—</div></div>
+      <div class="stat-card" id="statNwe"><div class="stat-label">NW유럽 cfr 현재</div><div class="stat-val">—</div><div class="stat-sub">—</div></div>
+      <div class="stat-card" id="statJklab"><div class="stat-label">JKLAB cfr 울산</div><div class="stat-val">—</div><div class="stat-sub">45Q 미포함 · 주간</div></div>
     </div>
     <div class="chart-wrap">
       <div class="chart-title">암모니아 현물가 추이 ($/t)</div>
@@ -164,6 +196,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',san
 
 <script>
 const briefs = [
+  { date:'2026-06-03', label:'6월 3일', day:'수', hot:true, tags:'이란확전 · 6월현물매진 · OECD하향',
+    ocrUrl:'https://docs.google.com/document/d/1CNw_Bcw2dY4ebl3B3dXl_tnak9qPTwjzKh35uC4pSJM/edit?usp=drivesdk&ouid=112171435946091511989',
+    prices:{me:815,ea:835,nwe:900,usg:775,jklab:829.79}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'이란, 쿠웨이트·바레인 미사일 공격 — 호르무즈 분쟁 확전'},
+      {type:'hot', text:'6월 현물 전 지역 완전 매진 — 7월 물량 가격 협상 시작'},
+      {type:'',    text:'카타르에너지 암모니아 수출 단기 재개 불가 재확인'},
+      {type:'',    text:'OECD 2026년 성장률 하향 — 이란-미국 전쟁 여파 장기 지속 경고'},
+      {type:'',    text:'중국 3분기 요소 수출 200~260만톤 예상, 6월 말 확대'},
+    ], monitor:'이란 확전 추이 · 7월 물량 협상 가격 공개 여부 · 중국 55,000톤 목적지' },
+  { date:'2026-06-02', label:'6월 2일', day:'화', hot:true, tags:'호르무즈봉쇄 · 독일수소은행 · 폴란드할당제',
+    ocrUrl:'https://docs.google.com/document/d/1kPdlQ80xWLr5ZNr-ueY2V9ZzT0hXiET2oQnZw7EplTY/edit?usp=drivesdk&ouid=112171435946091511989',
+    prices:{me:815,ea:835,nwe:900,usg:775,jklab:829.79}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
+    issues:[
+      {type:'hot', text:'호르무즈 해협 봉쇄 장기화 — 카타르에너지 암모니아 수출 재개 불가 공식 확인'},
+      {type:'',    text:'독일 수소 은행 3차 사업, 덴마크 재생수소 78,000t/년 지원 10억 유로 확정'},
+      {type:'',    text:'페트로브라스 트라모파리호 15,000톤 선적 — 목적지 미공개'},
+      {type:'',    text:'인도 비료 재고 2천만톤, 카리프 시즌 수요 52% 충족'},
+      {type:'',    text:'오미프코 IPO 2500만 주 계획 — 오만 중동계 공급 확대 가능성'},
+    ], monitor:'카타르에너지 수출 재개 시점 · 7월 물량 협상 ($750~800 FOB) · JKLAB ▲+3.07 전주비' },
   { date:'2026-06-01', label:'6월 1일', day:'월', hot:true, tags:'이란-미국충돌 · TTF급등 · OCI인수',
     ocrUrl:'https://docs.google.com/document/d/1lf4pMesoW5oJmwt7-CVaEUCGeEu5aRD_OmEm7fZ0-B8/edit?usp=drivesdk&ouid=112171435946091511989',
     prices:{me:815,ea:835,nwe:900,usg:775,jklab:826.72}, chg:{me:'nc',ea:'nc',nwe:'nc',usg:'nc'},
@@ -505,17 +557,89 @@ function chgClass(v){ return v.startsWith('+') ? 'up' : v==='nc' ? 'nc' : 'dn'; 
 function chgLabel(v){ return v==='nc' ? '→ 보합' : v.startsWith('+') ? '▲ '+v : '▼ '+v; }
 const clrMap = {up:'#D85A30', nc:'#639922', dn:'#185FA5'};
 
+let activeFilter = 'all';
+
+function getFilteredBriefs(){
+  const q = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
+  return briefs.filter(b => {
+    if(activeFilter==='hot' && !b.hot) return false;
+    if(activeFilter==='pol' && !b.issues.some(i=>i.type==='pol')) return false;
+    if(activeFilter==='h2'){
+      const allText = [b.tags,...b.issues.map(i=>i.text),b.monitor||''].join(' ');
+      if(!/수소|H2|hydrogen|그린|RFNBO|전해|암모니아.*수소|수소.*암모니아/i.test(allText)) return false;
+    }
+    if(q){
+      const hay = [b.tags,b.label,b.monitor||'',...b.issues.map(i=>i.text)].join(' ').toLowerCase();
+      return q.split(/\s+/).every(w=>hay.includes(w));
+    }
+    return true;
+  });
+}
+
+const MONTH_KO = {'04':'4월','05':'5월','06':'6월','07':'7월','08':'8월','09':'9월','10':'10월','11':'11월','12':'12월','01':'1월','02':'2월','03':'3월'};
+
 function renderDates(){
   const list = document.getElementById('dateList');
+  const filtered = getFilteredBriefs();
   list.innerHTML = '';
-  briefs.forEach((b,i)=>{
-    const el = document.createElement('div');
-    el.className = 'date-item'+(i===0?' selected':'');
-    el.innerHTML = `<div class="d-date">${b.label} (${b.day})</div><div class="d-tag">${b.tags}</div>${b.hot?'<div class="d-badge">긴급이슈</div>':''}`;
-    el.onclick = ()=>{ document.querySelectorAll('.date-item').forEach(x=>x.classList.remove('selected')); el.classList.add('selected'); renderPreview(b); };
-    list.appendChild(el);
+
+  const rc = document.getElementById('resultCount');
+  if(rc) rc.textContent = filtered.length === briefs.length
+    ? `전체 ${briefs.length}건`
+    : `${filtered.length}건 / 전체 ${briefs.length}건`;
+
+  if(filtered.length === 0){
+    list.innerHTML = '<div style="padding:24px 8px;text-align:center;color:#bbb;font-size:13px">검색 결과 없음</div>';
+    document.getElementById('previewCol').innerHTML = '<div class="empty-msg">검색 결과가 없습니다</div>';
+    return;
+  }
+
+  // 월별 그룹핑
+  const groups = {};
+  filtered.forEach(b=>{
+    const ym = b.date.slice(0,7);
+    if(!groups[ym]) groups[ym]=[];
+    groups[ym].push(b);
   });
-  renderPreview(briefs[0]);
+
+  let firstItem = null, firstBrief = null;
+  Object.keys(groups).sort().reverse().forEach(ym=>{
+    const [y,m] = ym.split('-');
+    const section = document.createElement('div');
+    section.className = 'month-group';
+    const hdr = document.createElement('div');
+    hdr.className = 'month-header';
+    hdr.innerHTML = `${y}년 ${MONTH_KO[m]}<span class="month-count">${groups[ym].length}건</span>`;
+    section.appendChild(hdr);
+
+    groups[ym].forEach(b=>{
+      const isLatest = b===briefs[0];
+      const el = document.createElement('div');
+      el.className = 'date-item';
+      el.dataset.date = b.date;
+      el.innerHTML = `<div class="d-date">${b.label} (${b.day})${isLatest?'<span class="d-latest">최신</span>':''}</div>${b.hot?'<div class="d-badge">긴급이슈</div>':''}`;
+      el.onclick = ()=>{
+        document.querySelectorAll('.date-item').forEach(x=>x.classList.remove('selected'));
+        el.classList.add('selected');
+        renderPreview(b);
+      };
+      section.appendChild(el);
+      if(!firstItem){ firstItem=el; firstBrief=b; }
+    });
+    list.appendChild(section);
+  });
+
+  // 자동 선택
+  if(firstItem){ firstItem.classList.add('selected'); renderPreview(firstBrief); }
+}
+
+function onSearch(){ renderDates(); }
+
+function setFilter(f, btn){
+  activeFilter = f;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  renderDates();
 }
 
 function renderPreview(b){
@@ -572,6 +696,22 @@ function renderCharts(){
   ]},options:opts});
 }
 
+// 키보드 네비게이션 (↑↓로 날짜 이동)
+document.addEventListener('keydown', e=>{
+  if(e.target.tagName==='INPUT') return;
+  const items = [...document.querySelectorAll('.date-item')];
+  if(!items.length) return;
+  const idx = items.findIndex(el=>el.classList.contains('selected'));
+  let next = -1;
+  if(e.key==='ArrowDown') next = Math.min(idx+1, items.length-1);
+  if(e.key==='ArrowUp')   next = Math.max(idx-1, 0);
+  if(next>=0 && next!==idx){
+    items[next].click();
+    items[next].scrollIntoView({block:'nearest'});
+    e.preventDefault();
+  }
+});
+
 function switchTab(tab,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -584,10 +724,31 @@ function handleLogout(){
   window.location.replace('login.html');
 }
 
+function updateStatCards(){
+  // 최신 암모니아 가격이 있는 브리핑
+  const latestAmm = briefs.find(b=>b.prices.me!==null);
+  // 전체 중 중동 fob 최고치
+  const maxMe = briefs.filter(b=>b.prices.me).reduce((a,b)=>b.prices.me>a.val?{val:b.prices.me,label:b.label}:a,{val:0,label:''});
+  // 최신 JKLAB
+  const latestJk = briefs.find(b=>b.prices.jklab!==null);
+
+  if(latestAmm){
+    const me = document.getElementById('statMe');
+    if(me){ me.querySelector('.stat-val').textContent='$'+latestAmm.prices.me; me.querySelector('.stat-sub').textContent=latestAmm.label+' 기준'; }
+    const nwe = document.getElementById('statNwe');
+    if(nwe){ nwe.querySelector('.stat-val').textContent='$'+latestAmm.prices.nwe; nwe.querySelector('.stat-sub').textContent=latestAmm.label+' 기준'; }
+  }
+  if(latestJk){
+    const jk = document.getElementById('statJklab');
+    if(jk){ jk.querySelector('.stat-val').textContent='$'+latestJk.prices.jklab; jk.querySelector('.stat-sub').textContent='45Q 미포함 · '+latestJk.label; }
+  }
+}
+
 document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('totalCount').textContent = briefs.length;
   renderDates();
   renderCharts();
+  updateStatCards();
 });
 </script>
 </body>
