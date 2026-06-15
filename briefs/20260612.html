@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>암모니아 브리핑 — 2026.06.12</title>
+<script src="../auth.js"></script>
+<script>(function() { AUTH.requireAuth(); })();</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:#f4f6fa;color:#1a1a1a;font-size:14px;line-height:1.6}
+.wrap{max-width:720px;margin:24px auto;padding:0 16px 40px}
+.header{border-left:5px solid #0C447C;padding:12px 16px;margin-bottom:20px;background:#EEF4FB;border-radius:0 8px 8px 0}
+.header-badge{display:inline-block;font-size:10px;font-weight:700;background:#0C447C;color:#fff;padding:2px 8px;border-radius:20px;margin-bottom:6px;letter-spacing:.06em}
+.header-title{font-size:18px;font-weight:700;color:#0C447C}
+.header-meta{font-size:12px;color:#185FA5;margin-top:4px;display:flex;gap:12px;flex-wrap:wrap}
+.header-meta span{display:flex;align-items:center;gap:4px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#fff;border:1.5px solid #85B7EB;border-radius:7px;font-size:12px;font-weight:600;color:#0C447C;text-decoration:none;margin-bottom:16px;cursor:pointer}
+.back-btn:hover{background:#E6F1FB}
+.source-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.btn-src{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .15s}
+.btn-orig{background:#0C447C;color:#fff}.btn-orig:hover{background:#185FA5}
+.btn-trans{background:#fff;color:#0C447C;border:1.5px solid #85B7EB}.btn-trans:hover{background:#E6F1FB}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.08em;color:#888;text-transform:uppercase;margin:20px 0 10px}
+.price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px}
+.price-card{padding:10px 14px;border-radius:8px;border:0.5px solid #e0e0e0;background:#fff}
+.price-label{font-size:11px;color:#666;margin-bottom:2px}
+.price-val{font-size:22px;font-weight:700;color:#0C447C}
+.price-unit{font-size:11px;color:#888;font-weight:400}
+.price-chg{font-size:12px;font-weight:600;margin-top:3px}
+.up{color:#D85A30}.nc{color:#639922}.dn{color:#378ADD}
+.jklab-row{background:#fff;border:0.5px solid #e0e0e0;border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.jklab-label{font-size:12px;color:#555}
+.jklab-val{font-size:18px;font-weight:700;color:#0C447C}
+.jklab-chg{font-size:12px;font-weight:600}
+.issue-card{border-radius:10px;padding:14px 16px;margin-bottom:10px;border:0.5px solid}
+.issue-hot{background:#FFF4EF;border-color:#F0997B}.issue-hot .issue-title{color:#712B13}
+.issue-mid{background:#F0F7FF;border-color:#85B7EB}.issue-mid .issue-title{color:#0C447C}
+.issue-pol{background:#F7F0FF;border-color:#B59BDB}.issue-pol .issue-title{color:#3B1C7A}
+.issue-header{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px}
+.issue-badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.badge-hot{background:#F0997B;color:#4A1B0C}
+.badge-watch{background:#85B7EB;color:#042C53}
+.badge-pol{background:#B59BDB;color:#1E0A4A}
+.issue-title{font-weight:700;font-size:14px;line-height:1.4}
+.issue-divider{height:0.5px;background:#e0e0e0;margin:10px 0}
+.trans-quote{background:rgba(255,255,255,0.7);border-radius:6px;padding:8px 12px;margin:8px 0;font-size:12px;color:#555;line-height:1.7;border-left:3px solid #d0d0d0;font-style:italic}
+.trans-label{font-size:10px;font-weight:700;color:#aaa;letter-spacing:.06em;margin-bottom:4px}
+.issue-bullets{margin:0;padding:0;list-style:none}
+.issue-bullets li{font-size:13px;color:#333;padding:3px 0 3px 16px;position:relative;line-height:1.6}
+.issue-bullets li::before{content:'·';position:absolute;left:4px;color:#888;font-weight:700}
+.issue-bullets li strong{color:#0C447C}
+.arrow-point{font-size:12px;color:#185FA5;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #185FA5}
+.arrow-point-hot{font-size:12px;color:#712B13;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #F0997B}
+.arrow-point-pol{font-size:12px;color:#3B1C7A;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #B59BDB}
+.trend-list{background:#fff;border-radius:8px;border:0.5px solid #e0e0e0;overflow:hidden;margin-bottom:16px}
+.trend-item{padding:10px 16px;border-bottom:0.5px solid #f0f0f0;font-size:13px;color:#333;display:flex;gap:10px;align-items:flex-start;line-height:1.6}
+.trend-item:last-child{border-bottom:none}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.dot-red{background:#D85A30}.dot-blue{background:#378ADD}.dot-green{background:#639922}.dot-gray{background:#aaa}
+.monitor-box{border-radius:8px;background:#FFFBEF;border:0.5px solid #FAC775;padding:14px 16px;margin-bottom:16px}
+.monitor-title{font-size:12px;font-weight:700;color:#854F0B;margin-bottom:10px;letter-spacing:.04em;display:flex;align-items:center;gap:6px}
+.monitor-row{font-size:13px;color:#412402;margin-bottom:8px;display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:baseline}
+.monitor-row:last-child{margin-bottom:0}
+.monitor-key{color:#854F0B;font-weight:700;font-size:12px}
+.monitor-val{line-height:1.6}
+.footer{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:0.5px solid #e0e0e0;font-size:12px;color:#888;flex-wrap:wrap;gap:8px}
+.footer-src{display:flex;gap:16px}
+.footer-src a{color:#185FA5;text-decoration:none;font-weight:500}
+.footer-src a:hover{text-decoration:underline}
+.nav-btns{display:flex;gap:8px;margin-top:20px;justify-content:space-between}
+.nav-btn{padding:9px 16px;border-radius:7px;font-size:12px;font-weight:600;text-decoration:none;background:#fff;color:#0C447C;border:1.5px solid #85B7EB}
+.nav-btn:hover{background:#E6F1FB}
+.nav-btn.next{background:#0C447C;color:#fff;border-color:#0C447C}
+.nav-btn.next:hover{background:#185FA5}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-btn" href="../dashboard.html">← 아카이브로 돌아가기</a>
+  <div class="header">
+    <div class="header-badge">🔴 ARGUS MEDIA · 긴급 브리핑</div>
+    <div class="header-title">암모니아 일간 브리핑</div>
+    <div class="header-meta">
+      <span>📅 2026년 6월 12일 (금)</span>
+      <span>📄 Argus FMB Ammonia 26-112</span>
+      <span>🏢 서부발전 수소사업실</span>
+    </div>
+  </div>
+
+  <div class="source-bar">
+    <a class="btn-src btn-orig" href="https://drive.google.com/drive/folders/1oMyl4hTVN8chOw5MPLQKYWdMonStRLxo" target="_blank"><span>📂</span> 원문 PDF</a>
+    <a class="btn-src btn-trans" href="https://docs.google.com/document/d/1X4B93ekyYhuktahlqu8tyLNYi7g3sDZy1998mMCNS8E/edit?usp=drivesdk&ouid=112171435946091511989" target="_blank"><span>📄</span> 번역본</a>
+  </div>
+
+  <div class="section-label">📊 암모니아 일일 가격 (2026년 6월 12일)</div>
+  <div class="price-grid">
+    <div class="price-card"><div class="price-label">중동 fob</div><div class="price-val">800 <span class="price-unit">$/t</span></div><span class="price-chg nc">━ 전일 동일 (보합)</span></div>
+    <div class="price-card"><div class="price-label">동아시아 cfr</div><div class="price-val">835 <span class="price-unit">$/t</span></div><span class="price-chg nc">━ 전일 동일 (보합)</span></div>
+    <div class="price-card"><div class="price-label">NW유럽 cfr</div><div class="price-val">895 <span class="price-unit">$/t</span></div><span class="price-chg nc">━ 전일 동일 (보합)</span></div>
+    <div class="price-card"><div class="price-label">미국 걸프 cfr</div><div class="price-val">775 <span class="price-unit">$/t</span></div><span class="price-chg nc">━ 전일 동일 (보합)</span></div>
+  </div>
+  <div class="jklab-row">
+    <div>
+      <div class="jklab-label">JKLAB cfr 울산 <span style="color:#aaa;font-size:11px">(45Q 세액공제 미포함, 주간)</span></div>
+      <div class="jklab-val">825.32 <span style="font-size:12px;font-weight:400;color:#888">$/t</span></div>
+    </div>
+    <div class="jklab-chg dn">▼ -4.47 (전주比)</div>
+  </div>
+
+  <div class="section-label">🔥 핵심 이슈</div>
+
+  <div class="issue-card issue-hot">
+    <div class="issue-header">
+      <span class="issue-badge badge-hot">🔴 빅이슈</span>
+      <div class="issue-title">이란-미국 평화 협정 초안 임박 — 호르무즈 서명 후 30일 내 재개방 조항 포함</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "이란 외무부는 오늘 국영 통신사 IRNA를 통해 미국과 이란 간 전쟁을 종식시키기 위한 합의안 초안이 임박했다고 밝혔습니다. 합의안 초안은 서명 후 30일 이내에 해협을 재개방하고 미국이 이란 항구를 오가는 해상 교통에 대한 봉쇄를 해제하는 내용을 담고 있습니다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>이란 외무부, <strong>평화 협정 초안 마무리 단계</strong> 발표 (IRNA·메흐르 통신)</li>
+      <li>합의안: 서명 후 <strong>30일 이내 호르무즈 재개방</strong>, 60일간 핵·제재·배상 회담 예정</li>
+      <li>미국은 공식 입장 미발표 — 실제 정상화까지 30일 이상 소요 예상, 암모니아선 최후순위</li>
+      <li>오만, 현재 월 2척 화물 수출 중 — 중동 fob 보합($800)</li>
+    </ul>
+    <div class="arrow-point-hot">→ 호르무즈 재개방 시점 확인 전까지 중동 공급망 불확실성 지속 — 조달 대응 시나리오 유지 필요</div>
+  </div>
+
+  <div class="issue-card issue-pol">
+    <div class="issue-header">
+      <span class="issue-badge badge-pol">🟣 정책·규제</span>
+      <div class="issue-title">EU, 농가 비료 지원 5억 4천만 유로 제안 — 비료 구매 자금 직접 지원</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "유럽연합 집행위원회는 6월 12일 농가 지원을 확대하기 위한 일련의 법적 조치를 발표했습니다. 여기에는 EU 농업 위기 준비금에서 최대 5억 4천만 유로(6억 2천4백만 달러)를 투입하여 비료 구매 자금을 지원하는 내용이 포함됩니다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>EU 농업 위기 준비금 <strong>최대 5억 4천만 유로($6.24억)</strong> 투입 — 비료 구매 자금 직접 지원</li>
+      <li>10월 16일 이전 선지급 직접금 허용 — 농가 현금 흐름 개선</li>
+      <li>국가 재정 보충 시 <strong>최대 15억 유로</strong>까지 확대 가능 (EAFRD 65% 공동 지원)</li>
+      <li>최종 채택 2026년 <strong>7월 말</strong> 예정 — EU 회원국 전문가 위원회 우선 승인 필요</li>
+    </ul>
+    <div class="arrow-point-pol">→ EU 비료 지원으로 유럽 암모니아 수요 단기 부양 가능성 — 7월 말 채택 후 수입 수요 변화 모니터링</div>
+  </div>
+
+  <div class="issue-card issue-mid">
+    <div class="issue-header">
+      <span class="issue-badge badge-watch">👀 모니터링</span>
+      <div class="issue-title">전 지역 가격 보합 — 현물 거래 부재, 관망 장세 지속</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "현물 거래 활동이 제한적인 가운데 인도 시장은 여전히 톤당 835달러 cfr로 안정세를 유지하고 있습니다. 미국 내 FOB 가격 간 톤당 185달러의 차이가 있습니다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>중동·동아시아·NWE·미국 걸프 <strong>전 구간 보합(nc)</strong> — 신규 현물 거래 없음</li>
+      <li>인도 cfr $895, 동아시아 cfr $835 안정세 — 교착 상태 지속</li>
+      <li>미국 걸프 CFR($775) vs FOB($710) <strong>$185 격차</strong> 확대</li>
+      <li>미국산 2건 EU 향 선적 예정 — CBAM 비용이 대규모 무역 확대 억제</li>
+    </ul>
+    <div class="arrow-point">→ 이란 평화 협정 서명 전까지 관망 장세 지속 예상 — 단기 가격 변동 가능성 낮음</div>
+  </div>
+
+  <div class="issue-card issue-pol">
+    <div class="issue-header">
+      <span class="issue-badge badge-pol">🟣 정책·규제</span>
+      <div class="issue-title">CBAM 이해관계자 우려 제기 — 비EU 탄소 가격 산정 방식 논란</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "각국 정부, 산업체, 비정부기구들은 EU의 탄소 국경 조정 메커니즘(CBAM)에 따라 비EU 국가에서 이미 지불한 탄소 가격에 탄소 배출권을 산정하는 방안을 대체로 환영했지만, 많은 이해관계자들이 이 규칙이 어떻게 적용될지에 대해 우려를 제기했습니다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>각국 정부·산업계·NGO: CBAM 탄소 배출권 산정 방식 <strong>환영하나 적용 방법 우려</strong></li>
+      <li>미국산 암모니아 대EU 수출 시 CBAM 비용 부담 — 무관세에도 실질 경쟁력 제한</li>
+      <li>CBAM 이해관계자 의견 수렴 후 세부 규칙 확정 예정</li>
+    </ul>
+    <div class="arrow-point-pol">→ CBAM 세부 규칙 확정 시 암모니아 수출입 비용 구조 변화 — 한국 수입 영향 추적 필요</div>
+  </div>
+
+  <div class="issue-card issue-mid">
+    <div class="issue-header">
+      <span class="issue-badge badge-watch">👀 모니터링</span>
+      <div class="issue-title">브라질, 2030년까지 비료 생산량 연 980만 톤 증대 계획 — 수입 의존도 감축</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "브라질은 2030년까지 비료 생산량을 연간 약 980만 톤 증대하여 수입 의존도를 줄일 계획입니다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>브라질 농림축산부, 신규 프로젝트 통해 <strong>2030년까지 연 980만 톤</strong> 생산량 증대 목표</li>
+      <li>수입 의존도 감축 → 글로벌 비료 수요 패턴 장기 변화 가능성</li>
+      <li>암모니아 연계 비료 수요에 중장기적 영향</li>
+    </ul>
+    <div class="arrow-point">→ 브라질 비료 자급 확대 시 글로벌 암모니아 수요 구조 변화 — 장기 수급 전망 시 반영 필요</div>
+  </div>
+
+  <div class="section-label">📈 주요 동향</div>
+  <div class="trend-list">
+    <div class="trend-item"><div class="dot dot-red"></div><div>이란 외무부, 미-이란 평화 협정 초안 마무리 발표 — 서명 후 30일 내 호르무즈 재개방 조항 포함, 미국 공식 입장 미확인</div></div>
+    <div class="trend-item"><div class="dot dot-blue"></div><div>전 지역 가격 보합(nc) — 중동 fob $800, 동아시아 cfr $835, NWE cfr $895, 미국 걸프 cfr $775</div></div>
+    <div class="trend-item"><div class="dot dot-blue"></div><div>EU 농가 비료 지원 5억 4천만 유로 제안 — 비료 구매 자금 직접 지원, 7월 말 최종 채택 예정</div></div>
+    <div class="trend-item"><div class="dot dot-gray"></div><div>중국 유황 시장 공급 부족 경색 — 호르무즈 폐쇄로 수입 제한, 항만 재고 감소 지속</div></div>
+    <div class="trend-item"><div class="dot dot-green"></div><div>브라질, 2030년까지 비료 생산량 연 980만 톤 증대 계획 — 수입 의존도 감축 추진</div></div>
+    <div class="trend-item"><div class="dot dot-gray"></div><div>JKLAB cfr 울산 $825.32(45Q 미포함), 전주比 -$4.47 — 운임 하락 반영</div></div>
+  </div>
+
+  <div class="section-label">🎯 모니터링 포인트</div>
+  <div class="monitor-box">
+    <div class="monitor-title">⚠️ 이번 주 핵심 모니터링</div>
+    <div class="monitor-row">
+      <div class="monitor-key">평화협정</div>
+      <div class="monitor-val">이란-미국 평화 협정 서명 여부 — 서명 후 30일 내 호르무즈 재개방 일정 및 암모니아선 정상화 시점 확인</div>
+    </div>
+    <div class="monitor-row">
+      <div class="monitor-key">EU지원</div>
+      <div class="monitor-val">EU 농가 비료 지원 5억 4천만 유로 패키지 7월 말 최종 채택 여부 — 채택 시 유럽 암모니아 수요 단기 증가 가능</div>
+    </div>
+    <div class="monitor-row">
+      <div class="monitor-key">CBAM</div>
+      <div class="monitor-val">이해관계자 우려 반영한 세부 규칙 확정 방향 — 한국발 암모니아 대EU 수출 비용 구조에 미치는 영향</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-src">
+      <a href="https://www.argusmedia.com" target="_blank">Argus Media</a>
+      <a href="../dashboard.html">← 아카이브</a>
+    </div>
+    <div>© 2026 Argus Media Group | 라이선스: 추승엽, 한국서부발전(주)</div>
+  </div>
+
+  <div class="nav-btns">
+    <a class="nav-btn" href="20260611.html">← 이전 (6월 11일)</a>
+    <span style="padding:9px 16px;font-size:12px;color:#aaa;">최신 브리핑</span>
+  </div>
+</div>
+</body>
+</html>
