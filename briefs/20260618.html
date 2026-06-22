@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>암모니아 브리핑 — 2026.06.18</title>
+<script src="../auth.js"></script>
+<script>(function() { AUTH.requireAuth(); })();</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:#f4f6fa;color:#1a1a1a;font-size:14px;line-height:1.6}
+.wrap{max-width:720px;margin:24px auto;padding:0 16px 40px}
+.header{border-left:5px solid #D85A30;padding:12px 16px;margin-bottom:20px;background:#FFF4EF;border-radius:0 8px 8px 0}
+.header-badge{display:inline-block;font-size:10px;font-weight:700;background:#D85A30;color:#fff;padding:2px 8px;border-radius:20px;margin-bottom:6px;letter-spacing:.06em}
+.header-title{font-size:18px;font-weight:700;color:#712B13}
+.header-meta{font-size:12px;color:#A8431E;margin-top:4px;display:flex;gap:12px;flex-wrap:wrap}
+.header-meta span{display:flex;align-items:center;gap:4px}
+.alert-banner{background:#FFF4EF;border:1.5px solid #F0997B;border-radius:8px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px}
+.alert-icon{font-size:18px}
+.alert-text{font-size:13px;font-weight:700;color:#712B13;margin-bottom:4px}
+.alert-detail{font-size:12px;color:#8a4429}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#fff;border:1.5px solid #85B7EB;border-radius:7px;font-size:12px;font-weight:600;color:#0C447C;text-decoration:none;margin-bottom:16px;cursor:pointer}
+.back-btn:hover{background:#E6F1FB}
+.source-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.btn-src{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .15s}
+.btn-orig{background:#0C447C;color:#fff}.btn-orig:hover{background:#185FA5}
+.btn-trans{background:#fff;color:#0C447C;border:1.5px solid #85B7EB}.btn-trans:hover{background:#E6F1FB}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.08em;color:#888;text-transform:uppercase;margin:20px 0 10px}
+.price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px}
+.price-card{padding:10px 14px;border-radius:8px;border:0.5px solid #e0e0e0;background:#fff}
+.price-label{font-size:11px;color:#666;margin-bottom:2px}
+.price-val{font-size:22px;font-weight:700;color:#0C447C}
+.price-unit{font-size:11px;color:#888;font-weight:400}
+.price-chg{font-size:12px;font-weight:600;margin-top:3px}
+.up{color:#D85A30}.nc{color:#639922}.dn{color:#378ADD}
+.jklab-row{background:#fff;border:0.5px solid #e0e0e0;border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.jklab-label{font-size:12px;color:#555}
+.jklab-val{font-size:18px;font-weight:700;color:#0C447C}
+.jklab-chg{font-size:12px;font-weight:600}
+.issue-card{border-radius:10px;padding:14px 16px;margin-bottom:10px;border:0.5px solid}
+.issue-hot{background:#FFF4EF;border-color:#F0997B}.issue-hot .issue-title{color:#712B13}
+.issue-mid{background:#F0F7FF;border-color:#85B7EB}.issue-mid .issue-title{color:#0C447C}
+.issue-pol{background:#F7F0FF;border-color:#B59BDB}.issue-pol .issue-title{color:#3B1C7A}
+.issue-header{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px}
+.issue-badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.badge-hot{background:#F0997B;color:#4A1B0C}
+.badge-watch{background:#85B7EB;color:#042C53}
+.badge-pol{background:#B59BDB;color:#1E0A4A}
+.issue-title{font-weight:700;font-size:14px;line-height:1.4}
+.issue-divider{height:0.5px;background:#e0e0e0;margin:10px 0}
+.trans-quote{background:rgba(255,255,255,0.7);border-radius:6px;padding:8px 12px;margin:8px 0;font-size:12px;color:#555;line-height:1.7;border-left:3px solid #d0d0d0;font-style:italic}
+.trans-label{font-size:10px;font-weight:700;color:#aaa;letter-spacing:.06em;margin-bottom:4px}
+.issue-bullets{margin:0;padding:0;list-style:none}
+.issue-bullets li{font-size:13px;color:#333;padding:3px 0 3px 16px;position:relative;line-height:1.6}
+.issue-bullets li::before{content:'·';position:absolute;left:4px;color:#888;font-weight:700}
+.issue-bullets li strong{color:#0C447C}
+.arrow-point{font-size:12px;color:#185FA5;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #185FA5}
+.arrow-point-hot{font-size:12px;color:#712B13;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #F0997B}
+.arrow-point-pol{font-size:12px;color:#3B1C7A;font-weight:600;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:6px;border-left:3px solid #B59BDB}
+.trend-list{background:#fff;border-radius:8px;border:0.5px solid #e0e0e0;overflow:hidden;margin-bottom:16px}
+.trend-item{padding:10px 16px;border-bottom:0.5px solid #f0f0f0;font-size:13px;color:#333;display:flex;gap:10px;align-items:flex-start;line-height:1.6}
+.trend-item:last-child{border-bottom:none}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.dot-red{background:#D85A30}.dot-blue{background:#378ADD}.dot-gray{background:#aaa}
+.monitor-box{border-radius:8px;background:#FFFBEF;border:0.5px solid #FAC775;padding:14px 16px;margin-bottom:16px}
+.monitor-title{font-size:12px;font-weight:700;color:#854F0B;margin-bottom:10px;letter-spacing:.04em;display:flex;align-items:center;gap:6px}
+.monitor-row{font-size:13px;color:#412402;margin-bottom:8px;display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:baseline}
+.monitor-row:last-child{margin-bottom:0}
+.monitor-key{color:#854F0B;font-weight:700;font-size:12px}
+.monitor-val{line-height:1.6}
+.footer{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:0.5px solid #e0e0e0;font-size:12px;color:#888;flex-wrap:wrap;gap:8px}
+.footer-src{display:flex;gap:16px}
+.footer-src a{color:#185FA5;text-decoration:none;font-weight:500}
+.footer-src a:hover{text-decoration:underline}
+.nav-btns{display:flex;gap:8px;margin-top:20px;justify-content:space-between}
+.nav-btn{padding:9px 16px;border-radius:7px;font-size:12px;font-weight:600;text-decoration:none;background:#fff;color:#0C447C;border:1.5px solid #85B7EB}
+.nav-btn:hover{background:#E6F1FB}
+.nav-btn.next{background:#0C447C;color:#fff;border-color:#0C447C}
+.nav-btn.next:hover{background:#185FA5}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-btn" href="../dashboard.html">← 아카이브로 돌아가기</a>
+  <div class="header">
+    <div class="header-badge">🔴 ARGUS MEDIA · 긴급 브리핑</div>
+    <div class="header-title">암모니아 일간 브리핑</div>
+    <div class="header-meta">
+      <span>📅 2026년 6월 18일 (목)</span>
+      <span>📄 Argus Ammonia 26-116</span>
+      <span>🏢 서부발전 수소사업실</span>
+    </div>
+  </div>
+
+  <div class="alert-banner">
+    <div class="alert-icon">🚨</div>
+    <div>
+      <div class="alert-text">美-이란 평화협정(MoU) 전자서명 — 암모니아 전 지역 가격 급락 (중동 fob -$30)</div>
+      <div class="alert-detail">중동 770(-30) | 동아시아 825(-10) | NW유럽 880(-15) | 인도 cfr 805(-55) | 호르무즈 30일내 통항회복 약속</div>
+    </div>
+  </div>
+
+  <div class="source-bar">
+    <a class="btn-src btn-orig" href="https://drive.google.com/drive/folders/1oMyl4hTVN8chOw5MPLQKYWdMonStRLxo" target="_blank"><span>📂</span> 원문 PDF</a>
+    <a class="btn-src btn-trans" href="https://docs.google.com/document/d/1_It21W6NibJ6VqJgnaWT5LqdrigXHxcENk0HVjn5Zh8/edit?usp=drivesdk&ouid=112171435946091511989" target="_blank"><span>📄</span> 번역본</a>
+  </div>
+
+  <div class="section-label">📊 암모니아 일일 가격 (2026년 6월 18일)</div>
+  <div class="price-grid">
+    <div class="price-card"><div class="price-label">중동 fob</div><div class="price-val">770 <span class="price-unit">$/t</span></div><span class="price-chg dn">▼ -30 (전일대비)</span></div>
+    <div class="price-card"><div class="price-label">동아시아 cfr</div><div class="price-val">825 <span class="price-unit">$/t</span></div><span class="price-chg dn">▼ -10 (전일대비)</span></div>
+    <div class="price-card"><div class="price-label">NW유럽 cfr</div><div class="price-val">880 <span class="price-unit">$/t</span></div><span class="price-chg dn">▼ -15 (전일대비)</span></div>
+    <div class="price-card"><div class="price-label">미국 걸프 cfr</div><div class="price-val">775 <span class="price-unit">$/t</span></div><span class="price-chg nc">━ 전일 동일 (보합)</span></div>
+  </div>
+  <div class="jklab-row">
+    <div>
+      <div class="jklab-label">JKLAB cfr 울산 <span style="color:#aaa;font-size:11px">(45Q 세액공제 미포함, 주간)</span></div>
+      <div class="jklab-val">828.99 <span style="font-size:12px;font-weight:400;color:#888">$/t</span></div>
+    </div>
+    <div class="jklab-chg nc">━ 전주 동일</div>
+  </div>
+
+  <div class="section-label">🔥 핵심 이슈</div>
+
+  <div class="issue-card issue-hot">
+    <div class="issue-header">
+      <span class="issue-badge badge-hot">🔴 빅이슈</span>
+      <div class="issue-title">美-이란 평화협정(MoU) 전자서명 확정 — 전 지역 가격 급락 촉발</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "미국과 이란 대통령은 전 세계 에너지 및 상품 시장의 공급 충격과 가격 변동성을 야기했던 분쟁을 종식시키기 위한 양해각서(MoU)에 전자 서명했습니다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>이란, 호르무즈해협(중동만↔오만만) 선박통행 <strong>30일 내 전쟁이전 수준</strong> 회복 약속 (기술적 장애물·기뢰제거 전제)</li>
+      <li>협정 체결 즉시 중동 fob -$30, 동아시아 cfr -$10, NWE cfr -$15 하락</li>
+      <li>호르무즈에 발묶인 선박 3척은 아직 미이동 — 실제 통항 정상화까지 시차 예상</li>
+      <li>업계, 30~60일 내 공급·수요 역학 정상화 전망</li>
+    </ul>
+    <div class="arrow-point-hot">→ 호르무즈 실질 재개방 속도가 7월 이후 추가 가격조정 폭 결정 — 통항 동향 일일 모니터링 필요</div>
+  </div>
+
+  <div class="issue-card issue-mid">
+    <div class="issue-header">
+      <span class="issue-badge badge-watch">👀 모니터링</span>
+      <div class="issue-title">인도 cfr 805달러(-55) 최대폭 하락 — 호르무즈 재개 기대로 관망세</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "운송 가격은 톤당 55달러 하락한 750~860달러(cfr)를 기록했습니다... 구매자들은 미국과 이란 간의 평화 협정 체결 이후 호르무즈 해협 재개방 노력이 시작되면서 추가 가격 하락을 예상하여 현물 시장에서 관망세를 보이고 있습니다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>인도 cfr 중간값 <strong>805달러 (-55)</strong> — 전 지역 중 최대 하락폭</li>
+      <li>中 인도분 최저가, 동남아시아가 최고가 형성</li>
+      <li>일부 구매자 750달러 이하 저가물량 물색 중</li>
+    </ul>
+    <div class="arrow-point">→ 인도 추가 하락 마감 여부가 동아시아 전반 가격 하방압력 가늠자</div>
+  </div>
+
+  <div class="issue-card issue-pol">
+    <div class="issue-header">
+      <span class="issue-badge badge-pol">🟣 정책·규제</span>
+      <div class="issue-title">EU, 美산 암모니아 무관세 수출 공식 채택 — 24.2만톤 소급 환급대상</div>
+    </div>
+    <div class="trans-quote">
+      <div class="trans-label">ARGUS 원문 번역</div>
+      "유럽 의회는 6월 16일 도널드 트럼프 미국 대통령과 합의한 무역 협정을 이행하는 법안을 공식 채택했으며, 이 협정에 따라 암모니아를 포함한 다양한 미국산 수출품에 대해 무관세가 적용됩니다."
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li><strong>2025.8.1~2028.12.31</strong> 소급적용, 美산 암모니아 약 <strong>24.2만톤</strong> 관세환급 대상</li>
+      <li>주요 인도국: 불가리아·벨기에·네덜란드·프랑스·스페인</li>
+      <li>CBAM상 美 기본평가액이 높아 관세철폐 효과는 제한적이라는 거래업자 의견도 존재</li>
+    </ul>
+    <div class="arrow-point-pol">→ 무관세 효력에도 CBAM비용으로 실제 물동량 증가는 제한적 전망 — 7월 이후 美→EU 수출 추이 확인</div>
+  </div>
+
+  <div class="issue-card issue-mid">
+    <div class="issue-header">
+      <span class="issue-badge badge-watch">👀 모니터링</span>
+      <div class="issue-title">中·동남아 가격 양극화 심화 — 中 FOB -$45(705달러), 동남아 안정세</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>中 FOB 중간값 <strong>705달러 (-45)</strong> — 일부 항구 600달러대 초반 거래 보고</li>
+      <li>잔장·롄윈강 등 대형화물(7월말~8월초 선적)은 750~790달러 FOB로 상대적 견조</li>
+      <li>저장석유화학, 8월초 선적 15,000톤 현물입찰 공고 (낙찰가 600달러대 초반 예상)</li>
+    </ul>
+    <div class="arrow-point">→ 중국 내부 가격 격차 확대 — 수출입찰 결과로 단기 방향성 가늠</div>
+  </div>
+
+  <div class="issue-card issue-mid">
+    <div class="issue-header">
+      <span class="issue-badge badge-watch">👀 모니터링</span>
+      <div class="issue-title">日 Jera, NYK·MOL과 청색암모니아 운반선 4척 장기용선 계약</div>
+    </div>
+    <div class="issue-divider"></div>
+    <ul class="issue-bullets">
+      <li>Jera, 美산 청색암모니아 운송 위해 NYK·MOL과 대형 연료암모니아 운반선 4척 장기용선</li>
+    </ul>
+    <div class="arrow-point">→ 日 청색암모니아 수입 인프라 확충 — 향후 물량 확정 시 美걸프 수출 수요 영향 모니터링</div>
+  </div>
+
+  <div class="section-label">📈 주요 동향</div>
+  <div class="trend-list">
+    <div class="trend-item"><div class="dot dot-red"></div><div>美-이란 평화협정(MoU) 전자서명 — 전 지역 가격 급락 촉발 (중동 -30, 동아시아 -10, NWE -15, 中 -45, 인도 -55)</div></div>
+    <div class="trend-item"><div class="dot dot-red"></div><div>호르무즈 갇힌 선박 3척 미이동 — 실제 통항 정상화까지 시차 예상, 30~60일 내 정상화 전망</div></div>
+    <div class="trend-item"><div class="dot dot-blue"></div><div>EU, 美산 암모니아 무관세 수출 공식 채택 — 24.2만톤 소급 환급대상</div></div>
+    <div class="trend-item"><div class="dot dot-blue"></div><div>인도 cfr 805달러(-55) 최대 하락 — 추가하락 기대로 관망세 지속</div></div>
+    <div class="trend-item"><div class="dot dot-gray"></div><div>中 FOB 705달러(-45) — 항구별 가격 양극화, 일부 600달러대 거래</div></div>
+    <div class="trend-item"><div class="dot dot-gray"></div><div>日 Jera, NYK·MOL과 청색암모니아 운반선 4척 장기용선 계약</div></div>
+  </div>
+
+  <div class="section-label">🎯 모니터링 포인트</div>
+  <div class="monitor-box">
+    <div class="monitor-title">⚠️ 이번 주 핵심 모니터링</div>
+    <div class="monitor-row"><div class="monitor-key">호르무즈</div><div class="monitor-val">30일내 통항 정상화 이행여부 — 갇힌 선박 3척 이동 개시 시점</div></div>
+    <div class="monitor-row"><div class="monitor-key">7월탬파</div><div class="monitor-val">평화협정發 가격하락이 7월 탬파 정산가에 미치는 영향</div></div>
+    <div class="monitor-row"><div class="monitor-key">EU환급</div><div class="monitor-val">24.2만톤 관세환급 실제 집행 여부 및 추가 美→EU 수출 흐름</div></div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-src">
+      <a href="https://www.argusmedia.com" target="_blank">Argus Media</a>
+      <a href="../dashboard.html">← 아카이브</a>
+    </div>
+    <div>© 2026 Argus Media Group | 라이선스: 추승엽, 한국서부발전(주)</div>
+  </div>
+
+  <div class="nav-btns">
+    <a class="nav-btn" href="20260617.html">← 이전 (6월 17일)</a>
+    <a class="nav-btn next" href="20260619.html">다음 (6월 19일) →</a>
+  </div>
+</div>
+</body>
+</html>
